@@ -1,0 +1,512 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Noto+Serif+KR:wght@400;700&display=swap');
+
+body {
+  background: #faf9f7;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  font-family: 'Noto Serif KR', 'Playfair Display', serif;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.invitation-container {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 20px;
+  background: #fff;
+  color: #222;
+  min-height: 100vh;
+  font-size: 1.1rem;
+}
+
+.lang-switch {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.lang-switch button {
+  background: #f7e6ea;
+  border: none;
+  padding: 7px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #b87c9b;
+  letter-spacing: 0.04em;
+  transition: background 0.2s;
+}
+.lang-switch button:active, .lang-switch button:focus {
+  background: #f2c9d6;
+}
+
+.invitation-message, .dday, .info, .banquet, .gift, .rsvp {
+  background: #fff;
+  border-radius: 18px;
+  border: 1.5px solid #f0f0f0;
+  padding: 32px 18px 28px 18px;
+  margin-bottom: 28px;
+  box-shadow: none;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.invitation-message h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-align: center;
+  margin: 0 0 18px 0;
+  text-transform: uppercase;
+}
+.invitation-message pre {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.15rem;
+  white-space: pre-line;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  line-height: 2.1;
+  margin: 0;
+  text-align: center;
+  font-weight: 400;
+}
+
+.dday {
+  text-align: center;
+  font-size: 1.15rem;
+  color: #b87c9b;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.08em;
+  background: #faf9f7;
+  border: none;
+  margin-bottom: 28px;
+}
+
+.photo-slider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 28px;
+}
+.photo-slider img {
+  border-radius: 12px;
+  box-shadow: none;
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border: 1.5px solid #f0f0f0;
+}
+.photo-slider button {
+  background: #f7e6ea;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1.3rem;
+  margin: 0 10px;
+  cursor: pointer;
+  color: #b87c9b;
+  transition: background 0.2s;
+}
+.photo-slider button:active, .photo-slider button:focus {
+  background: #f2c9d6;
+}
+
+.info h3, .banquet h3, .guestbook h3, .gift h3, .rsvp h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  color: #b87c9b;
+  letter-spacing: 0.08em;
+  margin-top: 0;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+.info a, .banquet a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #fff;
+  background: #b87c9b;
+  padding: 7px 18px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.info a:active, .banquet a:focus {
+  background: #f2c9d6;
+}
+
+.guestbook {
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  margin-bottom: 40px;
+  text-align: center;
+}
+.guestbook-title {
+  margin-bottom: 18px;
+}
+.guestbook-en {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: #e3bfcf;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.guestbook-ko {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 2rem;
+  color: #f7a6b2;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin-bottom: 18px;
+}
+.guestbook-cards {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+.guestbook-card {
+  background: #fff6f8;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px #f7a6b220;
+  padding: 22px 18px 18px 18px;
+  min-width: 180px;
+  max-width: 240px;
+  flex: 1 1 0;
+  position: relative;
+  text-align: left;
+  font-size: 1.05rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.guestbook-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #e3bfcf;
+  cursor: pointer;
+}
+.guestbook-flower {
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+  align-self: center;
+}
+.guestbook-content {
+  font-family: 'Noto Serif KR', serif;
+  line-height: 1.7;
+  margin-top: 2px;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.guestbook-write-card {
+  justify-content: center;
+  align-items: center;
+  background: #fff6f8;
+  color: #b87c9b;
+  border: 1.5px dashed #f7a6b2;
+  min-height: 140px;
+}
+.guestbook-write-icon {
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+}
+.guestbook-write-text {
+  font-size: 1.1rem;
+  font-family: 'Noto Serif KR', serif;
+  color: #b87c9b;
+}
+.guestbook-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 18px;
+  margin-top: 10px;
+}
+.guestbook-action-btn {
+  background: #f7e6ea;
+  color: #b87c9b;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 22px;
+  font-size: 1.1rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.guestbook-action-btn:active, .guestbook-action-btn:focus {
+  background: #f2c9d6;
+}
+
+.rsvp form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+.rsvp input, .rsvp select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #f0f0f0;
+  font-size: 1.1rem;
+  font-family: 'Noto Serif KR', serif;
+}
+.rsvp button[type="submit"] {
+  background: #f7e6ea;
+  color: #b87c9b;
+  border: none;
+  border-radius: 20px;
+  padding: 12px 0;
+  font-size: 1.1rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+.rsvp button[type="submit"]:active, .rsvp button[type="submit"]:focus {
+  background: #f2c9d6;
+}
+
+@media (max-width: 520px) {
+  .invitation-container {
+    max-width: 100vw;
+    width: 100vw;
+    border-radius: 0;
+    padding: 0 8px;
+  }
+  .photo-slider img {
+    width: 100vw;
+    max-width: calc(100vw - 16px);
+    height: 160px;
+    border-radius: 0;
+  }
+  .invitation-message, .dday, .info, .banquet, .gift, .rsvp {
+    border-radius: 0;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+  .guestbook-cards {
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+  }
+  .guestbook-card {
+    min-width: 0;
+    max-width: 100vw;
+    width: 100%;
+  }
+  .guestbook-ko {
+    font-size: 1.4rem;
+  }
+}
+
+.section-title-en {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: #f7a6b2;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+  text-align: center;
+}
+.section-title-ko {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 2rem;
+  color: #f7a6b2;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin-bottom: 24px;
+  text-align: center;
+}
+.section-box {
+  background: #fff;
+  border-radius: 18px;
+  border: 1.5px solid #f7a6b2;
+  padding: 36px 18px 32px 18px;
+  margin-bottom: 36px;
+  box-shadow: none;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  text-align: center;
+}
+.section-box p, .section-box pre {
+  color: #555;
+  font-size: 1.15rem;
+  line-height: 2.1;
+  font-family: 'Noto Serif KR', serif;
+  margin: 0 0 18px 0;
+  white-space: pre-line;
+}
+.section-box h3 {
+  color: #f7a6b2;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.3rem;
+  margin-bottom: 18px;
+  margin-top: 0;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.section-btn {
+  background: #f7a6b2;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  margin-top: 18px;
+  transition: background 0.2s;
+}
+.section-btn:active, .section-btn:focus {
+  background: #e3bfcf;
+}
+@media (max-width: 520px) {
+  .section-title-ko {
+    font-size: 1.4rem;
+  }
+  .section-box {
+    border-radius: 0;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.18);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-content {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px #0002;
+  padding: 36px 24px 28px 24px;
+  min-width: 320px;
+  max-width: 95vw;
+  width: 400px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #bbb;
+  cursor: pointer;
+}
+.modal-form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+  text-align: left;
+}
+.modal-form-row label {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #222;
+}
+.modal-form-row input,
+.modal-form-row textarea {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #f0f0f0;
+  font-size: 1.1rem;
+  font-family: 'Noto Serif KR', serif;
+  margin-bottom: 2px;
+  resize: none;
+}
+.modal-form-row textarea {
+  min-height: 90px;
+}
+.modal-submit {
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 16px 0;
+  font-size: 1.15rem;
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  margin-top: 18px;
+  transition: background 0.2s;
+}
+.modal-submit:active, .modal-submit:focus {
+  background: #444;
+}
+@media (max-width: 520px) {
+  .modal-content {
+    min-width: 0;
+    width: 98vw;
+    padding: 18px 4vw 18px 4vw;
+  }
+}
