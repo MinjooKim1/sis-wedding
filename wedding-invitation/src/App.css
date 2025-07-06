@@ -71,7 +71,7 @@ body {
   cursor: pointer;
   font-weight: 500;
   font-size: 1rem;
-  color: #b87c9b;
+  color: #f7a6b2;
   letter-spacing: 0.04em;
   transition: background 0.2s;
 }
@@ -81,13 +81,14 @@ body {
 
 .invitation-message, .dday, .info, .banquet, .gift, .rsvp {
   background: #fff;
-  border-radius: 18px;
+  border-radius: 24px;
   border: 1.5px solid #f0f0f0;
   padding: 32px 18px 28px 18px;
   margin-bottom: 28px;
   box-shadow: none;
   word-break: keep-all;
   overflow-wrap: break-word;
+  text-align: center;
 }
 
 .invitation-message h2 {
@@ -157,7 +158,7 @@ body {
 .info h3, .banquet h3, .guestbook h3, .gift h3, .rsvp h3 {
   font-family: 'Playfair Display', serif;
   font-size: 1.25rem;
-  color: #b87c9b;
+  color: #f7a6b2;
   letter-spacing: 0.08em;
   margin-top: 0;
   margin-bottom: 12px;
@@ -168,7 +169,7 @@ body {
   display: inline-block;
   margin-top: 10px;
   color: #fff;
-  background: #b87c9b;
+  background: #f7a6b2;
   padding: 7px 18px;
   border-radius: 20px;
   text-decoration: none;
@@ -183,11 +184,15 @@ body {
 }
 
 .guestbook {
-  background: none;
-  border-radius: 0;
-  padding: 0;
+  background: #fff;
+  border: 1.5px solid #f7cfdc;
+  border-radius: 24px;
+  padding: 32px 18px 28px 18px;
   margin-bottom: 40px;
   text-align: center;
+  box-shadow: none;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 .guestbook-title {
   margin-bottom: 18px;
@@ -210,24 +215,25 @@ body {
 }
 .guestbook-cards {
   display: flex;
-  gap: 18px;
+  gap: 0;
   justify-content: center;
   margin-bottom: 18px;
+  width: 100%;
 }
 .guestbook-card {
   background: #fff6f8;
   border-radius: 16px;
   box-shadow: 0 2px 12px #f7a6b220;
   padding: 22px 18px 18px 18px;
-  min-width: 180px;
-  max-width: 240px;
-  flex: 1 1 0;
+  width: 100%;
+  min-width: 0;
   position: relative;
-  text-align: left;
+  text-align: center;
   font-size: 1.05rem;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  margin: 0 auto;
 }
 .guestbook-close {
   position: absolute;
@@ -255,7 +261,7 @@ body {
   justify-content: center;
   align-items: center;
   background: #fff6f8;
-  color: #b87c9b;
+  color: #f7a6b2;
   border: 1.5px dashed #f7a6b2;
   min-height: 140px;
 }
@@ -266,7 +272,7 @@ body {
 .guestbook-write-text {
   font-size: 1.1rem;
   font-family: 'Noto Serif KR', serif;
-  color: #b87c9b;
+  color: #f7a6b2;
 }
 .guestbook-actions {
   display: flex;
@@ -276,7 +282,7 @@ body {
 }
 .guestbook-action-btn {
   background: #f7e6ea;
-  color: #b87c9b;
+  color: #f7a6b2;
   border: none;
   border-radius: 20px;
   padding: 10px 22px;
@@ -325,9 +331,22 @@ body {
 @media (max-width: 520px) {
   .invitation-container {
     max-width: 100vw;
-    width: 100vw;
-    border-radius: 0;
-    padding: 0 8px;
+    padding: 0 4vw;
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+  .main-photo-section img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+  .main-photo-section {
+    margin-bottom: 28px;
+  }
+  .lang-switch {
+    justify-content: center;
+    margin-bottom: 12px;
   }
   .photo-slider img {
     width: 100vw;
@@ -336,19 +355,24 @@ body {
     border-radius: 0;
   }
   .invitation-message, .dday, .info, .banquet, .gift, .rsvp {
-    border-radius: 0;
-    padding-left: 4px;
-    padding-right: 4px;
+    border-radius: 18px;
+    padding: 24px 8px 20px 8px;
+  }
+  .guestbook {
+    border-radius: 18px;
+    padding: 24px 8px 20px 8px;
   }
   .guestbook-cards {
     flex-direction: column;
-    gap: 14px;
+    gap: 0;
     align-items: center;
+    width: 100%;
   }
   .guestbook-card {
     min-width: 0;
-    max-width: 100vw;
     width: 100%;
+    text-align: center;
+    align-items: center;
   }
   .guestbook-ko {
     font-size: 1.4rem;
@@ -375,22 +399,32 @@ body {
 }
 .section-box {
   background: #fff;
-  border-radius: 18px;
-  border: 1.5px solid #f7a6b2;
-  padding: 36px 18px 32px 18px;
-  margin-bottom: 36px;
+  border: 1.5px solid #f7cfdc;
+  border-radius: 24px;
+  padding: 32px 18px 28px 18px;
+  margin-bottom: 28px;
   box-shadow: none;
   word-break: keep-all;
   overflow-wrap: break-word;
   text-align: center;
 }
-.section-box p, .section-box pre {
+.section-box p {
   color: #555;
-  font-size: 1.15rem;
-  line-height: 2.1;
+  font-size: 17px;
+  line-height: 1.7;
   font-family: 'Noto Serif KR', serif;
   margin: 0 0 18px 0;
   white-space: pre-line;
+}
+.section-box pre {
+  color: #555;
+  font-size: 17px;
+  line-height: 1.7;
+  font-family: 'Noto Serif KR', serif;
+  margin: 0 0 18px 0;
+  white-space: pre-line;
+  text-align: center;
+  font-weight: 400;
 }
 .section-box h3 {
   color: #f7a6b2;
@@ -423,9 +457,7 @@ body {
     font-size: 1.4rem;
   }
   .section-box {
-    border-radius: 0;
-    padding-left: 4px;
-    padding-right: 4px;
+    border-radius: 18px;
   }
 }
 
@@ -508,5 +540,114 @@ body {
     min-width: 0;
     width: 98vw;
     padding: 18px 4vw 18px 4vw;
+  }
+}
+
+.guestbook-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.guestbook-input {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1.5px solid #f0f0f0;
+  font-size: 1.1rem;
+  font-family: 'Noto Serif KR', serif;
+  background: #fff;
+  margin-bottom: 0;
+}
+.guestbook-submit-btn {
+  background: #f7a6b2;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 14px 0;
+  font-size: 1.1rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+.guestbook-submit-btn:active, .guestbook-submit-btn:focus {
+  background: #e3bfcf;
+}
+.guestbook-comments {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.guestbook-comment-card {
+  background: #fff;
+  border: 1.5px solid #f7cfdc;
+  border-radius: 18px;
+  padding: 18px 16px 14px 16px;
+  box-shadow: none;
+  text-align: left;
+  font-size: 1.08rem;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+.guestbook-comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.guestbook-comment-name {
+  font-weight: 600;
+  color: #b87c9b;
+  font-size: 1.08rem;
+}
+.guestbook-comment-date {
+  color: #bbb;
+  font-size: 0.98rem;
+  font-family: 'Playfair Display', serif;
+}
+.guestbook-comment-msg {
+  color: #333;
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+.guestbook-no-comments {
+  color: #bbb;
+  text-align: center;
+  padding: 24px 0;
+  font-size: 1.08rem;
+}
+@media (max-width: 520px) {
+  .guestbook-form {
+    gap: 10px;
+  }
+  .guestbook-input {
+    font-size: 1rem;
+    padding: 10px 10px;
+  }
+  .guestbook-submit-btn {
+    font-size: 1rem;
+    padding: 12px 0;
+  }
+  .guestbook-comments {
+    gap: 10px;
+  }
+  .guestbook-comment-card {
+    padding: 14px 8px 10px 8px;
+    border-radius: 14px;
+    font-size: 1rem;
+  }
+  .guestbook-comment-header {
+    font-size: 0.95rem;
+  }
+  .guestbook-comment-name {
+    font-size: 1rem;
+  }
+  .guestbook-comment-date {
+    font-size: 0.9rem;
+  }
+  .guestbook-comment-msg {
+    font-size: 1rem;
   }
 }

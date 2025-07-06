@@ -46,10 +46,17 @@ function App() {
   const today = now.getDate();
   const isThisMonth = now.getFullYear() === calYear && now.getMonth() === calMonth;
 
-  // 샘플 사진 배열 (추후 교체)
+  // 샘플 사진 배열 (10장으로 확장)
   const samplePhotos = [
     'https://images.unsplash.com/photo-1506744038136-46273834b3fb',
     'https://images.unsplash.com/photo-1465101046530-73398c7f28ca',
+    'https://images.unsplash.com/photo-1519125323398-675f0ddb6308',
+    'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429',
+    'https://images.unsplash.com/photo-1465101178521-c1a9136a3b99',
+    'https://images.unsplash.com/photo-1465101046530-73398c7f28ca',
+    'https://images.unsplash.com/photo-1502082553048-f009c37129b9',
+    'https://images.unsplash.com/photo-1465101178521-c1a9136a3b99',
+    'https://images.unsplash.com/photo-1506744038136-46273834b3fb',
     'https://images.unsplash.com/photo-1519125323398-675f0ddb6308',
   ];
   const [photoIdx, setPhotoIdx] = useState(0);
@@ -112,13 +119,96 @@ function App() {
     }
   };
 
+  // 메인 사진 섹션 다국어 텍스트
+  const mainSectionText = {
+    ko: {
+      phrase: '언제나 한결같이, 평생 함께',
+      names: '김명진 & 제이미',
+    },
+    en: {
+      phrase: 'Always together, forever as one',
+      names: 'Taylor & Jamie',
+    },
+  };
+
+  // Guestbook i18n text
+  const guestbookText = {
+    ko: {
+      title: '방명록',
+      subtitle: '축하 메시지를 남겨주세요',
+      name: '이름',
+      password: '비밀번호',
+      message: '축하메시지',
+      submit: '축하메시지 남기기',
+      more: '더보기',
+      all: '전체보기',
+      noComments: '아직 방명록이 없습니다.',
+    },
+    en: {
+      title: 'Guest Book',
+      subtitle: 'Leave a congratulatory message',
+      name: 'Name',
+      password: 'Password',
+      message: 'Message',
+      submit: 'Leave a message',
+      more: 'More',
+      all: 'View all',
+      noComments: 'No guestbook entries yet.',
+    },
+  };
+
+  // D-day labels for bilingual support
+  const ddayLabels = {
+    ko: {
+      weekday: '토요일 낮 3시',
+      days: '일',
+      hour: '시간',
+      min: '분',
+      sec: '초',
+      countdown: `제이미, 명진의 결혼식이 `,
+      left: '일 남았습니다.',
+    },
+    en: {
+      weekday: 'Saturday, 3:00 PM',
+      days: 'DAYS',
+      hour: 'HOUR',
+      min: 'MIN',
+      sec: 'SEC',
+      countdown: `Jamie & Taylor's wedding is in `,
+      left: 'days left.',
+    },
+  };
+
   return (
     <div className="invitation-container">
-      {/* 언어 전환 버튼 */}
-      <div className="lang-switch">
+      {/* 언어 전환 버튼 - 최상단으로 이동 */}
+      <div className="lang-switch" style={{position: 'relative', textAlign: 'right', marginBottom: 16}}>
         <button onClick={() => setLang('ko')}>한국어</button>
         <button onClick={() => setLang('en')}>English</button>
       </div>
+
+      {/* 메인 사진 및 이름/문구 섹션 */}
+      <section className="main-photo-section" style={{textAlign: 'center', marginBottom: 40}}>
+        <img 
+          src={process.env.PUBLIC_URL + '/main_photos/WS_02233.jpg'} 
+          alt="main" 
+          style={{
+            width: '100%',
+            maxWidth: 400,
+            height: 'auto',
+            borderRadius: 16,
+            boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
+            margin: '0 auto',
+            display: 'block',
+          }}
+        />
+        <div style={{marginTop: 32, color: '#888', fontSize: '1.1rem', letterSpacing: '0.08em'}}>
+          {mainSectionText[lang].phrase}
+        </div>
+        <div style={{marginTop: 12, fontWeight: 600, fontSize: '2rem', color: '#222'}}>
+          {mainSectionText[lang].names}
+        </div>
+      </section>
 
       {/* 인삿말 */}
       <section className="section-box">
@@ -130,51 +220,44 @@ function App() {
       {/* D-day 카운트 */}
       <section className="section-box">
         <div style={{marginBottom: 24}}>
-          <div style={{fontSize: '2rem', fontWeight: 500, color: '#555', letterSpacing: '0.08em'}}>
-            {calYear}.{String(calMonth+1).padStart(2,'0')}.{String(weddingDate.getDate()).padStart(2,'0')}
+          <div style={{fontSize: '2.5rem', fontWeight: 500, color: '#555', letterSpacing: '0.08em'}}>
+            {lang === 'ko'
+              ? `${calYear}.${String(calMonth+1).padStart(2,'0')}.${String(weddingDate.getDate()).padStart(2,'0')}`
+              : `${calYear}.${String(calMonth+1).padStart(2,'0')}.${String(weddingDate.getDate()).padStart(2,'0')}`}
           </div>
           <div style={{fontSize: '1.2rem', color: '#888', marginTop: 6}}>
-            토요일 낮 3시
+            {ddayLabels[lang].weekday}
           </div>
         </div>
-        <div style={{maxWidth: 340, margin: '0 auto 24px auto'}}>
-          <table style={{width: '100%', borderCollapse: 'collapse', fontFamily: 'inherit'}}>
-            <thead>
-              <tr style={{color: '#f7a6b2', fontWeight: 500, fontSize: '1.1rem'}}>
-                {/* {['일','월','화','수','목','금','토'].map((d,i)=>(<th key={i} style={{padding: 4, fontWeight: 400}}>{d}</th>))} */}
-              </tr>
-            </thead>
-            <tbody>
-              {calWeeks.map((week, i) => (
-                <tr key={i}>
-                  {/* {week.map((d, j) => {
-                    let style = {padding: 4, borderRadius: '50%', width: 32, height: 32, textAlign: 'center'};
-                    if (d === weddingDate.getDate()) style.background = '#f7a6b2', style.color = '#fff';
-                    else if (isThisMonth && d === today) style.background = '#e3bfcf', style.color = '#fff';
-                    else if (j === 0) style.color = '#f7a6b2';
-                    else if (j === 6) style.color = '#7a8bb7';
-                    else style.color = '#888';
-                    return <td key={j} style={style}>{d||''}</td>;
-                  })} */}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <div style={{maxWidth: 340, margin: '0 auto 24px auto'}}></div>
         <div style={{display:'flex', justifyContent:'center', gap:24, margin:'24px 0 10px 0', fontFamily:'Playfair Display,serif'}}>
-          <div style={{textAlign:'center'}}><div style={{fontSize:'2rem', color:'#555'}}>{days}</div><div style={{fontSize:'0.9rem', color:'#bbb', letterSpacing:'0.1em'}}>DAYS</div></div>
-          <div style={{textAlign:'center'}}><div style={{fontSize:'2rem', color:'#555'}}>{String(hours).padStart(2,'0')}</div><div style={{fontSize:'0.9rem', color:'#bbb', letterSpacing:'0.1em'}}>HOUR</div></div>
-          <div style={{textAlign:'center'}}><div style={{fontSize:'2rem', color:'#555'}}>{String(mins).padStart(2,'0')}</div><div style={{fontSize:'0.9rem', color:'#bbb', letterSpacing:'0.1em'}}>MIN</div></div>
-          <div style={{textAlign:'center'}}><div style={{fontSize:'2rem', color:'#555'}}>{String(secs).padStart(2,'0')}</div><div style={{fontSize:'0.9rem', color:'#bbb', letterSpacing:'0.1em'}}>SEC</div></div>
+          <div style={{textAlign:'center'}}>
+            <div style={{fontSize:'2rem', color:'#555'}}>{days}</div>
+            <div style={{fontSize:'0.9rem', color:'#bbb', letterSpacing:'0.1em'}}>{ddayLabels[lang].days}</div>
+          </div>
+          <div style={{textAlign:'center'}}>
+            <div style={{fontSize:'2rem', color:'#555'}}>{String(hours).padStart(2,'0')}</div>
+            <div style={{fontSize:'0.9rem', color:'#bbb', letterSpacing:'0.1em'}}>{ddayLabels[lang].hour}</div>
+          </div>
+          <div style={{textAlign:'center'}}>
+            <div style={{fontSize:'2rem', color:'#555'}}>{String(mins).padStart(2,'0')}</div>
+            <div style={{fontSize:'0.9rem', color:'#bbb', letterSpacing:'0.1em'}}>{ddayLabels[lang].min}</div>
+          </div>
+          <div style={{textAlign:'center'}}>
+            <div style={{fontSize:'2rem', color:'#555'}}>{String(secs).padStart(2,'0')}</div>
+            <div style={{fontSize:'0.9rem', color:'#bbb', letterSpacing:'0.1em'}}>{ddayLabels[lang].sec}</div>
+          </div>
         </div>
         <div style={{marginTop: 10, color:'#555', fontSize:'1.1rem'}}>
-          제이미, 명진의 결혼식이 <span style={{color:'#f7a6b2', fontWeight:600}}>{dDay}</span>일 남았습니다.
+          {ddayLabels[lang].countdown}
+          <span style={{color:'#f7a6b2', fontWeight:600}}>{dDay}</span>
+          {lang === 'ko' ? ddayLabels[lang].left : ` ${ddayLabels[lang].left}`}
         </div>
       </section>
 
       {/* 사진 슬라이드 */}
       <section className="photo-slider">
-        <img src={samplePhotos[photoIdx]} alt="wedding" />
+        <img src={samplePhotos[photoIdx]} alt="wedding" style={{height: 440, objectFit: 'cover', width: '100%', maxWidth: '100%'}} />
         <div>
           <button onClick={() => setPhotoIdx((photoIdx - 1 + samplePhotos.length) % samplePhotos.length)}>&lt;</button>
           <span>{photoIdx + 1} / {samplePhotos.length}</span>
@@ -202,56 +285,45 @@ function App() {
       {/* 방명록 */}
       <section className="guestbook">
         <div className="guestbook-title">
-          <div className="guestbook-en">GUESTBOOK</div>
-          <div className="guestbook-ko">방명록</div>
+          <div className="guestbook-en" style={{fontSize:'1.3rem', color:'#f7a6b2', letterSpacing:'0.12em', marginBottom:4}}>{guestbookText[lang].title.toUpperCase()}</div>
+          <div className="guestbook-ko" style={{fontSize:'1.1rem', color:'#f7a6b2', marginBottom:18}}>{guestbookText[lang].subtitle}</div>
         </div>
-        <div className="guestbook-cards">
-          {guestbookList.map((item, idx) => (
-            <div className="guestbook-card" key={idx}>
-              <div className="guestbook-flower">🌸</div>
-              <div className="guestbook-content">{item.msg}</div>
-              <div style={{marginTop: 12, fontWeight: 500, color: '#888'}}>- {item.name} -</div>
-            </div>
-          ))}
-          <div className="guestbook-card guestbook-write-card" onClick={() => setShowGuestbookModal(true)} style={{cursor:'pointer'}}>
-            <div className="guestbook-write-icon">✏️</div>
-            <div className="guestbook-write-text">방명록 작성하기</div>
-          </div>
+        <form className="guestbook-form" style={{display:'flex', flexDirection:'column', gap:12, marginBottom:24}} onSubmit={e => {
+          e.preventDefault();
+          if (!guestName || !guestPw || !guestMsg) return;
+          setGuestbookList([
+            {
+              name: guestName,
+              pw: guestPw,
+              msg: guestMsg,
+              date: new Date().toISOString(),
+            },
+            ...guestbookList,
+          ]);
+          setGuestName('');
+          setGuestPw('');
+          setGuestMsg('');
+        }}>
+          <input value={guestName} onChange={e => setGuestName(e.target.value)} placeholder={guestbookText[lang].name} className="guestbook-input" />
+          <input type="password" value={guestPw} onChange={e => setGuestPw(e.target.value)} placeholder={guestbookText[lang].password} className="guestbook-input" />
+          <input value={guestMsg} onChange={e => setGuestMsg(e.target.value)} placeholder={guestbookText[lang].message} className="guestbook-input" />
+          <button type="submit" className="guestbook-submit-btn">{guestbookText[lang].submit}</button>
+        </form>
+        <div className="guestbook-comments">
+          {guestbookList.length === 0 ? (
+            <div className="guestbook-no-comments">{guestbookText[lang].noComments}</div>
+          ) : (
+            guestbookList.map((item, idx) => (
+              <div className="guestbook-comment-card" key={idx}>
+                <div className="guestbook-comment-header">
+                  <span className="guestbook-comment-name">{item.name}</span>
+                  <span className="guestbook-comment-date">{item.date.slice(0,10)} {item.date.slice(11,16)}</span>
+                </div>
+                <div className="guestbook-comment-msg">{item.msg}</div>
+              </div>
+            ))
+          )}
         </div>
-        <div className="guestbook-actions">
-          <button className="guestbook-action-btn" onClick={() => setShowGuestbookModal(true)}>작성하기</button>
-          <button className="guestbook-action-btn">전체보기</button>
-        </div>
-        {/* 방명록 작성 모달 */}
-        {showGuestbookModal && (
-          <div className="modal-backdrop" onClick={() => setShowGuestbookModal(false)}>
-            <div className="modal-content" onClick={e => e.stopPropagation()}>
-              <button className="modal-close" onClick={() => setShowGuestbookModal(false)}>×</button>
-              <h2 style={{marginTop: 0, fontWeight: 700, fontSize: '1.3rem'}}>방명록 (축하 글) 작성</h2>
-              <div className="modal-form-row">
-                <label>이름 <span style={{color:'#ff5a5a'}}>*</span></label>
-                <input value={guestName} onChange={e => setGuestName(e.target.value)} placeholder="이름을 입력해 주세요." />
-              </div>
-              <div className="modal-form-row">
-                <label>비밀번호 <span style={{color:'#ff5a5a'}}>*</span></label>
-                <input type="password" value={guestPw} onChange={e => setGuestPw(e.target.value)} placeholder="비밀번호를 입력해 주세요." />
-              </div>
-              <div className="modal-form-row">
-                <label>내용 <span style={{color:'#ff5a5a'}}>*</span></label>
-                <textarea value={guestMsg} onChange={e => setGuestMsg(e.target.value)} placeholder="내용을 입력해 주세요. (최대 500자)" maxLength={500} rows={5} />
-              </div>
-              <button className="modal-submit" onClick={() => {alert('축하 글이 임시로 저장됩니다!'); setShowGuestbookModal(false); setGuestName(''); setGuestPw(''); setGuestMsg(''); setGuestbookList([
-                ...guestbookList,
-                {
-                  name: guestName,
-                  pw: guestPw,
-                  msg: guestMsg,
-                  date: new Date().toISOString(),
-                }
-              ]);}}>신랑 & 신부에게 축하 글 전달하기</button>
-            </div>
-          </div>
-        )}
       </section>
 
       {/* 마음 전하실 곳 */}
