@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import { FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
 
 function App() {
   const [lang, setLang] = useState('ko');
@@ -12,6 +13,31 @@ function App() {
   const [guestbookList, setGuestbookList] = useState([
     // 예시글(샘플)도 이 배열에 포함
   ]);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const audioRef = React.useRef(null);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      const playPromise = audioRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Autoplay might be blocked; set isPlaying to false
+          setIsPlaying(false);
+        });
+      }
+    }
+  }, []);
+
+  const handleSoundToggle = () => {
+    if (!audioRef.current) return;
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current.play();
+      setIsPlaying(true);
+    }
+  };
   useEffect(() => {
     const timer = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(timer);
@@ -46,19 +72,19 @@ function App() {
   const today = now.getDate();
   const isThisMonth = now.getFullYear() === calYear && now.getMonth() === calMonth;
 
-  // 샘플 사진 배열 (10장으로 확장)
-  const samplePhotos = [
-    'https://images.unsplash.com/photo-1506744038136-46273834b3fb',
-    'https://images.unsplash.com/photo-1465101046530-73398c7f28ca',
-    'https://images.unsplash.com/photo-1519125323398-675f0ddb6308',
-    'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429',
-    'https://images.unsplash.com/photo-1465101178521-c1a9136a3b99',
-    'https://images.unsplash.com/photo-1465101046530-73398c7f28ca',
-    'https://images.unsplash.com/photo-1502082553048-f009c37129b9',
-    'https://images.unsplash.com/photo-1465101178521-c1a9136a3b99',
-    'https://images.unsplash.com/photo-1506744038136-46273834b3fb',
-    'https://images.unsplash.com/photo-1519125323398-675f0ddb6308',
+  // main_photos 폴더의 9장 이미지 사용
+  const mainPhotoFiles = [
+    'WS_00534.jpg',
+    'WS_01566.jpg',
+    'WS_00260.jpg',
+    'WS_00534.jpg',
+    'WS_00927 ed.jpg',
+    'WS_01596.jpg',
+    'WS_02057.jpg',
+    'WS_01621.jpg',
+    'WS_01130.jpg',
   ];
+  const samplePhotos = mainPhotoFiles.map(f => process.env.PUBLIC_URL + '/main_photos/' + f);
   const [photoIdx, setPhotoIdx] = useState(0);
 
   // 다국어 텍스트
@@ -72,7 +98,7 @@ function App() {
       address: '서울 중구 퇴계로 34길 28',
       tel: '02-6358-5543',
       map: '지도보기',
-      banquet: '연회 & 식사 안내',
+      banquet: '연회 & 식사 안내, 오후 4시',
       banquetDesc: `식사는 혼례 및 사진 촬영이 끝난 후 도보로 5분 거리에 있는 솔라고 호텔 2층 연회장 에서 진행됩니다.\n\n부족함 없이 즐기실 수 있도록 한식을 비롯해 중식, 양식, 일식 등 다양한 뷔페 메뉴가 준비되어 있습니다.`,
       banquetAddr: '서울 특별시 중구 충무로 2길 9',
       guestbook: '방명록',
@@ -92,14 +118,18 @@ function App() {
     },
     en: {
       invitationTitle: 'You are cordially invited.',
-      invitationMsg: `We are delighted to announce that our small encounter has blossomed into love, and we will be holding our precious wedding.\n\nWe promise to cherish, respect, and care for each other as we did from the very beginning.\n\nIt would be our greatest joy if you could join us on this day of love and faith.\n\nJamie, son of Gary & Morak\nTaylor, daughter of Jaeduk Kim & Kyungja Shim`,
+      invitationMsg: `We are happy to share that what began as a simple meeting has grown into a beautiful love story. 
+
+We will soon be celebrating our wedding, a day filled with love, commitment, and faith.
+
+As we vow to honour, support, and care for one another as we always have, it would mean the world to us to have you there to witness and share in this special moment. \n\nTaylor & Jamie`,
       dday: `148 days left until Jamie & Taylor's wedding.`,
       date: 'Saturday, November 8, 2025, 3:00 PM',
       place: 'Namsangol Hanok Village, Gwanhundong Min Family House',
       address: '28, Toegye-ro 34-gil, Jung-gu, Seoul',
       tel: '+82-2-6358-5543',
       map: 'View Map',
-      banquet: 'Banquet & Meal Info',
+      banquet: 'Banquet & Meal Info, 4PM',
       banquetDesc: `After the ceremony and photo session, a banquet will be held at the 2nd floor hall of Sollago Hotel, a 5-minute walk away.\n\nA variety of buffet menus including Korean, Chinese, Western, and Japanese cuisine will be served.`,
       banquetAddr: '9, Chungmuro 2-gil, Jung-gu, Seoul',
       guestbook: 'Guestbook',
@@ -165,7 +195,7 @@ function App() {
       hour: '시간',
       min: '분',
       sec: '초',
-      countdown: `제이미, 명진의 결혼식이 `,
+      countdown: `명진, 제이미의 결혼식이 `,
       left: '일 남았습니다.',
     },
     en: {
@@ -174,13 +204,23 @@ function App() {
       hour: 'HOUR',
       min: 'MIN',
       sec: 'SEC',
-      countdown: `Jamie & Taylor's wedding is in `,
+      countdown: `Taylor & Jamie's wedding is in `,
       left: 'days left.',
     },
   };
 
   return (
     <div className="invitation-container">
+      {/* 사운드 아이콘 - 좌상단 */}
+      <button
+        className="sound-toggle-btn"
+        style={{position:'absolute', left:16, top:16, background:'none', border:'none', cursor:'pointer', zIndex:10}}
+        onClick={handleSoundToggle}
+        aria-label={isPlaying ? 'Pause sound' : 'Play sound'}
+      >
+        {isPlaying ? <FaVolumeUp size={28} color="#f7a6b2" /> : <FaVolumeMute size={28} color="#f7a6b2" />}
+      </button>
+      <audio ref={audioRef} src={process.env.PUBLIC_URL + '/sound.mp3'} loop autoPlay />
       {/* 언어 전환 버튼 - 최상단으로 이동 */}
       <div className="lang-switch" style={{position: 'relative', textAlign: 'right', marginBottom: 16}}>
         <button onClick={() => setLang('ko')}>한국어</button>
@@ -194,8 +234,9 @@ function App() {
           alt="main" 
           style={{
             width: '100%',
-            maxWidth: 400,
+            aspectRatio: '3/2',
             height: 'auto',
+            objectFit: 'cover',
             borderRadius: 16,
             boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
             margin: '0 auto',
@@ -255,6 +296,24 @@ function App() {
         </div>
       </section>
 
+      {/* GALLERY 섹션 */}
+      <section className="gallery-section" style={{margin: '48px 0 32px 0'}}>
+        <div style={{textAlign:'center', fontFamily:'Playfair Display,serif', fontSize:'1.5rem', letterSpacing:'0.3em', marginBottom:32}}>
+          GALLERY
+        </div>
+        <div className="gallery-grid" style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap: '16px', maxWidth: 700, margin:'0 auto'}}>
+          {samplePhotos.map((url, idx) => (
+            <img
+              key={idx}
+              src={url}
+              alt={`gallery-${idx}`}
+              style={{width:'100%', aspectRatio:'1/1', objectFit:'cover', borderRadius:12, cursor:'pointer', boxShadow:'0 2px 8px #0001'}}
+              onClick={() => setPhotoIdx(idx)}
+            />
+          ))}
+        </div>
+      </section>
+
       {/* 사진 슬라이드 */}
       <section className="photo-slider">
         <img src={samplePhotos[photoIdx]} alt="wedding" style={{height: 440, objectFit: 'cover', width: '100%', maxWidth: '100%'}} />
@@ -271,6 +330,11 @@ function App() {
         <p>{text[lang].place}</p>
         <p>{text[lang].address}</p>
         <p>Tel. {text[lang].tel}</p>
+        <img
+          src={process.env.PUBLIC_URL + '/map_min.png'}
+          alt="map"
+          style={{width:'100%', maxWidth:500, borderRadius:12, margin:'18px auto 0 auto', display:'block', border:'1px solid #0002', boxShadow:'0 2px 8px #0001', marginBottom:12}}
+        />
         <a className="section-btn" href="https://naver.me/5Qw1Qw1Q" target="_blank" rel="noopener noreferrer">{text[lang].map}</a>
       </section>
 
@@ -279,6 +343,11 @@ function App() {
         <h3>{text[lang].banquet}</h3>
         <pre>{text[lang].banquetDesc}</pre>
         <p>{text[lang].banquetAddr}</p>
+        <img
+          src={process.env.PUBLIC_URL + '/map_hotel.png'}
+          alt="banquet-map"
+          style={{width:'100%', maxWidth:500, borderRadius:12, margin:'18px auto 0 auto', display:'block', border:'1px solid #0002', boxShadow:'0 2px 8px #0001', marginBottom:12}}
+        />
         <a className="section-btn" href="https://naver.me/5Qw1Qw1Q" target="_blank" rel="noopener noreferrer">{text[lang].map}</a>
       </section>
 
