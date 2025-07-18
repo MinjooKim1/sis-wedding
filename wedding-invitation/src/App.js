@@ -39,11 +39,25 @@ const groomAccounts = [
       const playPromise = audioRef.current.play();
       if (playPromise !== undefined) {
         playPromise.catch(() => {
-          // Autoplay might be blocked; set isPlaying to false
           setIsPlaying(false);
         });
       }
     }
+    // 사용자 첫 상호작용 시 play() 재시도
+    const tryPlay = () => {
+      if (audioRef.current && !isPlaying) {
+        audioRef.current.play();
+        setIsPlaying(true);
+      }
+    };
+    window.addEventListener('click', tryPlay, { once: true });
+    window.addEventListener('touchstart', tryPlay, { once: true });
+    window.addEventListener('keydown', tryPlay, { once: true });
+    return () => {
+      window.removeEventListener('click', tryPlay);
+      window.removeEventListener('touchstart', tryPlay);
+      window.removeEventListener('keydown', tryPlay);
+    };
   }, []);
 
   
@@ -183,8 +197,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
       map: 'View Map',
       call: 'Call',
       banquet: 'Banquet & Meal Info, 4PM',
-      banquetDesc: 'at the 2nd floor hall of Sollago Hotel, a 5-minute walk away.',
-      banquetDesc: 'a 5-minute walk away from the Hanok Village.',
+      banquetDesc: 'at the 2nd floor hall of Sollago Hotel',
+      banquetDesc2: 'a 5-minute walk away from the Hanok Village.',
       banquetDesc3: 'A variety of buffet menus including Korean, Chinese, Western, and Japanese cuisine will be served.`,' ,
       banquetAddr: '9, Chungmuro 2-gil, Jung-gu, Seoul',
       guestbook: 'Guestbook',
@@ -389,7 +403,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
         <div style={{textAlign:'center', fontFamily:'Playfair Display,serif', fontSize:'1.5rem', letterSpacing:'0.3em', marginBottom:32}}>
           GALLERY
         </div>
-        <div className="gallery-grid" style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gridTemplateRows:'repeat(4, 1fr)', gap: '12px', maxWidth: 700, margin:'0 auto'}}>
+        <div className="gallery-grid" style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gridTemplateRows:'repeat(4, 1fr)', gap: '6px', maxWidth: 700, margin:'0 auto'}}>
           {samplePhotos.slice(0, 12).map((url, idx) => (
             <img
               key={idx}
@@ -430,6 +444,12 @@ As we vow to honour, support, and care for one another as we always have, it wou
   href="https://naver.me/5gFg3FmY"
   target="_blank"
   rel="map"
+  style={{
+    width: '100px',
+    height: '30px', display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingRight:'10px'}}
 >
   <span role="img" aria-label="map" style={{ marginRight: '6px' }}>📍</span>
   {text[lang].map}
@@ -437,6 +457,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
 
 
       </section>
+
+      <div style={{ height: '5px', backgroundColor: '#f0f0f0', margin: '16px 0' }} />
 
       {/* 연회 & 식사 안내 */}
       <section className="section-box" style={{padding:'32px 20px 28px 20px', marginLeft:0, marginRight:0}}>
@@ -458,6 +480,12 @@ As we vow to honour, support, and care for one another as we always have, it wou
   href="https://naver.me/x0UPjjrq"
   target="_blank"
   rel="noopener noreferrer"
+  style={{
+    width: '100px',
+    height: '30px', display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingRight:'10px'}}
 >
   <span role="img" aria-label="map" style={{ marginRight: '6px' }}>📍</span>
   {text[lang].map}
@@ -466,6 +494,12 @@ As we vow to honour, support, and care for one another as we always have, it wou
 <a
   className="circle-button"
   href="tel:0222637979"
+  style={{
+    width: '100px',
+    height: '30px', display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingRight:'10px'}}
 >
   <span role="img" aria-label="call" style={{ marginRight: '6px' }}>📞</span>
   {text[lang].call}
@@ -491,7 +525,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
     : 'For those unable to attend, we have provided a bank account below. Thank you for your understanding.'}
   </p>
 
-  <div style={{ marginTop: 16, display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap' }}>
+  <div style={{ marginTop: 16, display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap', }}>
     <button 
       onClick={() => setShowModal('bride')} 
       style={{ border: '1px solid rgb(213 213 213)', padding: '14px 30px', borderRadius: '30px', background: 'white'}}>
