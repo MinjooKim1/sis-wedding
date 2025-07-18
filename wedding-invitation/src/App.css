@@ -1,11 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Noto+Serif+KR:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;700&display=swap');
 
-body {
-  background: #faf9f7;
+html, body {
   margin: 0;
   padding: 0;
-  font-size: 18px;
-  font-family: 'Noto Serif KR', 'Playfair Display', serif;
+  background: #fff;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Gowun Batang', 'Noto Serif KR', 'Playfair Display', serif;
+}
+.landing-section-info, .section-box, .guestbook, .gift, .rsvp, .dday, .info, .banquet {
+  font-family: 'Fira Sans', Arial, sans-serif;
+}
+.section-box p, .section-box pre, .guestbook-content, .guestbook-input, .guestbook-submit-btn, .rsvp input, .rsvp select, .rsvp button[type="submit"], .modal-form-row input, .modal-form-row textarea, .modal-submit {
+  font-family: 'Fira Sans', Arial, sans-serif;
 }
 
 .App {
@@ -48,13 +62,92 @@ body {
 }
 
 .invitation-container {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  min-width: 100vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+}
+.landing-section {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  min-width: 100vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+}
+.landing-section > div:first-child {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  min-width: 100vw !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  overflow: hidden;
+  background: none;
+  box-shadow: none;
+  padding: 0 !important;
+}
+.landing-section img {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  min-width: 100vw !important;
+  height: 70vh;
+  object-fit: cover;
+  margin: 0 !important;
+  display: block;
+  border-radius: 0 !important;
+  border: none !important;
+  padding: 0 !important;
+}
+@media (max-width: 520px) {
+  .landing-section img {
+    width: 100%;
+    max-width: 100vw;
+    min-width: 0;
+    height: 70vh;
+    margin: 0;
+  }
+}
+
+.landing-section-info {
+  background: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 32px 0 24px 0;
+  text-align: center;
   max-width: 520px;
   margin: 0 auto;
-  padding: 0 20px;
-  background: #fff;
-  color: #222;
-  min-height: 100vh;
+  margin-top: 0;
+}
+
+.landing-section-info .en-font, .en-font {
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
   font-size: 1.1rem;
+  letter-spacing: 0.18em;
+  font-weight: 400;
+  color: #444;
+}
+.en-font-bold {
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-size: 19px;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: #444;
+}
+.en-fira {
+  font-family: 'Fira Sans', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #888;
+  letter-spacing: 0.04em;
+}
+.en-poppins {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #888;
+  letter-spacing: 0.04em;
 }
 
 .lang-switch {
@@ -186,7 +279,7 @@ body {
 
 .guestbook {
   background: #fff;
-  border: 1.5px solid #f7cfdc;
+  border: 1.5px solid #f0f0f0;
   border-radius: 24px;
   padding: 32px 18px 28px 18px;
   margin-bottom: 40px;
@@ -380,6 +473,30 @@ body {
   }
 }
 
+@media (min-width: 521px) {
+  .landing-section > div:first-child {
+    width: 520px !important;
+    max-width: 520px !important;
+    min-width: 520px !important;
+    margin: 0 auto !important;
+  }
+  .landing-section img {
+    width: 520px !important;
+    max-width: 520px !important;
+    min-width: 520px !important;
+    margin: 0 auto !important;
+  }
+}
+@media (max-width: 520px) {
+  .landing-section > div:first-child,
+  .landing-section img {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 100vw !important;
+    margin: 0 !important;
+  }
+}
+
 .section-title-en {
   font-family: 'Playfair Display', serif;
   font-size: 1.1rem;
@@ -400,7 +517,7 @@ body {
 }
 .section-box {
   background: #fff;
-  border: 1.5px solid #f7cfdc;
+  border: 1.5px solid #f0f0f0;
   border-radius: 24px;
   padding: 32px 18px 28px 18px;
   margin-bottom: 28px;
@@ -585,7 +702,7 @@ body {
 }
 .guestbook-comment-card {
   background: #fff;
-  border: 1.5px solid #f7cfdc;
+  border: 1.5px solid #f0f0f0;
   border-radius: 18px;
   padding: 18px 16px 14px 16px;
   box-shadow: none;
@@ -653,4 +770,21 @@ body {
   .guestbook-comment-msg {
     font-size: 1rem;
   }
+}
+
+.section-box, .guestbook, .gift, .rsvp, .dday, .info, .banquet {
+  background: #fff !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+.guestbook-card, .guestbook-write-card, .guestbook-comment-card {
+  background: #fff !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+.guestbook-action-btn, .lang-switch button, .photo-slider button, .section-btn, .rsvp button[type="submit"], .guestbook-submit-btn {
+  background: #fff !important;
+  color: #b87c9b;
+  border: none !important;
+  border-radius: 0 !important;
 }

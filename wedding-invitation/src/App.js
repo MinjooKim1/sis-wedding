@@ -74,15 +74,18 @@ function App() {
 
   // main_photos 폴더의 9장 이미지 사용
   const mainPhotoFiles = [
-    'WS_00534.jpg',
-    'WS_01566.jpg',
-    'WS_00260.jpg',
-    'WS_00534.jpg',
-    'WS_00927 ed.jpg',
-    'WS_01596.jpg',
-    'WS_02057.jpg',
-    'WS_01621.jpg',
-    'WS_01130.jpg',
+    'WS_00927 ed.png',
+    'WS_01847.png',
+    'WS_01621.png',
+    'WS_00781.png',
+    'WS_00597.png',
+    'WS_00728.png',//6
+    'WS_01329.png',
+    'WS_00713.png',
+    'WS_02057.png',//9
+    'WS_00321.png',
+    'WS_01423.png',
+    'WS_00049.png',
   ];
   const samplePhotos = mainPhotoFiles.map(f => process.env.PUBLIC_URL + '/main_photos/' + f);
   const [photoIdx, setPhotoIdx] = useState(0);
@@ -209,8 +212,69 @@ As we vow to honour, support, and care for one another as we always have, it wou
     },
   };
 
+  // 랜딩페이지 다국어 텍스트
+  const landingText = {
+    ko: {
+      groom: '신랑',
+      bride: '신부',
+      groomName: '명진',
+      brideName: '제이미',
+      date: '2025.11.08 토요일 오후 3시',
+      place: '남산골한옥마을 관훈동 민씨가옥',
+    },
+    en: {
+      groom: 'GROOM',
+      bride: 'BRIDE',
+      groomName: 'Taylor',
+      brideName: 'Jamie',
+      date: 'SAT, NOV 8, 2025, 3:00 PM',
+      place: 'Namsangol Hanok Village, Min Clan’s House',
+    },
+  };
+
   return (
     <div className="invitation-container">
+      {/* 최상단 언어 전환 버튼 영역 */}
+      <div style={{width:'100%', height:100, background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', paddingTop:0, paddingBottom:0, margin:0}}>
+        <div className="lang-switch" style={{position:'static', textAlign:'center', margin:0}}>
+          <button onClick={() => setLang('ko')}>한국어</button>
+          <button onClick={() => setLang('en')}>English</button>
+        </div>
+      </div>
+      {/* 랜딩페이지 섹션 */}
+      <section className="landing-section" style={{padding:0, margin:0, marginBottom:0}}>
+        <div style={{position:'relative', width:'100%', margin:'0', borderRadius:0, overflow:'hidden', background:'none', boxShadow:'none', padding:0}}>
+          <img
+            src={process.env.PUBLIC_URL + '/main_photos/main.png'}
+            alt="landing-main"
+            style={{width:'100%', height:'70vh', objectFit:'cover', display:'block', margin:0, padding:0, border:'none'}}
+          />
+          {/* 하트 오버레이 */}
+          <div style={{position:'absolute', left:0, top:0, width:'100%', height:'100%', pointerEvents:'none'}}>
+            {Array.from({length:18}).map((_,i)=>(
+              <span key={i} style={{
+                position:'absolute',
+                left: `${Math.random()*90+2}%`,
+                top: `${Math.random()*90+2}%`,
+                fontSize: `${Math.random()*18+12}px`,
+                color:'#fff',
+                opacity:0.7
+              }}>♡</span>
+            ))}
+          </div>
+        </div>
+        {/* 이름/장소만 표시 */}
+        <div className="landing-section-info" style={{padding:'0 20px'}}>
+          <div style={{display:'flex', justifyContent:'center', alignItems:'center', gap:32, fontSize: lang === 'en' ? 19 : 28, fontWeight:700, color:'#222', marginBottom:19, fontFamily: lang === 'ko' ? 'Gowun Batang, Noto Serif KR, serif' : 'Cormorant Garamond, Playfair Display, serif', letterSpacing:'0.08em'}}>
+            <span className={lang === 'en' ? 'en-font-bold' : ''} style={{fontWeight:700}}>{landingText[lang].groomName}</span>
+            <span style={{fontSize:22, color:'#f7a6b2', fontWeight:400, margin:'0 8px'}}>|</span>
+            <span className={lang === 'en' ? 'en-font-bold' : ''} style={{fontWeight:700}}>{landingText[lang].brideName}</span>
+          </div>
+          <div style={{fontSize:14, color:'#888', fontFamily: lang === 'en' ? 'Fira Sans, Arial, sans-serif' : 'Noto Serif KR, Playfair Display, serif', marginBottom:48, fontWeight:500, letterSpacing:'0.04em'}}>
+            {lang === 'en' ? <span className="en-fira">{landingText[lang].place}</span> : landingText[lang].place}
+          </div>
+        </div>
+      </section>
       {/* 사운드 아이콘 - 좌상단 */}
       <button
         className="sound-toggle-btn"
@@ -221,45 +285,17 @@ As we vow to honour, support, and care for one another as we always have, it wou
         {isPlaying ? <FaVolumeUp size={28} color="#f7a6b2" /> : <FaVolumeMute size={28} color="#f7a6b2" />}
       </button>
       <audio ref={audioRef} src={process.env.PUBLIC_URL + '/sound.mp3'} loop autoPlay />
-      {/* 언어 전환 버튼 - 최상단으로 이동 */}
-      <div className="lang-switch" style={{position: 'relative', textAlign: 'right', marginBottom: 16}}>
-        <button onClick={() => setLang('ko')}>한국어</button>
-        <button onClick={() => setLang('en')}>English</button>
-      </div>
 
-      {/* 메인 사진 및 이름/문구 섹션 */}
-      <section className="main-photo-section" style={{textAlign: 'center', marginBottom: 40}}>
-        <img 
-          src={process.env.PUBLIC_URL + '/main_photos/WS_02233.jpg'} 
-          alt="main" 
-          style={{
-            width: '100%',
-            aspectRatio: '3/2',
-            height: 'auto',
-            objectFit: 'cover',
-            borderRadius: 16,
-            boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
-            margin: '0 auto',
-            display: 'block',
-          }}
-        />
-        <div style={{marginTop: 32, color: '#888', fontSize: '1.1rem', letterSpacing: '0.08em'}}>
-          {mainSectionText[lang].phrase}
-        </div>
-        <div style={{marginTop: 12, fontWeight: 600, fontSize: '2rem', color: '#222'}}>
-          {mainSectionText[lang].names}
-        </div>
-      </section>
 
       {/* 인삿말 */}
-      <section className="section-box">
+      <section className="section-box" style={{padding:'32px 20px 28px 20px', marginLeft:0, marginRight:0}}>
         <div className="section-title-en">INVITATION</div>
         <div className="section-title-ko">소중한 분들을 초대합니다</div>
         <pre>{text[lang].invitationMsg}</pre>
       </section>
 
       {/* D-day 카운트 */}
-      <section className="section-box">
+      <section className="section-box" style={{padding:'32px 20px 28px 20px', marginLeft:0, marginRight:0}}>
         <div style={{marginBottom: 24}}>
           <div style={{fontSize: '2.5rem', fontWeight: 500, color: '#555', letterSpacing: '0.08em'}}>
             {lang === 'ko'
@@ -297,17 +333,17 @@ As we vow to honour, support, and care for one another as we always have, it wou
       </section>
 
       {/* GALLERY 섹션 */}
-      <section className="gallery-section" style={{margin: '48px 0 32px 0'}}>
+      <section className="gallery-section" style={{margin: '48px 0 32px 0', padding:'0 20px'}}>
         <div style={{textAlign:'center', fontFamily:'Playfair Display,serif', fontSize:'1.5rem', letterSpacing:'0.3em', marginBottom:32}}>
           GALLERY
         </div>
-        <div className="gallery-grid" style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap: '16px', maxWidth: 700, margin:'0 auto'}}>
-          {samplePhotos.map((url, idx) => (
+        <div className="gallery-grid" style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gridTemplateRows:'repeat(4, 1fr)', gap: '12px', maxWidth: 700, margin:'0 auto'}}>
+          {samplePhotos.slice(0, 12).map((url, idx) => (
             <img
               key={idx}
               src={url}
               alt={`gallery-${idx}`}
-              style={{width:'100%', aspectRatio:'1/1', objectFit:'cover', borderRadius:12, cursor:'pointer', boxShadow:'0 2px 8px #0001'}}
+              style={{width:'100%', aspectRatio:'1/1', objectFit:'cover', objectPosition:'top', borderRadius:0, cursor:'pointer', boxShadow:'0 2px 8px #0001'}}
               onClick={() => setPhotoIdx(idx)}
             />
           ))}
@@ -315,8 +351,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
       </section>
 
       {/* 사진 슬라이드 */}
-      <section className="photo-slider">
-        <img src={samplePhotos[photoIdx]} alt="wedding" style={{height: 440, objectFit: 'cover', width: '100%', maxWidth: '100%'}} />
+      <section className="photo-slider" style={{padding:'0 20px'}}>
+        <img src={samplePhotos[photoIdx]} alt="wedding" style={{height: '70vh', minHeight: '400px', maxHeight: '800px', objectFit: 'cover', objectPosition:'top', width: '100%', maxWidth: '100%'}} />
         <div>
           <button onClick={() => setPhotoIdx((photoIdx - 1 + samplePhotos.length) % samplePhotos.length)}>&lt;</button>
           <span>{photoIdx + 1} / {samplePhotos.length}</span>
@@ -325,7 +361,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       </section>
 
       {/* 날짜/장소/시간/오시는 길 */}
-      <section className="section-box">
+      <section className="section-box" style={{padding:'32px 20px 28px 20px', marginLeft:0, marginRight:0}}>
         <h3>{text[lang].date}</h3>
         <p>{text[lang].place}</p>
         <p>{text[lang].address}</p>
@@ -339,7 +375,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       </section>
 
       {/* 연회 & 식사 안내 */}
-      <section className="section-box">
+      <section className="section-box" style={{padding:'32px 20px 28px 20px', marginLeft:0, marginRight:0}}>
         <h3>{text[lang].banquet}</h3>
         <pre>{text[lang].banquetDesc}</pre>
         <p>{text[lang].banquetAddr}</p>
@@ -352,7 +388,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       </section>
 
       {/* 방명록 */}
-      <section className="guestbook">
+      <section className="guestbook" style={{padding:'32px 20px 28px 20px', marginLeft:0, marginRight:0}}>
         <div className="guestbook-title">
           <div className="guestbook-en" style={{fontSize:'1.3rem', color:'#f7a6b2', letterSpacing:'0.12em', marginBottom:4}}>{guestbookText[lang].title.toUpperCase()}</div>
           <div className="guestbook-ko" style={{fontSize:'1.1rem', color:'#f7a6b2', marginBottom:18}}>{guestbookText[lang].subtitle}</div>
@@ -396,14 +432,14 @@ As we vow to honour, support, and care for one another as we always have, it wou
       </section>
 
       {/* 마음 전하실 곳 */}
-      <section className="gift">
+      <section className="gift" style={{padding:'32px 20px 28px 20px', marginLeft:0, marginRight:0}}>
         <h3>{text[lang].gift}</h3>
         <p>{text[lang].giftDesc}</p>
         <p>{text[lang].account}</p>
       </section>
 
       {/* 참석 의사 전달 */}
-      <section className="rsvp">
+      <section className="rsvp" style={{padding:'32px 20px 28px 20px', marginLeft:0, marginRight:0}}>
         <h3>{text[lang].rsvp}</h3>
         <p>{text[lang].rsvpDesc}</p>
         <form>
