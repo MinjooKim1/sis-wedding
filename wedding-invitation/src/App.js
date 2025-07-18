@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
+import GuestbookForm from './GuestbookForm';
+import { db } from './firebase'; // make sure this path matches your project
+import { collection, addDoc, Timestamp, getDocs, query, orderBy  } from 'firebase/firestore';
+import AccountModal from './AccountModal';
 
 function App() {
   const [lang, setLang] = useState('ko');
@@ -15,6 +19,20 @@ function App() {
   ]);
   const [isPlaying, setIsPlaying] = useState(true);
   const audioRef = React.useRef(null);
+  const [mapModal, setMapModal] = useState({ open: false, src: '' });
+  const [rsvpName, setRsvpName] = useState("");
+const [rsvpStatus, setRsvpStatus] = useState("Y");
+const [showModal, setShowModal] = useState(false);
+const [selectedAccountType, setSelectedAccountType] = useState(null);
+const brideAccounts = [
+  { bank: '국민은행', number: '000-123-456789', holder: '이석훈' },
+  { bank: '국민은행', number: '000-123-456789', holder: '이석훈' },
+];
+
+const groomAccounts = [
+  { bank: '우리은행', number: '100-243-2266279', holder: '김명진' },
+];
+  
 
   useEffect(() => {
     if (audioRef.current) {
@@ -27,6 +45,8 @@ function App() {
       }
     }
   }, []);
+
+  
 
   const handleSoundToggle = () => {
     if (!audioRef.current) return;
@@ -72,6 +92,8 @@ function App() {
   const today = now.getDate();
   const isThisMonth = now.getFullYear() === calYear && now.getMonth() === calMonth;
 
+  
+
   // main_photos 폴더의 9장 이미지 사용
   const mainPhotoFiles = [
     'WS_00927 ed.png',
@@ -80,15 +102,39 @@ function App() {
     'WS_00781.png',
     'WS_00597.png',
     'WS_00728.png',//6
-    'WS_01329.png',
+    'WS_00344.png',
     'WS_00713.png',
-    'WS_02057.png',//9
+    'WS_01759.png',//9
     'WS_00321.png',
     'WS_01423.png',
     'WS_00049.png',
   ];
   const samplePhotos = mainPhotoFiles.map(f => process.env.PUBLIC_URL + '/main_photos/' + f);
   const [photoIdx, setPhotoIdx] = useState(0);
+
+  useEffect(() => {
+    const fetchGuestbook = async () => {
+      const q = query(collection(db, 'guestbook'), orderBy('timestamp', 'desc'));
+      const snapshot = await getDocs(q);
+      const messages = snapshot.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id,
+        date: doc.data().timestamp.toDate().toISOString()
+      }));
+      setGuestbookList(messages);
+    };
+    fetchGuestbook();
+  }, []);
+
+  const [currentPage, setCurrentPage] = useState(1);
+const commentsPerPage = 3;
+
+
+
+// Calculate indexes
+const indexOfLast = currentPage * commentsPerPage;
+const indexOfFirst = indexOfLast - commentsPerPage;
+const currentComments = guestbookList.slice(indexOfFirst, indexOfLast);
 
   // 다국어 텍스트
   const text = {
@@ -270,7 +316,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
             <span style={{fontSize:22, color:'#f7a6b2', fontWeight:400, margin:'0 8px'}}>|</span>
             <span className={lang === 'en' ? 'en-font-bold' : ''} style={{fontWeight:700}}>{landingText[lang].brideName}</span>
           </div>
-          <div style={{fontSize:14, color:'#888', fontFamily: lang === 'en' ? 'Fira Sans, Arial, sans-serif' : 'Noto Serif KR, Playfair Display, serif', marginBottom:48, fontWeight:500, letterSpacing:'0.04em'}}>
+          <div style={{fontSize:14, color:'#888', fontFamily: lang === 'en' ? 'Fira Sans, Arial, sans-serif' : 'Playfair Display, serif', marginBottom:48, fontWeight:500, letterSpacing:'0.04em'}}>
             {lang === 'en' ? <span className="en-fira">{landingText[lang].place}</span> : landingText[lang].place}
           </div>
         </div>
@@ -288,10 +334,10 @@ As we vow to honour, support, and care for one another as we always have, it wou
 
 
       {/* 인삿말 */}
-      <section className="section-box" style={{padding:'32px 20px 28px 20px', marginLeft:0, marginRight:0}}>
-        <div className="section-title-en">INVITATION</div>
+      <section className="section-box greeting" style={{padding:'32px 20px 28px 20px', marginLeft:0, marginRight:0 }}>
+        <div className="section-title-en" >INVITATION</div>
         <div className="section-title-ko">소중한 분들을 초대합니다</div>
-        <pre>{text[lang].invitationMsg}</pre>
+        <pre style={{padding:'10px 20px'}}>{text[lang].invitationMsg}</pre>
       </section>
 
       {/* D-day 카운트 */}
@@ -325,7 +371,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
             <div style={{fontSize:'0.9rem', color:'#bbb', letterSpacing:'0.1em'}}>{ddayLabels[lang].sec}</div>
           </div>
         </div>
-        <div style={{marginTop: 10, color:'#555', fontSize:'1.1rem'}}>
+        <div style={{marginTop: 10, color:'#555', fontSize:'15px'}}>
           {ddayLabels[lang].countdown}
           <span style={{color:'#f7a6b2', fontWeight:600}}>{dDay}</span>
           {lang === 'ko' ? ddayLabels[lang].left : ` ${ddayLabels[lang].left}`}
@@ -352,7 +398,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
 
       {/* 사진 슬라이드 */}
       <section className="photo-slider" style={{padding:'0 20px'}}>
-        <img src={samplePhotos[photoIdx]} alt="wedding" style={{height: '70vh', minHeight: '400px', maxHeight: '800px', objectFit: 'cover', objectPosition:'top', width: '100%', maxWidth: '100%'}} />
+        <img src={samplePhotos[photoIdx]} alt="wedding" style={{height: '70vh', minHeight: '400px', maxHeight: '800px', objectFit: 'cover', objectPosition:'top', width: '100%', maxWidth: '500px', margin: '0 auto', display: 'block'}} />
         <div>
           <button onClick={() => setPhotoIdx((photoIdx - 1 + samplePhotos.length) % samplePhotos.length)}>&lt;</button>
           <span>{photoIdx + 1} / {samplePhotos.length}</span>
@@ -369,7 +415,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
         <img
           src={process.env.PUBLIC_URL + '/map_min.png'}
           alt="map"
-          style={{width:'100%', maxWidth:500, borderRadius:12, margin:'18px auto 0 auto', display:'block', border:'1px solid #0002', boxShadow:'0 2px 8px #0001', marginBottom:12}}
+          style={{width:'100%', maxWidth:360, margin:'18px auto 0 auto', display:'block', cursor:'pointer'}}
+          onClick={() => setMapModal({ open: true, src: process.env.PUBLIC_URL + '/map_min.png' })}
         />
         <a className="section-btn" href="https://naver.me/5Qw1Qw1Q" target="_blank" rel="noopener noreferrer">{text[lang].map}</a>
       </section>
@@ -382,75 +429,147 @@ As we vow to honour, support, and care for one another as we always have, it wou
         <img
           src={process.env.PUBLIC_URL + '/map_hotel.png'}
           alt="banquet-map"
-          style={{width:'100%', maxWidth:500, borderRadius:12, margin:'18px auto 0 auto', display:'block', border:'1px solid #0002', boxShadow:'0 2px 8px #0001', marginBottom:12}}
+          style={{width:'100%', maxWidth:500, margin:'18px auto 0 auto', display:'block', cursor:'pointer'}}
+          onClick={() => setMapModal({ open: true, src: process.env.PUBLIC_URL + '/map_hotel.png' })}
         />
         <a className="section-btn" href="https://naver.me/5Qw1Qw1Q" target="_blank" rel="noopener noreferrer">{text[lang].map}</a>
       </section>
 
-      {/* 방명록 */}
-      <section className="guestbook" style={{padding:'32px 20px 28px 20px', marginLeft:0, marginRight:0}}>
+      {/* 지도 모달 */}
+      {mapModal.open && (
+        <div style={{position:'fixed', top:0, left:0, width:'100vw', height:'100vh', background:'rgba(0,0,0,0.6)', zIndex:10000, display:'flex', alignItems:'center', justifyContent:'center'}} onClick={() => setMapModal({ open: false, src: '' })}>
+          <div style={{position:'relative', maxWidth:'90vw', maxHeight:'90vh'}} onClick={e => e.stopPropagation()}>
+            <img src={mapModal.src} alt="enlarged-map" style={{width:'100%', height:'auto', maxHeight:'80vh', borderRadius:8, boxShadow:'0 4px 32px #0008'}} />
+            <button onClick={() => setMapModal({ open: false, src: '' })} style={{position:'absolute', top:8, right:8, background:'rgba(0,0,0,0.5)', color:'#fff', border:'none', borderRadius:'50%', width:32, height:32, fontSize:22, cursor:'pointer'}}>×</button>
+          </div>
+        </div>
+      )}
+
+
+      {/* 마음 전하실 곳 */}
+      <section className="gift" style={{ padding: '32px 20px 28px 20px', textAlign: 'center' }}>
+  <h3>{lang === 'ko' ? '마음 전하실 곳' : 'GIFT'}</h3>
+  <p>{lang === 'ko' 
+    ? '참석이 어려우신 분들을 위해 계좌번호를 기재하였습니다.\n너그러운 마음으로 양해 부탁드립니다.' 
+    : 'For those unable to attend, we have provided a bank account below. Thank you for your understanding.'}
+  </p>
+
+  <div style={{ marginTop: 16, display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap' }}>
+    <button 
+      onClick={() => setShowModal('bride')} 
+      style={{ border: '1px solid #999', padding: '8px 14px', borderRadius: '6px', background: 'white' }}>
+      {lang === 'ko' ? '신부 측 계좌번호' : "Bride's Account Info"}
+    </button>
+
+    <button 
+      onClick={() => setShowModal('groom')} 
+      style={{ border: '1px solid #999', padding: '8px 14px', borderRadius: '6px', background: 'white' }}>
+      {lang === 'ko' ? '신랑 측 계좌번호' : "Groom's Account Info"}
+    </button>
+  </div>
+
+  {showModal && (
+  <AccountModal
+    title={showModal === 'bride' ? (lang === 'ko' ? '신부 측 계좌번호' : "Bride's Account Info") : (lang === 'ko' ? '신랑 측 계좌번호' : "Groom's Account Info")}
+    accounts={showModal === 'bride' ? brideAccounts : groomAccounts}
+    onClose={() => setShowModal(null)}
+    isKorean={lang === 'ko'}
+  />
+)}
+</section>
+
+      {/* 참석 의사 전달 */}
+
+<section className="rsvp" style={{ padding: '32px 20px 28px 20px', marginLeft: 0, marginRight: 0 }}>
+  <h3>{text[lang].rsvp}</h3>
+  <p>{text[lang].rsvpDesc}</p>
+
+  <form
+    onSubmit={async (e) => {
+      e.preventDefault();
+      if (!rsvpName) {
+        alert(lang === 'ko' ? "이름을 입력해주세요." : "Please enter your name.");
+        return;
+      }
+
+      try {
+        await addDoc(collection(db, "rsvps"), {
+          name: rsvpName,
+          status: rsvpStatus,
+          createdAt: Timestamp.now(),
+        });
+        alert(lang === 'ko' ? "참석 의사가 저장되었어요!" : "RSVP saved successfully!");
+        setRsvpName("");
+        setRsvpStatus("Y");
+      } catch (error) {
+        console.error("RSVP 저장 오류", error);
+        alert(lang === 'ko' ? "저장에 실패했어요." : "Failed to save RSVP.");
+      }
+    }}
+  >
+    <input
+      type="text"
+      value={rsvpName}
+      onChange={(e) => setRsvpName(e.target.value)}
+      placeholder={text[lang].name}
+    />
+    <select
+      value={rsvpStatus}
+      onChange={(e) => setRsvpStatus(e.target.value)}
+    >
+      <option value="Y">{text[lang].yes}</option>
+      <option value="N">{text[lang].no}</option>
+    </select>
+    <button type="submit" className="deliver-btn">
+      {text[lang].submit}
+    </button>
+  </form>
+</section>
+
+  {/* 방명록 */}
+  <section className="guestbook" style={{padding:'32px 20px 28px 20px', marginLeft:0, marginRight:0}}>
         <div className="guestbook-title">
           <div className="guestbook-en" style={{fontSize:'1.3rem', color:'#f7a6b2', letterSpacing:'0.12em', marginBottom:4}}>{guestbookText[lang].title.toUpperCase()}</div>
           <div className="guestbook-ko" style={{fontSize:'1.1rem', color:'#f7a6b2', marginBottom:18}}>{guestbookText[lang].subtitle}</div>
         </div>
-        <form className="guestbook-form" style={{display:'flex', flexDirection:'column', gap:12, marginBottom:24}} onSubmit={e => {
-          e.preventDefault();
-          if (!guestName || !guestPw || !guestMsg) return;
-          setGuestbookList([
-            {
-              name: guestName,
-              pw: guestPw,
-              msg: guestMsg,
-              date: new Date().toISOString(),
-            },
-            ...guestbookList,
-          ]);
-          setGuestName('');
-          setGuestPw('');
-          setGuestMsg('');
-        }}>
-          <input value={guestName} onChange={e => setGuestName(e.target.value)} placeholder={guestbookText[lang].name} className="guestbook-input" />
-          <input type="password" value={guestPw} onChange={e => setGuestPw(e.target.value)} placeholder={guestbookText[lang].password} className="guestbook-input" />
-          <input value={guestMsg} onChange={e => setGuestMsg(e.target.value)} placeholder={guestbookText[lang].message} className="guestbook-input" />
-          <button type="submit" className="guestbook-submit-btn">{guestbookText[lang].submit}</button>
-        </form>
+        <GuestbookForm lang={lang} guestbookText={guestbookText} onNewMessage={(entry) => setGuestbookList([entry, ...guestbookList])} />
         <div className="guestbook-comments">
-          {guestbookList.length === 0 ? (
-            <div className="guestbook-no-comments">{guestbookText[lang].noComments}</div>
-          ) : (
-            guestbookList.map((item, idx) => (
-              <div className="guestbook-comment-card" key={idx}>
-                <div className="guestbook-comment-header">
-                  <span className="guestbook-comment-name">{item.name}</span>
-                  <span className="guestbook-comment-date">{item.date.slice(0,10)} {item.date.slice(11,16)}</span>
-                </div>
-                <div className="guestbook-comment-msg">{item.msg}</div>
-              </div>
-            ))
-          )}
+  {currentComments.length === 0 ? (
+    <div className="guestbook-no-comments">{lang === "ko"
+      ? "아직 축하 메시지가 없어요 🥺"
+      : "No messages yet 🥺"}</div>
+  ) : (
+    currentComments.map((comment, idx) => (
+      <div key={idx} className="guestbook-comment-card">
+        <div className="guestbook-comment-header">
+          <span className="guestbook-comment-name">{comment.name}</span>
+          <span className="guestbook-comment-date">{comment.date}</span>
         </div>
+        <div className="guestbook-comment-msg">{comment.msg}</div>
+      </div>
+    ))
+  )}
+</div>
+
+<div className="pagination-buttons" style={{ marginTop: '16px', textAlign: 'center' }}>
+  <button
+    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+    disabled={currentPage === 1}
+  >
+    {lang === "ko" ? "이전" : "Previous"}
+  </button>
+
+  <button
+    onClick={() =>
+      setCurrentPage(prev => (indexOfLast < guestbookList.length ? prev + 1 : prev))
+    }
+    disabled={indexOfLast >= guestbookList.length}
+  >
+   {lang === "ko" ? "다음" : "Next"}
+  </button>
+</div>
       </section>
 
-      {/* 마음 전하실 곳 */}
-      <section className="gift" style={{padding:'32px 20px 28px 20px', marginLeft:0, marginRight:0}}>
-        <h3>{text[lang].gift}</h3>
-        <p>{text[lang].giftDesc}</p>
-        <p>{text[lang].account}</p>
-      </section>
-
-      {/* 참석 의사 전달 */}
-      <section className="rsvp" style={{padding:'32px 20px 28px 20px', marginLeft:0, marginRight:0}}>
-        <h3>{text[lang].rsvp}</h3>
-        <p>{text[lang].rsvpDesc}</p>
-        <form>
-          <input type="text" placeholder={text[lang].name} />
-          <select>
-            <option value="Y">{text[lang].yes}</option>
-            <option value="N">{text[lang].no}</option>
-          </select>
-          <button type="submit">{text[lang].submit}</button>
-        </form>
-      </section>
     </div>
   );
 }

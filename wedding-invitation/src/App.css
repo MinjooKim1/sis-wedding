@@ -14,12 +14,15 @@ html, body {
 
 body {
   font-family: 'Gowun Batang', 'Noto Serif KR', 'Playfair Display', serif;
+ 
 }
 .landing-section-info, .section-box, .guestbook, .gift, .rsvp, .dday, .info, .banquet {
   font-family: 'Fira Sans', Arial, sans-serif;
 }
 .section-box p, .section-box pre, .guestbook-content, .guestbook-input, .guestbook-submit-btn, .rsvp input, .rsvp select, .rsvp button[type="submit"], .modal-form-row input, .modal-form-row textarea, .modal-submit {
   font-family: 'Fira Sans', Arial, sans-serif;
+  font-size: 16px;
+  color: #555;
 }
 
 .App {
@@ -195,8 +198,8 @@ body {
   text-transform: uppercase;
 }
 .invitation-message pre {
-  font-family: 'Noto Serif KR', serif;
-  font-size: 1.15rem;
+  font-family: 'Fira Sans', Arial, sans-serif;
+  font-size: 16px;
   white-space: pre-line;
   word-break: keep-all;
   overflow-wrap: break-word;
@@ -287,6 +290,7 @@ body {
   box-shadow: none;
   word-break: keep-all;
   overflow-wrap: break-word;
+  background-color: #fdf5f9 !important;
 }
 .guestbook-title {
   margin-bottom: 18px;
@@ -300,8 +304,8 @@ body {
   margin-bottom: 2px;
 }
 .guestbook-ko {
-  font-family: 'Noto Serif KR', serif;
-  font-size: 2rem;
+  font-family: 'Fira Sans', Arial, sans-serif;
+  font-size: 1.1rem;
   color: #f7a6b2;
   font-weight: 500;
   letter-spacing: 0.04em;
@@ -345,7 +349,7 @@ body {
   align-self: center;
 }
 .guestbook-content {
-  font-family: 'Noto Serif KR', serif;
+  font-family: 'Fira Sans', Arial, sans-serif;
   line-height: 1.7;
   margin-top: 2px;
   word-break: keep-all;
@@ -375,7 +379,7 @@ body {
   margin-top: 10px;
 }
 .guestbook-action-btn {
-  background: #f7e6ea;
+  background: #f8e4ec;
   color: #f7a6b2;
   border: none;
   border-radius: 20px;
@@ -508,7 +512,7 @@ body {
 }
 .section-title-ko {
   font-family: 'Noto Serif KR', serif;
-  font-size: 2rem;
+  font-size: 20px;
   color: #f7a6b2;
   font-weight: 500;
   letter-spacing: 0.04em;
@@ -536,9 +540,9 @@ body {
 }
 .section-box pre {
   color: #555;
-  font-size: 17px;
+  font-size: 15px;
   line-height: 1.7;
-  font-family: 'Noto Serif KR', serif;
+  font-family: 'Fira Sans', Arial, sans-serif;
   margin: 0 0 18px 0;
   white-space: pre-line;
   text-align: center;
@@ -574,7 +578,7 @@ body {
 }
 @media (max-width: 520px) {
   .section-title-ko {
-    font-size: 1.4rem;
+    font-size: 20px;
   }
   .section-box {
     border-radius: 18px;
@@ -669,7 +673,9 @@ body {
   gap: 12px;
   margin-bottom: 24px;
 }
-.guestbook-input {
+
+.guestbook-input,
+.guestbook-textarea {
   padding: 12px 16px;
   border-radius: 10px;
   border: 1.5px solid #f0f0f0;
@@ -678,11 +684,12 @@ body {
   background: #fff;
   margin-bottom: 0;
 }
+
 .guestbook-submit-btn {
-  background: #f7a6b2;
+  background-color: #f8e4ec !important;
   color: #fff;
-  border: none;
-  border-radius: 20px;
+  border: 1px solid #eddbe4;
+  border-radius: 8px !important;
   padding: 14px 0;
   font-size: 1.1rem;
   font-family: 'Playfair Display', serif;
@@ -692,99 +699,148 @@ body {
   margin-top: 8px;
   transition: background 0.2s;
 }
-.guestbook-submit-btn:active, .guestbook-submit-btn:focus {
+
+.guestbook-submit-btn:active,
+.guestbook-submit-btn:focus {
   background: #e3bfcf;
+}
+
+/* ========= MESSAGE CARD STYLES ========= */
+.guestbook{
+  background-color: #e3bfcf;
 }
 .guestbook-comments {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
+
 .guestbook-comment-card {
   background: #fff;
   border: 1.5px solid #f0f0f0;
   border-radius: 18px;
   padding: 18px 16px 14px 16px;
-  box-shadow: none;
-  text-align: left;
   font-size: 1.08rem;
+  text-align: left;
   word-break: break-word;
   overflow-wrap: break-word;
 }
+
 .guestbook-comment-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
 }
+
 .guestbook-comment-name {
   font-weight: 600;
   color: #b87c9b;
   font-size: 1.08rem;
 }
+
 .guestbook-comment-date {
   color: #bbb;
   font-size: 0.98rem;
   font-family: 'Playfair Display', serif;
 }
+
 .guestbook-comment-msg {
   color: #333;
   font-size: 1.08rem;
   line-height: 1.7;
 }
+
 .guestbook-no-comments {
   color: #bbb;
   text-align: center;
   padding: 24px 0;
   font-size: 1.08rem;
 }
+
+/* ========= EXTRA ELEMENTS ========= */
+.deliver-btn {
+  border: 1px solid #eddbe4 !important;
+  background-color: #fbf1f65b !important;
+  border-radius: 8px !important;
+}
+
+.greeting {
+  background-color: #fff6f9 !important;
+}
+
+/* ========= RESPONSIVE STYLES ========= */
 @media (max-width: 520px) {
   .guestbook-form {
     gap: 10px;
   }
-  .guestbook-input {
+
+  .guestbook-input,
+  .guestbook-textarea {
     font-size: 1rem;
-    padding: 10px 10px;
+    padding: 10px;
   }
+
   .guestbook-submit-btn {
     font-size: 1rem;
     padding: 12px 0;
   }
+
   .guestbook-comments {
     gap: 10px;
   }
+
   .guestbook-comment-card {
     padding: 14px 8px 10px 8px;
-    border-radius: 14px;
+    border-radius: 9px !important;
     font-size: 1rem;
+    border: 1px solid #e7e7e7 !important;
   }
-  .guestbook-comment-header {
-    font-size: 0.95rem;
-  }
+
   .guestbook-comment-name {
     font-size: 1rem;
   }
+
   .guestbook-comment-date {
     font-size: 0.9rem;
   }
+
   .guestbook-comment-msg {
     font-size: 1rem;
   }
 }
+.gift{
+  background-color: #f7f7f7 !important;
+}
 
 .section-box, .guestbook, .gift, .rsvp, .dday, .info, .banquet {
-  background: #fff !important;
-  border: none !important;
-  border-radius: 0 !important;
+  background: #fff;
+  border: none ;
+  border-radius: 0 ;
 }
 .guestbook-card, .guestbook-write-card, .guestbook-comment-card {
-  background: #fff !important;
-  border: none !important;
-  border-radius: 0 !important;
+  background: #fff;
+  border: none ;
+  border-radius: 0;
 }
 .guestbook-action-btn, .lang-switch button, .photo-slider button, .section-btn, .rsvp button[type="submit"], .guestbook-submit-btn {
-  background: #fff !important;
+  background: #fff ;
   color: #b87c9b;
-  border: none !important;
-  border-radius: 0 !important;
+
+}
+
+.pagination-buttons button {
+  margin: 0 8px;
+  padding: 8px 16px;
+  background: #f8e4ec;
+  border: 1px solid #ebb9ca;
+  border-radius: 6px;
+  font-family: 'Playfair Display', serif;
+  color: #b87c9b;
+  cursor: pointer;
+}
+
+.pagination-buttons button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
