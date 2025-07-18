@@ -147,8 +147,11 @@ const currentComments = guestbookList.slice(indexOfFirst, indexOfLast);
       address: '서울 중구 퇴계로 34길 28',
       tel: '02-6358-5543',
       map: '지도보기',
+      call: '전화하기',
       banquet: '연회 & 식사 안내, 오후 4시',
-      banquetDesc: `식사는 혼례 및 사진 촬영이 끝난 후 도보로 5분 거리에 있는 솔라고 호텔 2층 연회장 에서 진행됩니다.\n\n부족함 없이 즐기실 수 있도록 한식을 비롯해 중식, 양식, 일식 등 다양한 뷔페 메뉴가 준비되어 있습니다.`,
+      banquetDesc: '솔라고 호텔 2층 연회장', 
+      banquetDesc2: '(민씨가옥에서 5분 거리).',
+      banquetDesc3: '부족함 없이 즐기실 수 있도록 한식을 비롯해 중식, 양식, 일식 등 다양한 뷔페 메뉴가 준비되어 있습니다.',
       banquetAddr: '서울 특별시 중구 충무로 2길 9',
       guestbook: '방명록',
       addNote: '스티키노트 추가 →',
@@ -178,8 +181,11 @@ As we vow to honour, support, and care for one another as we always have, it wou
       address: '28, Toegye-ro 34-gil, Jung-gu, Seoul',
       tel: '+82-2-6358-5543',
       map: 'View Map',
+      call: 'Call',
       banquet: 'Banquet & Meal Info, 4PM',
-      banquetDesc: `After the ceremony and photo session, a banquet will be held at the 2nd floor hall of Sollago Hotel, a 5-minute walk away.\n\nA variety of buffet menus including Korean, Chinese, Western, and Japanese cuisine will be served.`,
+      banquetDesc: 'at the 2nd floor hall of Sollago Hotel, a 5-minute walk away.',
+      banquetDesc: 'a 5-minute walk away from the Hanok Village.',
+      banquetDesc3: 'A variety of buffet menus including Korean, Chinese, Western, and Japanese cuisine will be served.`,' ,
       banquetAddr: '9, Chungmuro 2-gil, Jung-gu, Seoul',
       guestbook: 'Guestbook',
       addNote: 'Add sticky note →',
@@ -409,30 +415,61 @@ As we vow to honour, support, and care for one another as we always have, it wou
       {/* 날짜/장소/시간/오시는 길 */}
       <section className="section-box" style={{padding:'32px 20px 28px 20px', marginLeft:0, marginRight:0}}>
         <h3>{text[lang].date}</h3>
-        <p>{text[lang].place}</p>
-        <p>{text[lang].address}</p>
-        <p>Tel. {text[lang].tel}</p>
+        <p style={{fontWeight:'600'}}>{text[lang].place} </p>
+        <p style={{ fontSize: '15px', whiteSpace: 'pre-line', marginTop:"10px",marginBottom:"0px" }}>
+  {`${text[lang].address}\nTel. ${text[lang].tel}`}
+</p>
         <img
           src={process.env.PUBLIC_URL + '/map_min.png'}
           alt="map"
-          style={{width:'100%', maxWidth:360, margin:'18px auto 0 auto', display:'block', cursor:'pointer'}}
+          style={{width:'100%', maxWidth:360, margin:'5px auto 0 auto', display:'block', cursor:'pointer'}}
           onClick={() => setMapModal({ open: true, src: process.env.PUBLIC_URL + '/map_min.png' })}
         />
-        <a className="section-btn" href="https://naver.me/5Qw1Qw1Q" target="_blank" rel="noopener noreferrer">{text[lang].map}</a>
+        <a
+  className="circle-button"
+  href="https://naver.me/5gFg3FmY"
+  target="_blank"
+  rel="map"
+>
+  <span role="img" aria-label="map" style={{ marginRight: '6px' }}>📍</span>
+  {text[lang].map}
+</a>
+
+
       </section>
 
       {/* 연회 & 식사 안내 */}
       <section className="section-box" style={{padding:'32px 20px 28px 20px', marginLeft:0, marginRight:0}}>
         <h3>{text[lang].banquet}</h3>
-        <pre>{text[lang].banquetDesc}</pre>
-        <p>{text[lang].banquetAddr}</p>
+        <p style={{fontWeight: '600', margin:'0px'}}>{text[lang].banquetDesc}</p>
+        <pre style={{fontSize:'13px'}}>{text[lang].banquetDesc2}</pre>
+        <pre>{text[lang].banquetDesc3}</pre>
+
+        
+        <p style={{ fontSize: '15px', whiteSpace: 'pre-line', marginTop:"10px",marginBottom:"0px" }}>{text[lang].banquetAddr}</p>
         <img
           src={process.env.PUBLIC_URL + '/map_hotel.png'}
           alt="banquet-map"
-          style={{width:'100%', maxWidth:500, margin:'18px auto 0 auto', display:'block', cursor:'pointer'}}
+          style={{width:'100%', maxWidth:500, margin:'5px auto 0 auto', display:'block', cursor:'pointer'}}
           onClick={() => setMapModal({ open: true, src: process.env.PUBLIC_URL + '/map_hotel.png' })}
         />
-        <a className="section-btn" href="https://naver.me/5Qw1Qw1Q" target="_blank" rel="noopener noreferrer">{text[lang].map}</a>
+        <a
+  className="circle-button"
+  href="https://naver.me/x0UPjjrq"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <span role="img" aria-label="map" style={{ marginRight: '6px' }}>📍</span>
+  {text[lang].map}
+</a>
+
+<a
+  className="circle-button"
+  href="tel:0222637979"
+>
+  <span role="img" aria-label="call" style={{ marginRight: '6px' }}>📞</span>
+  {text[lang].call}
+</a>
       </section>
 
       {/* 지도 모달 */}
@@ -457,13 +494,13 @@ As we vow to honour, support, and care for one another as we always have, it wou
   <div style={{ marginTop: 16, display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap' }}>
     <button 
       onClick={() => setShowModal('bride')} 
-      style={{ border: '1px solid #999', padding: '8px 14px', borderRadius: '6px', background: 'white' }}>
+      style={{ border: '1px solid rgb(213 213 213)', padding: '14px 30px', borderRadius: '30px', background: 'white'}}>
       {lang === 'ko' ? '신부 측 계좌번호' : "Bride's Account Info"}
     </button>
 
     <button 
       onClick={() => setShowModal('groom')} 
-      style={{ border: '1px solid #999', padding: '8px 14px', borderRadius: '6px', background: 'white' }}>
+      style={{ border: '1px solid rgb(213 213 213)', padding: '14px 30px', borderRadius: '30px', background: 'white'}}>
       {lang === 'ko' ? '신랑 측 계좌번호' : "Groom's Account Info"}
     </button>
   </div>
@@ -529,8 +566,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
   {/* 방명록 */}
   <section className="guestbook" style={{padding:'32px 20px 28px 20px', marginLeft:0, marginRight:0}}>
         <div className="guestbook-title">
-          <div className="guestbook-en" style={{fontSize:'1.3rem', color:'#f7a6b2', letterSpacing:'0.12em', marginBottom:4}}>{guestbookText[lang].title.toUpperCase()}</div>
-          <div className="guestbook-ko" style={{fontSize:'1.1rem', color:'#f7a6b2', marginBottom:18}}>{guestbookText[lang].subtitle}</div>
+          <div className="guestbook-en" style={{fontSize:'1.3rem', color:'#b87c9b', letterSpacing:'0.12em', marginBottom:4}}>{guestbookText[lang].title.toUpperCase()}</div>
+          <div className="guestbook-ko" style={{fontSize:'15px', color:'#f7a6b2', marginBottom:18}}>{guestbookText[lang].subtitle}</div>
         </div>
         <GuestbookForm lang={lang} guestbookText={guestbookText} onNewMessage={(entry) => setGuestbookList([entry, ...guestbookList])} />
         <div className="guestbook-comments">

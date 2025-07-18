@@ -14,7 +14,8 @@ html, body {
 
 body {
   font-family: 'Gowun Batang', 'Noto Serif KR', 'Playfair Display', serif;
- 
+  color: #555;
+  font-size: 15px;
 }
 .landing-section-info, .section-box, .guestbook, .gift, .rsvp, .dday, .info, .banquet {
   font-family: 'Fira Sans', Arial, sans-serif;
@@ -255,7 +256,7 @@ body {
 .info h3, .banquet h3, .guestbook h3, .gift h3, .rsvp h3 {
   font-family: 'Playfair Display', serif;
   font-size: 1.25rem;
-  color: #f7a6b2;
+  color: rgb(184, 124, 155);
   letter-spacing: 0.08em;
   margin-top: 0;
   margin-bottom: 12px;
@@ -290,7 +291,7 @@ body {
   box-shadow: none;
   word-break: keep-all;
   overflow-wrap: break-word;
-  background-color: #fdf5f9 !important;
+  background-color: #fff9fc !important;
 }
 .guestbook-title {
   margin-bottom: 18px;
@@ -305,7 +306,7 @@ body {
 }
 .guestbook-ko {
   font-family: 'Fira Sans', Arial, sans-serif;
-  font-size: 1.1rem;
+  font-size: 15px !important;
   color: #f7a6b2;
   font-weight: 500;
   letter-spacing: 0.04em;
@@ -409,14 +410,14 @@ body {
   font-family: 'Noto Serif KR', serif;
 }
 .rsvp button[type="submit"] {
-  background: #f7e6ea;
-  color: #b87c9b;
+  background: #ffd6e8 !important;
+  color: #854566;
   border: none;
   border-radius: 20px;
   padding: 12px 0;
-  font-size: 1.1rem;
-  font-family: 'Playfair Display', serif;
-  font-weight: 500;
+  font-size: 14px;
+  font-family: 'fira sans', ;
+  font-weight: 400;
   letter-spacing: 0.04em;
   cursor: pointer;
   margin-top: 8px;
@@ -504,7 +505,7 @@ body {
 .section-title-en {
   font-family: 'Playfair Display', serif;
   font-size: 1.1rem;
-  color: #f7a6b2;
+  color: #b87c9b;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   margin-bottom: 2px;
@@ -513,7 +514,7 @@ body {
 .section-title-ko {
   font-family: 'Noto Serif KR', serif;
   font-size: 20px;
-  color: #f7a6b2;
+  color: #b87c9b;
   font-weight: 500;
   letter-spacing: 0.04em;
   margin-bottom: 24px;
@@ -549,7 +550,7 @@ body {
   font-weight: 400;
 }
 .section-box h3 {
-  color: #f7a6b2;
+  color: #cc81a7;
   font-family: 'Noto Serif KR', serif;
   font-size: 1.3rem;
   margin-bottom: 18px;
@@ -558,7 +559,7 @@ body {
   letter-spacing: 0.04em;
 }
 .section-btn {
-  background: #f7a6b2;
+  background: #ffd6e8;
   color: #fff;
   border: none;
   border-radius: 20px;
@@ -686,14 +687,14 @@ body {
 }
 
 .guestbook-submit-btn {
-  background-color: #f8e4ec !important;
-  color: #fff;
+  background-color: #ffd6e8 !important;
+  color: #b87c9b !important;
   border: 1px solid #eddbe4;
   border-radius: 8px !important;
   padding: 14px 0;
-  font-size: 1.1rem;
-  font-family: 'Playfair Display', serif;
-  font-weight: 500;
+  font-size: 14px !important;
+  font-family: 'Fira Sans', Arial, sans-serif;
+  font-weight: 400;
   letter-spacing: 0.04em;
   cursor: pointer;
   margin-top: 8px;
@@ -706,9 +707,7 @@ body {
 }
 
 /* ========= MESSAGE CARD STYLES ========= */
-.guestbook{
-  background-color: #e3bfcf;
-}
+
 .guestbook-comments {
   display: flex;
   flex-direction: column;
@@ -766,7 +765,7 @@ body {
 }
 
 .greeting {
-  background-color: #fff6f9 !important;
+  background-color: #fff9fc !important;
 }
 
 /* ========= RESPONSIVE STYLES ========= */
@@ -810,7 +809,7 @@ body {
   }
 }
 .gift{
-  background-color: #f7f7f7 !important;
+  background-color: #fafafa !important;
 }
 
 .section-box, .guestbook, .gift, .rsvp, .dday, .info, .banquet {
@@ -843,4 +842,25 @@ body {
 .pagination-buttons button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
+}
+
+.circle-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border: 1px solid #ccc;
+  border-radius: 999px;
+  background-color: white;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 10px;
+  transition: background 0.2s, box-shadow 0.2s;
+  margin-top: 12px;
+}
+
+.circle-button:hover {
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
