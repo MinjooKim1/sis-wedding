@@ -207,8 +207,9 @@ function App() {
       tel: "02-6358-5543",
       map: "지도보기",
       call: "전화하기",
-      banquet: "연회 & 식사 안내, 오후 4시",
-      banquetDesc: "솔라고 호텔 2층 연회장",
+      photoInfo: "사진을 클릭하시면 전체 화면 보기가 가능합니다",
+      banquet: "연회 & 식사 안내",
+      banquetDesc: "솔라고 호텔 2층 연회장, 오후 4시",
       banquetDesc2: "(민씨가옥에서 5분 거리).",
       banquetDesc3:
         "부족함 없이 즐기실 수 있도록 한식을 비롯해 중식, 양식, 일식 등 다양한 뷔페 메뉴가 준비되어 있습니다.",
@@ -243,8 +244,9 @@ As we vow to honour, support, and care for one another as we always have, it wou
       tel: "+82-2-6358-5543",
       map: "View Map",
       call: "Call",
-      banquet: "Banquet & Meal Info, 4PM",
-      banquetDesc: "at the 2nd floor hall of Sollago Hotel",
+      photoInfo: "Click the photo to view it in full screen.",
+      banquet: "Banquet & Meal Info",
+      banquetDesc: "at the 2nd floor hall of Sollago Hotel, 4PM",
       banquetDesc2: "a 5-minute walk away from the Hanok Village.",
       banquetDesc3:
         "A variety of buffet menus including Korean, Chinese, Western, and Japanese cuisine will be served.`,",
@@ -346,149 +348,29 @@ As we vow to honour, support, and care for one another as we always have, it wou
       place: "Namsangol Hanok Village, Min Clan’s House",
     },
   };
+ 
+
 
   return(
  
-    <div className="invitation-container">
+    <div className="invitation-container" style={{
+      maxWidth: "500px", // ✅ 최대 너비 제한
+
+    }}>
       {/* 최상단 언어 전환 버튼 영역 */}
       <div
-        style={{
-          width: "100%",
-          height: 100,
-          background: "#fff",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          paddingTop: 0,
-          paddingBottom: 0,
-          margin: 0,
-        }}
-      >
-        <div
-          className="lang-switch"
-          style={{ position: "static", textAlign: "center", margin: 0 }}
-        >
-          <button onClick={() => setLang("ko")}>한국어</button>
-          <button onClick={() => setLang("en")}>English</button>
-        </div>
-      </div>
-      {/* 랜딩페이지 섹션 */}
-      <FallingPetals/>
-      <section
-        className="landing-section"
-        style={{ padding: 0, margin: 0, marginBottom: 0 }}
-      >
-        <div
-          style={{
-            position: "relative",
-            width: "100%",
-            margin: 0,
-            borderRadius: 0,
-            overflow: "hidden",
-            background: "none",
-            boxShadow: "none",
-            padding: 0,
-          }}
-        >
-
-          {/* Main background image */}
-          <img
-            src={process.env.PUBLIC_URL + "/main_photos/main.png"}
-            alt="landing-main"
-            style={{
-              width: "100%",
-              height: "70vh",
-              objectFit: "cover",
-              display: "block",
-              margin: 0,
-              padding: 0,
-              border: "none",
-            }}
-          />
-        </div>
-        {/* 이름/장소만 표시 */}
-        <div className="landing-section-info" style={{ padding: "0 20px" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: 32,
-              fontSize: lang === "en" ? 19 : 28,
-              fontWeight: 700,
-              color: "#222",
-              marginBottom: 19,
-              fontFamily:
-                lang === "ko"
-                  ? "Gowun Batang, Noto Serif KR, serif"
-                  : "Cormorant Garamond, Playfair Display, serif",
-              letterSpacing: "0.08em",
-            }}
-          >
-            <span
-              className={lang === "en" ? "en-font-bold" : ""}
-              style={{ fontWeight: 700 }}
-            >
-              {landingText[lang].groomName}
-            </span>
-            <span
-              style={{
-                fontSize: 22,
-                color: "#f7a6b2",
-                fontWeight: 400,
-                margin: "0 8px",
-              }}
-            >
-              |
-            </span>
-            <span
-              className={lang === "en" ? "en-font-bold" : ""}
-              style={{ fontWeight: 700 }}
-            >
-              {landingText[lang].brideName}
-            </span>
-          </div>
-          <div
-            style={{
-              fontSize: 14,
-              color: "#888",
-              fontFamily:
-                lang === "en"
-                  ? "Fira Sans, Arial, sans-serif"
-                  : "Playfair Display, serif",
-              marginBottom: 12,
-              fontWeight: 500,
-              letterSpacing: "0.04em",
-            }}
-          >
-            {lang === "en" ? (
-              <span className="en-fira">{landingText[lang].place}</span>
-            ) : (
-              landingText[lang].place
-            )}
-          </div>
-          <div
-            style={{
-              fontSize: 20,
-              color: "#888",
-              fontFamily:
-                lang === "en"
-                  ? "Fira Sans, Arial, sans-serif"
-                  : "Playfair Display, serif",
-              marginBottom: 48,
-              fontWeight: 500,
-              letterSpacing: "0.04em",
-            }}
-          >
-            {lang === "en" ? (
-              <span className="en-fira">{landingText[lang].date}</span>
-            ) : (
-              landingText[lang].date
-            )}
-          </div>
-        </div>
-      </section>
-      {/* 사운드 아이콘 - 좌상단 */}
+  style={{
+    width: "95%",
+    height: 60,
+    background: "#fff",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "right",
+    padding: "10px 20px",
+  }}
+>
+  {/* 사운드 아이콘 */}
+    
       <button
         className="sound-toggle-btn"
         style={{
@@ -516,13 +398,154 @@ As we vow to honour, support, and care for one another as we always have, it wou
         autoPlay
       />
 
-      {/* 인삿말 */}
+  {/* 언어 변경 버튼 */}
+  <div
+    className="lang-switch"
+    style={{
+      display: "flex",
+      gap: 8,
+    }}
+  >
+    <button onClick={() => setLang("ko")}>한국어</button>
+    <button onClick={() => setLang("en")}>English</button>
+  </div>
+</div>
+
+
+
+
+      {/* 랜딩페이지 섹션  시작*/}
+      <FallingPetals/>
+      <section
+  className="section-box landing-section"
+  style={{ padding: 0, margin: 0 }}
+>
+  {/* 텍스트 정보 먼저 배치 */}
+  <div className="landing-section-info" style={{ padding: "30px 0px" }}>
+  <div
+  style={{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 16,
+    fontSize: lang === "en" ? 20 : 18,
+    fontWeight: 500,
+    color: "#222",
+    marginBottom: 10,
+    marginTop: 30,
+    fontFamily:
+      lang === "ko"
+        ? "Gowun Batang, Noto Serif KR, serif"
+        : "Cormorant Garamond, Playfair Display, serif",
+    letterSpacing: "0.04em",
+    lineHeight: "1.4",
+  }}
+>
+  <span
+    className={lang === "en" ? "en-font-bold" : ""}
+    style={{ fontWeight: 600 }}
+  >
+    {landingText[lang].groomName}
+  </span>
+  <span
+    style={{
+      fontSize: 18,
+      color: "#f7a6b2",
+      fontWeight: 500,
+      margin: "0 6px",
+    }}
+  >
+    ♡
+  </span>
+  <span
+    className={lang === "en" ? "en-font-bold" : ""}
+    style={{ fontWeight: 600 }}
+  >
+    {landingText[lang].brideName}
+  </span>
+</div>
+
+<div
+  style={{
+    display: "flex",
+    justifyContent: "center",
+  }}
+>
+  <div
+    style={{
+      width: "80%",
+      height: "1px",
+      backgroundColor: "#e0e0e0",
+      margin: "12px 0",
+    }}
+  ></div>
+</div>
+
+    <div
+      style={{
+        fontSize: 14,
+        color: "#888",
+        fontFamily:
+          lang === "en"
+            ? "Fira Sans, Arial, sans-serif"
+            : "Playfair Display, serif",
+        marginBottom: 8,
+        fontWeight: 500,
+        letterSpacing: "0.04em",
+        textAlign: "center",
+      }}
+    >
+      {lang === "en" ? (
+        <span className="en-fira">{landingText[lang].date}</span>
+      ) : (
+        landingText[lang].date
+      )}
+    </div>
+
+    <div
+      style={{
+        fontSize: 14,
+        color: "#888",
+        fontFamily:
+          lang === "en"
+            ? "Fira Sans, Arial, sans-serif"
+            : "Playfair Display, serif",
+        fontWeight: 500,
+        letterSpacing: "0.04em",
+        textAlign: "center",
+        marginBottom: "12px"
+      }}
+    >
+      {lang === "en" ? (
+        <span className="en-fira">{landingText[lang].place}</span>
+      ) : (
+        landingText[lang].place
+      )}
+    </div>
+  </div>
+
+  {/* 사진 아래 배치 */}
+  <img
+    src={process.env.PUBLIC_URL + "/main_photos/main.png"}
+    alt="landing-main"
+    style={{
+      width: "100%",
+      height: "70vh",
+      objectFit: "cover",
+      display: "block",
+      margin: 0,
+      padding: 0,
+      border: "none",
+    }}
+  />
+</section>
+
+      {/* 인삿말/ 시작 start */}
       <section
         className="section-box greeting"
         style={{
-          padding: "32px 20px 28px 20px",
-          marginLeft: 0,
-          marginRight: 0,
+          padding: "60px 20px",
+          margin: "0"
         }}
       >
       
@@ -537,8 +560,12 @@ As we vow to honour, support, and care for one another as we always have, it wou
            margin: "10px auto",
            padding: 0}}
            />
-        <div className="section-title-en">INVITATION</div>
-        <div className="section-title-ko">소중한 분들을 초대합니다</div>
+        <div className="section-title-en" style={{            textAlign: "center",
+            fontFamily: "Playfair Display,serif",
+            fontSize: "1.5rem",
+            letterSpacing: "0.3em",
+            marginBottom: 8,}}>INVITATION</div>
+        <div className="section-title-ko" style={{fontSize:"14px"}}>소중한 분들을 초대합니다</div>
         <img
           src={process.env.PUBLIC_URL + "/main_photos/210A1898.jpg"}
           alt="landing-main"
@@ -560,24 +587,24 @@ As we vow to honour, support, and care for one another as we always have, it wou
       <section
         className="section-box"
         style={{
-          padding: "40px 20px",
+          padding: "60px 20px",
           backgroundColor: "#fafafa",
           textAlign: "center",
+          margin:"0"
         }}
       >
         {/* Title */}
-        <h2
+        <div
           style={{
-            fontFamily: "Playfair Display, serif",
-            fontSize: "2.5rem",
-            fontWeight: 400,
-            letterSpacing: "0.05em",
-            color: "#333",
-            marginBottom: "10px",
+            textAlign: "center",
+            fontFamily: "Playfair Display,serif",
+            fontSize: "2rem",
+            letterSpacing: "0.3em",
+            marginBottom: 16,
           }}
         >
           WEDDING DAY
-        </h2>
+        </div>
 
         {/* Date info */}
         <div style={{ fontSize: "1.1rem", color: "#555", marginBottom: "4px" }}>
@@ -711,7 +738,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       {/* GALLERY 섹션 */}
       <section
   className="gallery-section"
-  style={{ margin: "48px 0 32px 0", padding: "0 20px" }}
+  style={{ padding: "40px 20px" }}
 >
   <div
     style={{
@@ -719,11 +746,32 @@ As we vow to honour, support, and care for one another as we always have, it wou
       fontFamily: "Playfair Display,serif",
       fontSize: "1.5rem",
       letterSpacing: "0.3em",
-      marginBottom: 32,
+      marginBottom: 30,
+      marginTop: 30,
+      color: "#b87c9b"
+      
     }}
   >
     GALLERY
   </div>
+  <div
+  style={{
+    fontSize: 14,
+    textAlign: "center",
+    color: "#888",
+    fontFamily:
+      lang === "en"
+        ? "Fira Sans, Arial, sans-serif"
+        : "Playfair Display, serif",
+    marginBottom: 12,
+    fontWeight: 500,
+    letterSpacing: "0.04em",
+  }}
+>
+<span className={lang === "en" ? "en-fira" : undefined}>
+  {text[lang]?.photoInfo}
+</span>
+</div>
 
   {/* 🟩 3x4 이미지 그리드 */}
   <div
@@ -759,7 +807,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
   <div
   {...swipeHandlers} // ✅ 스와이프 감지 연결
   style={{
-    marginTop: "40px",
+    marginTop: "20px",
     textAlign: "center",
   }}
 >
@@ -838,8 +886,37 @@ As we vow to honour, support, and care for one another as we always have, it wou
           marginRight: 0,
         }}
       >
-        <h3>{text[lang].date}</h3>
-        <p style={{ fontWeight: "600" }}>{text[lang].place} </p>
+        <div
+  style={{
+    display: "flex",
+    justifyContent: "center",
+  }}
+>
+  <div
+    style={{
+      width: "80%",
+      height: "1px",
+      backgroundColor: "#e0e0e0",
+      margin: "12px 0",
+    }}
+  ></div>
+</div>
+      <div
+      style={{
+            textAlign: "center",
+            fontFamily: "Playfair Display,serif",
+            fontSize: "1.5rem",
+            letterSpacing: "0.3em",
+            marginBottom: 16,
+            marginTop: 30,
+           color: "#e69ac1"
+          }}>LOCATION</div>
+        <div
+        style={{marginBottom:"40px", marginTop:"30px"}}
+        >
+          <p style={{ fontWeight: "600", marginBottom:"4px", fontSize:"20px" }}>{text[lang].place} </p>
+          {text[lang].date}</div>
+       
         <p
           style={{
             fontSize: "15px",
@@ -848,61 +925,143 @@ As we vow to honour, support, and care for one another as we always have, it wou
             marginBottom: "0px",
           }}
         >
-          {`${text[lang].address}\nTel. ${text[lang].tel}`}
+          {`${text[lang].address}`}
         </p>
         <img
-          src={process.env.PUBLIC_URL + "/map_min.png"}
-          alt="map"
-          style={{
-            width: "100%",
-            maxWidth: 360,
-            margin: "5px auto 0 auto",
-            display: "block",
-            cursor: "pointer",
-          }}
-          onClick={() =>
-            setMapModal({
-              open: true,
-              src: process.env.PUBLIC_URL + "/map_min.png",
-            })
-          }
-        />
-        <a
-          className="circle-button"
-          href="https://naver.me/5gFg3FmY"
-          target="_blank"
-          rel="map"
-          style={{
-            width: "100px",
-            height: "30px",
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            paddingRight: "10px",
-          }}
-        >
-          <span role="img" aria-label="map" style={{ marginRight: "6px" }}>
-            📍
-          </span>
-          {text[lang].map}
-        </a>
+      src="map_min.png"
+      alt="Google Map"
+      style={{
+        width: "100%",
+        background: "#f1f1f1",
+        objectFit: "cover",
+        marginBottom: "6px",
+      }}
+    />
+        <div
+  style={{
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginTop: "8px",
+    flexWrap: "wrap",
+  }}
+>
+  {/* Google Maps */}
+  <a
+    href="https://maps.app.goo.gl/LmmCiUggPAGuqnTC9"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      textDecoration: "none",
+      color: "#000",
+    }}
+  >
+    <img
+      src="https://yt3.googleusercontent.com/ytc/AIdro_mZGy0ZLktn9NL_4__5MbK49kpYHU8YPkUgvvdpPxt3O6Q=s900-c-k-c0x00ffffff-no-rj"
+      alt="Google Map"
+      style={{
+        width: 45,
+        height: 45,
+        borderRadius: "50%",
+        background: "#f1f1f1",
+        objectFit: "cover",
+        marginBottom: "6px",
+        border: "solid 1px #eae9e9"
+      }}
+    />
+    <span style={{ fontSize: 14 }}>구글지도</span>
+  </a>
+
+  {/* Naver Map */}
+  <a
+    href="https://naver.me/5gFg3Fm"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      textDecoration: "none",
+      color: "#000",
+    }}
+  >
+    <img
+      src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/15/79/af/1579afe7-27a1-7c65-4445-55a99fc76031/AppIcon-0-0-1x_U007epad-0-1-0-sRGB-85-220.png/434x0w.webp"
+      alt="Naver Map"
+      style={{
+        width: 45,
+        height: 45,
+        borderRadius: "50%",
+        background: "#f1f1f1",
+        objectFit: "cover",
+        marginBottom: "6px",
+        border: "solid 1px #eae9e9"
+      }}
+    />
+    <span style={{ fontSize: 14 }}>네이버지도</span>
+  </a>
+
+  {/* Kakao Map */}
+  <a
+    href="https://kko.kakao.com/C1VTVtFsFV"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      textDecoration: "none",
+      color: "#000",
+      
+    }}
+  >
+    <img
+      src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ba/45/6c/ba456ce5-e8cb-daf1-4afc-8ef96f2aeb9f/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/434x0w.webp"
+      alt="Kakao Map"
+      style={{
+        width: 45,
+        height: 45,
+        borderRadius: "50%",
+        background: "#f1f1f1",
+        objectFit: "cover",
+        marginBottom: "6px",
+      }}
+    />
+    <span style={{ fontSize: 14 }}>카카오맵</span>
+  </a>
+</div>
       </section>
 
       <div
-        style={{ height: "5px", backgroundColor: "#f0f0f0", margin: "16px 0" }}
-      />
+  style={{
+    display: "flex",
+    justifyContent: "center",
+  }}
+>
+  <div
+    style={{
+      width: "80%",
+      height: "1px",
+      backgroundColor: "#e0e0e0",
+      margin: "12px 0",
+    }}
+  ></div>
+</div>
 
       {/* 연회 & 식사 안내 */}
       <section
         className="section-box"
         style={{
-          padding: "32px 20px 28px 20px",
+          padding: "40px 20px",
           marginLeft: 0,
           marginRight: 0,
         }}
       >
-        <h3>{text[lang].banquet}</h3>
-        <p style={{ fontWeight: "600", margin: "0px" }}>
+        <h3 style={{marginBottom: "40px"}}>{text[lang].banquet}</h3>
+        <p style={{ fontWeight: "600", margin: "0px", fontSize:"20px" }}>
           {text[lang].banquetDesc}
         </p>
         <pre style={{ fontSize: "13px" }}>{text[lang].banquetDesc2}</pre>
@@ -935,43 +1094,102 @@ As we vow to honour, support, and care for one another as we always have, it wou
             })
           }
         />
-        <a
-          className="circle-button"
-          href="https://naver.me/x0UPjjrq"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            width: "100px",
-            height: "30px",
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            paddingRight: "10px",
-          }}
-        >
-          <span role="img" aria-label="map" style={{ marginRight: "6px" }}>
-            📍
-          </span>
-          {text[lang].map}
-        </a>
+        <div
+  style={{
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginTop: "8px",
+    flexWrap: "wrap",
+  }}
+>
+  {/* Google Maps */}
+  <a
+    href="https://maps.app.goo.gl/4vCWhGsigcLQFCne6"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      textDecoration: "none",
+      color: "#000",
+    }}
+  >
+    <img
+      src="https://yt3.googleusercontent.com/ytc/AIdro_mZGy0ZLktn9NL_4__5MbK49kpYHU8YPkUgvvdpPxt3O6Q=s900-c-k-c0x00ffffff-no-rj"
+      alt="Google Map"
+      style={{
+        width: 45,
+        height: 45,
+        borderRadius: "50%",
+        background: "#f1f1f1",
+        objectFit: "cover",
+        marginBottom: "6px",
+        border: "solid 1px #eae9e9"
+      }}
+    />
+    <span style={{ fontSize: 14 }}>구글지도</span>
+  </a>
 
-        <a
-          className="circle-button"
-          href="tel:0222637979"
-          style={{
-            width: "100px",
-            height: "30px",
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            paddingRight: "10px",
-          }}
-        >
-          <span role="img" aria-label="call" style={{ marginRight: "6px" }}>
-            📞
-          </span>
-          {text[lang].call}
-        </a>
+  {/* Naver Map */}
+  <a
+    href="https://naver.me/x0UPjjrq"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      textDecoration: "none",
+      color: "#000",
+    }}
+  >
+    <img
+      src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/15/79/af/1579afe7-27a1-7c65-4445-55a99fc76031/AppIcon-0-0-1x_U007epad-0-1-0-sRGB-85-220.png/434x0w.webp"
+      alt="Naver Map"
+      style={{
+        width: 45,
+        height: 45,
+        borderRadius: "50%",
+        background: "#f1f1f1",
+        objectFit: "cover",
+        marginBottom: "6px",
+        border: "solid 1px #eae9e9"
+      }}
+    />
+    <span style={{ fontSize: 14 }}>네이버지도</span>
+  </a>
+
+  {/* Kakao Map */}
+  <a
+    href="https://kko.kakao.com/YsHebygNAP"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      textDecoration: "none",
+      color: "#000",
+      
+    }}
+  >
+    <img
+      src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ba/45/6c/ba456ce5-e8cb-daf1-4afc-8ef96f2aeb9f/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/434x0w.webp"
+      alt="Kakao Map"
+      style={{
+        width: 45,
+        height: 45,
+        borderRadius: "50%",
+        background: "#f1f1f1",
+        objectFit: "cover",
+        marginBottom: "6px",
+      }}
+    />
+    <span style={{ fontSize: 14 }}>카카오맵</span>
+  </a>
+</div>
       </section>
 
       {/* 지도 모달 */}
@@ -1035,7 +1253,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       {/* 마음 전하실 곳 */}
       <section
         className="gift"
-        style={{ padding: "32px 20px 28px 20px", textAlign: "center" }}
+        style={{ padding: "60px 20px", textAlign: "center" }}
       >
         <h3>{lang === "ko" ? "마음 전하실 곳" : "GIFT"}</h3>
         <p>
@@ -1101,7 +1319,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       <section
         className="rsvp"
         style={{
-          padding: "32px 20px 28px 20px",
+          padding: "60px 20px",
           marginLeft: 0,
           marginRight: 0,
         }}
@@ -1165,7 +1383,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       <section
         className="guestbook"
         style={{
-          padding: "32px 20px 28px 20px",
+          padding: "60px 20px",
           marginLeft: 0,
           marginRight: 0,
         }}
@@ -1239,10 +1457,51 @@ As we vow to honour, support, and care for one another as we always have, it wou
       </section>
     </div>  )}
   
- 
-
-
-
-
-
 export default App;
+
+
+
+// App.js (최적화된 구조)
+// import React, { useState } from "react";
+// import GallerySection from "./components/GallerySection";
+// import InvitationSection from "./components/InvitationSection";
+// import LocationSection from "./components/LocationSection";
+// import BanquetSection from "./components/BanquetSection";
+// import RSVPSection from "./components/RSVPSection";
+// import GuestbookSection from "./components/GuestbookSection";
+// import SoundPlayer from "./components/SoundPlayer";
+// import FallingPetals from "./components/FallingPetals";
+// import CalendarSection from "./components/CalendarSection";
+// import { samplePhotos, weddingDate, text, guestbookText, landingText, ddxayLabels } from "./constants";
+
+// function App() {
+//   const [lang, setLang] = useState("ko");
+
+//   return (
+//     <div className="invitation-container">
+//       <div className="lang-switch">
+//         <button onClick={() => setLang("ko")}>한국어</button>
+//         <button onClick={() => setLang("en")}>English</button>
+//       </div>
+
+//       <FallingPetals />
+//       <SoundPlayer lang={lang} />
+
+//       <InvitationSection lang={lang} text={text} landingText={landingText} />
+
+//       <CalendarSection lang={lang} weddingDate={weddingDate} ddayLabels={ddayLabels} />
+
+//       <GallerySection lang={lang} photos={samplePhotos} text={text} />
+
+//       <LocationSection lang={lang} text={text} />
+
+//       <BanquetSection lang={lang} text={text} />
+
+//       <RSVPSection lang={lang} text={text} />
+
+//       <GuestbookSection lang={lang} guestbookText={guestbookText} />
+//     </div>
+//   );
+// }
+
+// export default App;
