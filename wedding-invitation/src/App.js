@@ -21,14 +21,12 @@ import { useSwipeable } from "react-swipeable";
 import FallingPetals from "./components/FallingPetals";
 
 
+
 function App() {
   const [lang, setLang] = useState("ko");
   const weddingDate = new Date("2025-11-08T15:00:00+09:00");
   const [now, setNow] = useState(new Date());
-  const [showGuestbookModal, setShowGuestbookModal] = useState(false);
-  const [guestName, setGuestName] = useState("");
-  const [guestPw, setGuestPw] = useState("");
-  const [guestMsg, setGuestMsg] = useState("");
+
 
   const [guestbookList, setGuestbookList] = useState([
     // 예시글(샘플)도 이 배열에 포함
@@ -45,10 +43,6 @@ function App() {
   const brideAccounts = [
     { bank: "국민은행", number: "000-123-456789", holder: "이석훈" },
     { bank: "국민은행", number: "000-123-456789", holder: "이석훈" },
-  ];
-
-  const groomAccounts = [
-    { bank: "우리은행", number: "100-243-2266279", holder: "김명진" },
   ];
 
   useEffect(() => {
@@ -199,7 +193,8 @@ function App() {
   const text = {
     ko: {
       invitationTitle: "소중한 분들을 초대합니다.",
-      invitationMsg: `저희 두 사람의 작은 만남이 사랑의 결실을 이루어 소중한 결혼식을 올리게 되었습니다.\n\n평생 서로 귀하게 여기며 첫마음 그대로 존중하고 배려하며 살겠습니다.\n\n오로지 믿음과 사랑을 약속하는 날 오셔서 축복해 주시면 더없는 기쁨으로 간직하겠습니다.\n\n 명진 & 제이미`,
+      invitationMsg: `저희 두 사람의 작은 만남이 사랑의 결실을 이루어 소중한 결혼식을 올리게 되었습니다.\n\n평생 서로 귀하게 여기며 첫마음 그대로 존중하고 배려하며 살겠습니다.\n\n오로지 믿음과 사랑을 약속하는 날 오셔서 축복해 주시면 더없는 기쁨으로 간직하겠습니다.`,
+      nameTwo: "명진 & 제이미",
       dday: `제이미, 명진의 결혼식이 ${dDay}일 남았습니다.`,
       date: "2025년 11월 8일 토요일, 오후 3시",
       place: "남산골한옥마을 관훈동 민씨가옥",
@@ -229,6 +224,7 @@ function App() {
       yes: "참석",
       no: "불참",
       submit: "참석의사 전달하기",
+      
     },
     en: {
       invitationTitle: "You are cordially invited.",
@@ -236,8 +232,9 @@ function App() {
 
 We will soon be celebrating our wedding, a day filled with love, commitment, and faith.
 
-As we vow to honour, support, and care for one another as we always have, it would mean the world to us to have you there to witness and share in this special moment. \n\nTaylor & Jamie`,
+As we vow to honour, support, and care for one another as we always have, it would mean the world to us to have you there to witness and share in this special moment.`,
       dday: `148 days left until Jamie & Taylor's wedding.`,
+      nameTwo: "Taylor & Jamie",
       date: "Saturday, November 8, 2025, 3:00 PM",
       place: "Namsangol Hanok Village, Gwanhundong Min Family House",
       address: "28, Toegye-ro 34-gil, Jung-gu, Seoul",
@@ -246,7 +243,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       call: "Call",
       photoInfo: "Click the photo to view it in full screen.",
       banquet: "Banquet & Meal Info",
-      banquetDesc: "at the 2nd floor hall of Sollago Hotel, 4PM",
+      banquetDesc: "At the 2nd floor hall of Sollago Hotel, 4PM",
       banquetDesc2: "a 5-minute walk away from the Hanok Village.",
       banquetDesc3:
         "A variety of buffet menus including Korean, Chinese, Western, and Japanese cuisine will be served.`,",
@@ -307,6 +304,48 @@ As we vow to honour, support, and care for one another as we always have, it wou
     },
   };
 
+  const directionText = {
+    ko: {
+      title: "오시는 길",
+      name: "남산골한옥마을 – 관훈동민씨가옥",
+      address: "서울 중구 필동2가 84-1 (남산골한옥마을 내)",
+      phone: "02-2263-0854",
+      subwayTitle: "지하철",
+      subway: "3·4호선 충무로역 3번 또는 4번 출구 → 도보 약 5분",
+      busTitle: "버스",
+      bus: `퇴계로3가 또는 한옥마을 정류장 하차
+  • 일반: 104, 105, 140, 421, 463, 507, 604, 7011
+  • 순환: 남산순환버스 02, 05, 90S 투어
+  • 공항: 6001, 6015, 6021`,
+      parkingTitle: "주차 안내",
+      parking: `• 남산골한옥마을 내 공영주차장 이용 가능 (※ 유료 / 공간 협소)
+  • 솔라고호텔(피로연장) 주차 시 2시간 무료 제공
+   → 도보 약 5~10분 소요되며, 자차 이용 시 더욱 권장드립니다.`,
+      note: "※ 가급적 대중교통 또는 솔라고호텔 주차장 이용을 부탁드립니다.",
+    },
+  
+    en: {
+      title: "Directions",
+      name: "Namsangol Hanok Village – Min’s House (Minssi Gaok)",
+      address: "Address: 84-1, Pildong 2-ga, Jung-gu, Seoul (inside Namsangol Hanok Village)",
+      phone: "Phone: +82-2-2263-0854",
+      subwayTitle: "🚇 Subway",
+      subway: "Line 3 or 4 → Get off at Chungmuro Station, Exit 3 or 4 → 5-minute walk",
+      busTitle: "Bus",
+      bus: `Get off at Toegye-ro 3-ga or Hanok Village stop
+  •⁠  ⁠Regular: 104, 105, 140, 421, 463, 507, 604, 7011
+  •⁠  ⁠Circulation: Namsan Loop Bus 02, 05, 90S Tour
+  •⁠  ⁠Airport: 6001, 6015, 6021`,
+      parkingTitle: "Parking Information",
+      parking: `•⁠  ⁠Public parking is available inside Namsangol Hanok Village
+   (Paid parking / Limited spaces)
+  •⁠  ⁠Free 2-hour parking is available at Solloago Hotel (Reception venue)
+   → Approximately 5–10 minutes on foot from the ceremony venue
+   → We recommend using Solago Hotel parking if driving.`,
+      note: "※ For your convenience, we kindly suggest using public transportation or parking at Solago Hotel.",
+    },
+  };
+
   // D-day labels for bilingual support
   const ddayLabels = {
     ko: {
@@ -334,7 +373,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
     ko: {
       groom: "신랑",
       bride: "신부",
-      groomName: "명진",
+      gGroomName: "명진",
+      groomName: "Taylor",
       brideName: "제이미",
       date: "2025.11.08 토요일 오후 3시",
       place: "남산골한옥마을 관훈동 민씨가옥",
@@ -342,6 +382,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
     en: {
       groom: "GROOM",
       bride: "BRIDE",
+      kGroomName: "Myoung-Jin",
       groomName: "Taylor",
       brideName: "Jamie",
       date: "SAT, NOV 8, 2025, 3:00 PM",
@@ -420,8 +461,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
   className="section-box landing-section"
   style={{ padding: 0, margin: 0 }}
 >
-  {/* 텍스트 정보 먼저 배치 */}
-  <div className="landing-section-info" style={{ padding: "30px 0px" }}>
+  {/* 텍스트 정보 먼저 배치  맨 위*/}
+  <div className="landing-section-info" style={{ padding: "30px 0px 0px 0px" }}> 
   <div
   style={{
     display: "flex",
@@ -435,18 +476,30 @@ As we vow to honour, support, and care for one another as we always have, it wou
     marginTop: 30,
     fontFamily:
       lang === "ko"
-        ? "Gowun Batang, Noto Serif KR, serif"
+        ? "Fira Sans, Noto Serif KR, serif"
         : "Cormorant Garamond, Playfair Display, serif",
     letterSpacing: "0.04em",
     lineHeight: "1.4",
   }}
 >
-  <span
-    className={lang === "en" ? "en-font-bold" : ""}
-    style={{ fontWeight: 600 }}
-  >
-    {landingText[lang].groomName}
-  </span>
+<span
+  className={lang === "en" ? "en-font-bold" : ""}
+  style={{ fontWeight: 400, display: "inline-block" }}
+>
+{lang === "en" ? (
+    <>
+      {landingText[lang].groomName}
+      <br />
+      <span style={{ fontSize: "0.8em", opacity: 0.8 }}>
+        ({landingText[lang].kGroomName})
+      </span>
+    </>
+  ) : (
+    <>
+      {landingText[lang].gGroomName}
+    </>
+  )}
+</span>
   <span
     style={{
       fontSize: 18,
@@ -459,7 +512,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
   </span>
   <span
     className={lang === "en" ? "en-font-bold" : ""}
-    style={{ fontWeight: 600 }}
+    style={{ fontWeight: 400 }}
   >
     {landingText[lang].brideName}
   </span>
@@ -483,7 +536,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
 
     <div
       style={{
-        fontSize: 14,
+        fontSize: lang === "en" ? 20 : 18,
         color: "#888",
         fontFamily:
           lang === "en"
@@ -499,27 +552,6 @@ As we vow to honour, support, and care for one another as we always have, it wou
         <span className="en-fira">{landingText[lang].date}</span>
       ) : (
         landingText[lang].date
-      )}
-    </div>
-
-    <div
-      style={{
-        fontSize: 14,
-        color: "#888",
-        fontFamily:
-          lang === "en"
-            ? "Fira Sans, Arial, sans-serif"
-            : "Playfair Display, serif",
-        fontWeight: 500,
-        letterSpacing: "0.04em",
-        textAlign: "center",
-        marginBottom: "12px"
-      }}
-    >
-      {lang === "en" ? (
-        <span className="en-fira">{landingText[lang].place}</span>
-      ) : (
-        landingText[lang].place
       )}
     </div>
   </div>
@@ -565,7 +597,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
             fontSize: "1.5rem",
             letterSpacing: "0.3em",
             marginBottom: 8,}}>INVITATION</div>
-        <div className="section-title-ko" style={{fontSize:"14px"}}>소중한 분들을 초대합니다</div>
+        <div className="section-title-ko" style={{fontSize:"15px"}}>{text[lang].invitationTitle}</div>
         <img
           src={process.env.PUBLIC_URL + "/main_photos/210A1898.jpg"}
           alt="landing-main"
@@ -581,6 +613,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
           }}
         />
         <pre style={{ padding: "10px 20px" }}>{text[lang].invitationMsg}</pre>
+        <b>{text[lang].nameTwo}</b>
       </section>
 
       {/* D-day 카운트 */}
@@ -594,13 +627,27 @@ As we vow to honour, support, and care for one another as we always have, it wou
         }}
       >
         {/* Title */}
+
+        <img 
+         src={process.env.PUBLIC_URL + "/overlay/flower.png"}
+         alt="landing-main"
+         style={{
+           width: "60px",
+           height: "60px",
+           objectFit: "cover",
+           display: "block",
+           margin: "10px auto",
+           marginTop: 30,
+           padding: 0}}
+           />
         <div
           style={{
             textAlign: "center",
-            fontFamily: "Playfair Display,serif",
-            fontSize: "2rem",
-            letterSpacing: "0.3em",
-            marginBottom: 16,
+      fontFamily: "Playfair Display,serif",
+      fontSize: "1.5rem",
+      letterSpacing: "0.3em",
+      marginBottom: 30,
+      color: "#b87c9b"
           }}
         >
           WEDDING DAY
@@ -740,6 +787,18 @@ As we vow to honour, support, and care for one another as we always have, it wou
   className="gallery-section"
   style={{ padding: "40px 20px" }}
 >
+<img 
+         src={process.env.PUBLIC_URL + "/overlay/flower.png"}
+         alt="landing-main"
+         style={{
+           width: "60px",
+           height: "60px",
+           objectFit: "cover",
+           display: "block",
+           margin: "10px auto",
+           marginTop: 30,
+           padding: 0}}
+           />
   <div
     style={{
       textAlign: "center",
@@ -747,7 +806,6 @@ As we vow to honour, support, and care for one another as we always have, it wou
       fontSize: "1.5rem",
       letterSpacing: "0.3em",
       marginBottom: 30,
-      marginTop: 30,
       color: "#b87c9b"
       
     }}
@@ -901,6 +959,19 @@ As we vow to honour, support, and care for one another as we always have, it wou
     }}
   ></div>
 </div>
+
+<img 
+         src={process.env.PUBLIC_URL + "/overlay/flower.png"}
+         alt="landing-main"
+         style={{
+           width: "60px",
+           height: "60px",
+           objectFit: "cover",
+           display: "block",
+           marginTop: 30,
+           margin: "10px auto",
+           padding: 0}}
+           />
       <div
       style={{
             textAlign: "center",
@@ -908,7 +979,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
             fontSize: "1.5rem",
             letterSpacing: "0.3em",
             marginBottom: 16,
-            marginTop: 30,
+            
            color: "#e69ac1"
           }}>LOCATION</div>
         <div
@@ -937,6 +1008,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
         marginBottom: "6px",
       }}
     />
+
         <div
   style={{
     display: "flex",
@@ -1033,6 +1105,51 @@ As we vow to honour, support, and care for one another as we always have, it wou
     <span style={{ fontSize: 14 }}>카카오맵</span>
   </a>
 </div>
+
+<div className="direction-section" style={{ marginTop: "40px", lineHeight: 1.6 }}>
+  <h2>{directionText[lang].title}</h2>
+  <p>{directionText[lang].name}</p>
+  <p>{directionText[lang].address}</p>
+  <p>{directionText[lang].phone}</p>
+
+  <div
+  style={{
+    width: "90%",
+    height: "1px",
+    backgroundColor: "#c1c1c1",
+    margin: "12px auto",
+  }}
+></div>
+
+  <h4>{directionText[lang].subwayTitle}</h4>
+  <p>{directionText[lang].subway}</p>
+
+  <div
+  style={{
+    width: "90%",
+    height: "1px",
+    backgroundColor: "#c1c1c1",
+    margin: "12px auto",
+  }}
+></div>
+
+  <h4>{directionText[lang].busTitle}</h4>
+  <pre style={{ whiteSpace: "pre-wrap" }}>{directionText[lang].bus}</pre>
+
+<div
+  style={{
+    width: "90%",
+    height: "1px",
+    backgroundColor: "#c1c1c1",
+    margin: "12px auto",
+  }}
+></div>
+
+  <h4>{directionText[lang].parkingTitle}</h4>
+  <pre style={{ whiteSpace: "pre-wrap" }}>{directionText[lang].parking}</pre>
+
+  <p style={{ marginTop: "12px", fontWeight: 500 }}>{directionText[lang].note}</p>
+</div> 
       </section>
 
       <div
@@ -1041,14 +1158,14 @@ As we vow to honour, support, and care for one another as we always have, it wou
     justifyContent: "center",
   }}
 >
-  <div
-    style={{
-      width: "80%",
-      height: "1px",
-      backgroundColor: "#e0e0e0",
-      margin: "12px 0",
-    }}
-  ></div>
+<div
+  style={{
+    width: "90%",
+    height: "1px",
+    backgroundColor: "#c1c1c1",
+    margin: "12px auto",
+  }}
+></div>
 </div>
 
       {/* 연회 & 식사 안내 */}
@@ -1060,11 +1177,24 @@ As we vow to honour, support, and care for one another as we always have, it wou
           marginRight: 0,
         }}
       >
+
+<img 
+         src={process.env.PUBLIC_URL + "/overlay/flower.png"}
+         alt="landing-main"
+         style={{
+           width: "60px",
+           height: "60px",
+           objectFit: "cover",
+           display: "block",
+           margin: "10px auto",
+           marginTop: 30,
+           padding: 0}}
+           />
         <h3 style={{marginBottom: "40px"}}>{text[lang].banquet}</h3>
         <p style={{ fontWeight: "600", margin: "0px", fontSize:"20px" }}>
           {text[lang].banquetDesc}
         </p>
-        <pre style={{ fontSize: "13px" }}>{text[lang].banquetDesc2}</pre>
+        <pre style={{ fontSize: "16px" }}>{text[lang].banquetDesc2}</pre>
         <pre>{text[lang].banquetDesc3}</pre>
 
         <p
@@ -1253,8 +1383,21 @@ As we vow to honour, support, and care for one another as we always have, it wou
       {/* 마음 전하실 곳 */}
       <section
         className="gift"
-        style={{ padding: "60px 20px", textAlign: "center" }}
+        style={{ padding: "60px 20px 80px 20px", textAlign: "center" }}
       >
+
+<img 
+         src={process.env.PUBLIC_URL + "/overlay/flower.png"}
+         alt="landing-main"
+         style={{
+           width: "60px",
+           height: "60px",
+           objectFit: "cover",
+           display: "block",
+           margin: "10px auto",
+           marginTop: 10,
+           padding: 0}}
+           />
         <h3>{lang === "ko" ? "마음 전하실 곳" : "GIFT"}</h3>
         <p>
           {lang === "ko"
@@ -1283,17 +1426,6 @@ As we vow to honour, support, and care for one another as we always have, it wou
             {lang === "ko" ? "신부 측 계좌번호" : "Bride's Account Info"}
           </button>
 
-          <button
-            onClick={() => setShowModal("groom")}
-            style={{
-              border: "1px solid rgb(213 213 213)",
-              padding: "14px 30px",
-              borderRadius: "30px",
-              background: "white",
-            }}
-          >
-            {lang === "ko" ? "신랑 측 계좌번호" : "Groom's Account Info"}
-          </button>
         </div>
 
         {showModal && (
@@ -1319,11 +1451,24 @@ As we vow to honour, support, and care for one another as we always have, it wou
       <section
         className="rsvp"
         style={{
-          padding: "60px 20px",
+          padding: "60px 20px 80px 20px",
           marginLeft: 0,
           marginRight: 0,
         }}
       >
+
+<img 
+         src={process.env.PUBLIC_URL + "/overlay/flower.png"}
+         alt="landing-main"
+         style={{
+           width: "60px",
+           height: "60px",
+           objectFit: "cover",
+           display: "block",
+           margin: "10px auto",
+           marginTop: 10,
+           padding: 0}}
+           />
         <h3>{text[lang].rsvp}</h3>
         <p>{text[lang].rsvpDesc}</p>
 
@@ -1383,11 +1528,24 @@ As we vow to honour, support, and care for one another as we always have, it wou
       <section
         className="guestbook"
         style={{
-          padding: "60px 20px",
+          padding: "60px 20px 80px 20px",
           marginLeft: 0,
           marginRight: 0,
         }}
       >
+
+<img 
+         src={process.env.PUBLIC_URL + "/overlay/flower.png"}
+         alt="landing-main"
+         style={{
+           width: "60px",
+           height: "60px",
+           objectFit: "cover",
+           display: "block",
+           margin: "10px auto",
+           marginTop: 10,
+           padding: 0}}
+           />
         <div className="guestbook-title">
           <div
             className="guestbook-en"

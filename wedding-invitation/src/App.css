@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 html, body {
   margin: 0;
@@ -15,7 +16,7 @@ html, body {
 body {
   font-family: 'Gowun Batang', 'Noto Serif KR', 'Playfair Display', serif;
   color: #555;
-  font-size: 15px;
+  font-size: 16px;
 }
 .landing-section-info, .section-box, .guestbook, .gift, .rsvp, .dday, .info, .banquet {
   font-family: 'Fira Sans', Arial, sans-serif;
@@ -25,6 +26,7 @@ body {
   font-size: 16px;
   color: #555;
 }
+
 
 .App {
   text-align: center;
@@ -112,14 +114,14 @@ body {
   }
 }
 .landing-section-info .en-font, .en-font {
-  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-family: 'Fira Sans' 'Cormorant Garamond', 'Playfair Display', serif;
   font-size: 1.1rem;
   letter-spacing: 0.18em;
   font-weight: 400;
   color: #444;
 }
 .en-font-bold {
-  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-family: 'Fira Sans', 'Cormorant Garamond', 'Playfair Display', serif;
   font-size: 19px;
   letter-spacing: 0.18em;
   font-weight: 700;
@@ -127,7 +129,6 @@ body {
 }
 .en-fira {
   font-family: 'Fira Sans', Arial, sans-serif;
-  font-size: 14px;
   font-weight: 400;
   color: #888;
   letter-spacing: 0.04em;
@@ -292,7 +293,7 @@ body {
 }
 .guestbook-ko {
   font-family: 'Fira Sans', Arial, sans-serif;
-  font-size: 15px !important;
+  font-size: 16px !important;
   color: #f7a6b2;
   font-weight: 500;
   letter-spacing: 0.04em;
@@ -524,10 +525,11 @@ body {
   font-family: 'Noto Serif KR', serif;
   margin: 0 0 18px 0;
   white-space: pre-line;
+  border-bottom: 8px;
 }
 .section-box pre {
   color: #555;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.7;
   font-family: 'Fira Sans', Arial, sans-serif;
   margin: 0 0 18px 0;
@@ -678,7 +680,7 @@ body {
   border: 1px solid #eddbe4;
   border-radius: 8px !important;
   padding: 14px 0;
-  font-size: 14px !important;
+  font-size: 16px !important;
   font-family: 'Fira Sans', Arial, sans-serif;
   font-weight: 400;
   letter-spacing: 0.04em;
@@ -839,7 +841,7 @@ body {
   background-color: white;
   color: #333;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   margin-right: 10px;
   transition: background 0.2s, box-shadow 0.2s;
