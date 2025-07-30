@@ -1,0 +1,42 @@
+.bridegroom-wrapper {
+    background-color: #ffeff7;
+    padding: 50px 20px;
+    text-align: center;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  
+
+  .person-section {
+    margin-bottom: 40px;
+  }
+  .badge {
+    background-color: #cc81a7;
+    color: white;
+    border-radius: 20px;
+    padding: 6px 16px;
+    display: inline-block;
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+  .name {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  .roman {
+    font-size: 14px;
+    color: #a78f7a;
+    margin-bottom: 12px;
+  }
+  .parents {
+    font-size: 16px;
+    color: #444;
+    line-height: 1.6;
+  }
+  .divider {
+    border: none;
+    height: 1px;
+    background-color: #ddd;
+    margin: 40px auto;
+    width: 60%;
+  }

@@ -9,7 +9,7 @@ const ImageTransition = () => {
     AOS.init({ duration: 1000 });
     const timer = setInterval(() => {
       setShowFirst((prev) => !prev);
-    }, 3000); // 3초마다 전환
+    }, 2500); // 3초마다 전환
 
     return () => clearInterval(timer);
   }, []);
@@ -28,7 +28,7 @@ const ImageTransition = () => {
     >
       {/* 이미지 A */}
       <img
-        src="/main_photos/photo1.jpg"
+        src="/main_photos/photo1.png"
         alt="First"
         style={{
           position: "absolute",

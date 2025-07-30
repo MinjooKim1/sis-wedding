@@ -8,7 +8,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: #fff;
+  background: #555;
   width: 100vw;
   overflow-x: hidden;
 }
@@ -80,9 +80,9 @@ body {
 .landing-section {
   width: 100%;
   max-width: 100%;
-  margin: 0;
-  padding: 0;
+  padding-top: 30px !important;
   box-sizing: border-box;
+  background-color: #fff;
 }
 
 /* 정보 블록 정렬 */
@@ -185,7 +185,7 @@ body {
   border-radius: 24px;
   border: 1.5px solid #f0f0f0;
   padding: 32px 18px 28px 18px;
-  margin-bottom: 28px;
+  /* margin-bottom: 28px; */
   box-shadow: none;
   word-break: keep-all;
   overflow-wrap: break-word;
@@ -294,7 +294,7 @@ body {
   box-shadow: none;
   word-break: keep-all;
   overflow-wrap: break-word;
-  background-color: #fff9fc !important;
+  background-color: #ffeff7 !important;
 }
 .guestbook-title {
   margin-bottom: 18px;
@@ -483,15 +483,15 @@ body {
 
 @media (min-width: 521px) {
   .landing-section > div:first-child {
-    width: 520px !important;
+/* 
     max-width: 520px !important;
-    min-width: 520px !important;
+    min-width: 520px !important; */
     margin: 0 auto !important;
   }
   .landing-section img {
-    width: 520px !important;
-    max-width: 520px !important;
-    min-width: 520px !important;
+
+    /* max-width: 520px !important;
+    min-width: 520px !important; */
     margin: 0 auto !important;
   }
 }
@@ -527,8 +527,7 @@ body {
   background: #fff;
   border: 1.5px solid #f0f0f0;
   border-radius: 24px;
-  padding: 32px 18px 28px 18px;
-  margin-bottom: 28px;
+  padding: 32px 18px 40px 18px;
   box-shadow: none;
   word-break: keep-all;
   overflow-wrap: break-word;
@@ -762,6 +761,9 @@ body {
 }
 
 /* ========= EXTRA ELEMENTS ========= */
+.gallery-section{
+  background-color: #fff;
+}
 .deliver-btn {
   border: 1px solid #eddbe4 !important;
   background-color: #fbf1f65b !important;
@@ -769,7 +771,7 @@ body {
 }
 
 .greeting {
-  background-color: #fff9fc !important;
+  background-color: #ffeff7 !important;
 }
 
 /* ========= RESPONSIVE STYLES ========= */

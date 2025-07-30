@@ -24,6 +24,8 @@ import { FaSubway, FaBus, FaParking  } from 'react-icons/fa';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import ImageTransition from "./components/ImageTransition"; // 경로 주의!
+import BrideGroomInfo from "./components/BrideGroomInfo";
+import SoundToggle from "./components/SoundToggle";
 
 
 function App() {
@@ -391,7 +393,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
     en: {
       groom: "GROOM",
       bride: "BRIDE",
-      kGroomName: "Myoung-Jin",
+      kGroomName: "Myungjin",
       groomName: "Taylor",
       brideName: "Jamie",
       date: "SAT, NOV 8, 2025, 3:00 PM",
@@ -404,12 +406,13 @@ As we vow to honour, support, and care for one another as we always have, it wou
       className="invitation-container"
       style={{
         maxWidth: "500px", // ✅ 최대 너비 제한
+        position: "relative"
       }} 
     >
       {/* 최상단 언어 전환 버튼 영역 */}
       <div
         style={{
-          width: "95%",
+          // width: "95%",
           height: 60,
           background: "#fff",
           display: "flex",
@@ -419,33 +422,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
         }}
       >
         {/* 사운드 아이콘 */}
-
-        <button
-          className="sound-toggle-btn"
-          style={{
-            position: "absolute",
-            left: 16,
-            top: 16,
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            zIndex: 10,
-          }}
-          onClick={handleSoundToggle}
-          aria-label={isPlaying ? "Pause sound" : "Play sound"}
-        >
-          {isPlaying ? (
-            <FaVolumeUp size={28} color="#f7a6b2" />
-          ) : (
-            <FaVolumeMute size={28} color="#f7a6b2" />
-          )}
-        </button>
-        <audio
-          ref={audioRef}
-          src={process.env.PUBLIC_URL + "/sound.mp3"}
-          loop
-          autoPlay
-        />
+        <SoundToggle />
 
         {/* 언어 변경 버튼 */}
         <div
@@ -463,8 +440,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
       {/* 랜딩페이지 섹션  시작*/}
       <FallingPetals />
       <section
-        className="section-box landing-section"
-        style={{ padding: 0, marginTop: 30 }}
+        className="landing-section"
+        // style={{ padding: 30 }}
       >
         {/* 텍스트 정보 먼저 배치  맨 위*/}
           <div
@@ -473,7 +450,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
     justifyContent: "center",
     alignItems: "flex-start", // ✅ 위 정렬
     gap: 24,
-    marginBottom: 10
+    marginBottom: 10,
+    paddingBottom: 10
     }}
 >
   {/* Groom Name */}
@@ -487,13 +465,13 @@ As we vow to honour, support, and care for one another as we always have, it wou
 >
   {lang === "en" ? (
     <>
-      <span style={{ fontSize: "1.3em", fontWeight: 500 }}>{landingText[lang].groomName}</span>
+      <span style={{ fontSize: "1.3em", fontWeight: 600 }}>{landingText[lang].groomName}</span>
       <span style={{ fontSize: "0.8em", opacity: 0.6 }}>
         ({landingText[lang].kGroomName})
       </span>
     </>
   ) : (
-    <span style={{ fontWeight: 500, fontSize: "1.3em" }}>{landingText[lang].gGroomName}</span>
+    <span style={{ fontWeight: 600, fontSize: "1.3em" }}>{landingText[lang].gGroomName}</span>
   )}
 </div>
 
@@ -511,7 +489,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
 
   {/* Bride Name */}
   <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-    <span style={{ fontSize: "1.3em", fontWeight: 500 }}>{landingText[lang].brideName}</span>
+    <span style={{ fontSize: "1.3em", fontWeight: 600 }}>{landingText[lang].brideName}</span>
   </div>
 </div>
 
@@ -762,6 +740,10 @@ As we vow to honour, support, and care for one another as we always have, it wou
           {lang === "ko" ? ddayLabels[lang].left : ` ${ddayLabels[lang].left}`}
         </div>
       </section>
+
+      {/* 부모님 아들 딸 */}
+
+      <BrideGroomInfo lang={lang} />
 
       {/* GALLERY 섹션 */}
       <section className="gallery-section" data-aos="fade-up" style={{ padding: "40px 20px" }}>
@@ -1220,18 +1202,10 @@ As we vow to honour, support, and care for one another as we always have, it wou
           justifyContent: "center",
         }}
       >
-        <div
-          style={{
-            width: "90%",
-            height: "1px",
-            backgroundColor: "#c1c1c1",
-            margin: "12px auto",
-          }}
-        ></div>
       </div>
 
       {/* 연회 & 식사 안내 */}
-      <section data-aos="fade-up"
+      <section 
         className="section-box"
         style={{
           padding: "40px 20px",
@@ -1239,7 +1213,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
           marginRight: 0,
         }}
       >
-        <img
+        <img data-aos="fade-up"
           src={process.env.PUBLIC_URL + "/overlay/flower.png"}
           alt="landing-main"
           style={{
@@ -1252,8 +1226,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
             padding: 0,
           }}
         />
-        <h3 style={{ marginBottom: "10px" }}>{text[lang].banquet}</h3>
-        <img
+        <h3 data-aos="fade-up" style={{ marginBottom: "10px" }}>{text[lang].banquet}</h3>
+        <img data-aos="fade-up"
             src="/main_photos/table_flower.png"
             alt="Enlarged Map"
             style={{
@@ -1265,16 +1239,17 @@ As we vow to honour, support, and care for one another as we always have, it wou
             }}
           />
 
-<div style={{margin:"30px auto " }}>
-<p style={{ fontWeight: "600", marginBottom:0, fontSize: "20px" }}>
+<div data-aos="fade-up" style={{margin:"50px auto " }}>
+<p data-aos="fade-up" style={{ fontWeight: "600", marginBottom:0, fontSize: "20px" }}>
           {text[lang].banquetDesc}
         </p>
-        <p style={{fontSize:"15px", color:"#555"}}>{text[lang].mealTime}</p>
+        <p data-aos="fade-up" style={{fontSize:"15px", color:"#555"}}>{text[lang].mealTime}</p>
 
+        <div data-aos="fade-up" style={{fontSize:"16px", color:"#5e5e5e", margin:"30px 10px"}}>{text[lang].banquetDesc3}</div>
 </div>
       
 
-<div >
+<div  data-aos="fade-up">
     <span style={{fontSize: "14px", marginBottom: 0}} data-aos="fade-up">{text[lang].banquetAddr}</span>
     <button data-aos="fade-up"
       style={{
@@ -1471,7 +1446,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
         className="gift"
         style={{ padding: "60px 20px", textAlign: "center" }}
       >
-        <img
+        <img data-aos="fade-up"
           src={process.env.PUBLIC_URL + "/overlay/flower.png"}
           alt="landing-main"
           style={{
@@ -1484,14 +1459,14 @@ As we vow to honour, support, and care for one another as we always have, it wou
             padding: 0,
           }}
         />
-        <h3>  {lang === "ko" ? "마음 전하실 곳" : "GIFT"}</h3>
-        <p className="body_text_deco">
+        <h3 data-aos="fade-up">  {lang === "ko" ? "마음 전하실 곳" : "GIFT"}</h3>
+        <p  className="body_text_deco" data-aos="fade-up">
           {lang === "ko"
             ? "참석이 어려우신 분들을 위해 계좌번호를 기재하였습니다.\n너그러운 마음으로 양해 부탁드립니다."
             : "For those unable to attend, we have provided a bank account below. Thank you for your understanding."}
         </p>
 
-        <div
+        <div data-aos="fade-up"
           style={{
             marginTop: 16,
             display: "flex",
@@ -1500,7 +1475,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
             flexWrap: "wrap",
           }}
         >
-          <button
+          <button data-aos="fade-up"
             onClick={() => setShowModal("bride")}
             style={{
               border: "1px solid rgb(213 213 213)",
@@ -1541,7 +1516,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
           marginRight: 0,
         }}
       >
-        <img
+        <img data-aos="fade-up"
           src={process.env.PUBLIC_URL + "/overlay/flower.png"}
           alt="landing-main"
           style={{
@@ -1554,8 +1529,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
             padding: 0,
           }}
         />
-        <h3>{text[lang].rsvp}</h3>
-        <p>{text[lang].rsvpDesc}</p>
+        <h3 data-aos="fade-up">{text[lang].rsvp}</h3>
+        <p data-aos="fade-up">{text[lang].rsvpDesc}</p>
 
         <form
           onSubmit={async (e) => {
@@ -1618,7 +1593,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
           marginRight: 0,
         }}
       >
-        <img
+        <img data-aos="fade-up"
           src={process.env.PUBLIC_URL + "/overlay/flower.png"}
           alt="landing-main"
           style={{
@@ -1631,8 +1606,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
             padding: 0,
           }}
         />
-        <div className="guestbook-title">
-          <div
+        <div className="guestbook-title" data-aos="fade-up">
+          <div data-aos="fade-up"
             className="guestbook-en"
             style={{
               fontSize: "1.3rem",
@@ -1655,7 +1630,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
           guestbookText={guestbookText}
           onNewMessage={(entry) => setGuestbookList([entry, ...guestbookList])}
         />
-        <div className="guestbook-comments">
+        <div className="guestbook-comments" data-aos="fade-up">
           {currentComments.length === 0 ? (
             <div className="guestbook-no-comments">
               {lang === "ko"
