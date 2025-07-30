@@ -23,6 +23,7 @@ import { FiCopy } from "react-icons/fi"; // Feather icon
 import { FaSubway, FaBus, FaParking  } from 'react-icons/fa';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import ImageTransition from "./components/ImageTransition"; // 경로 주의!
 
 
 function App() {
@@ -79,6 +80,8 @@ function App() {
       once: true,     // 한 번만 실행
     });
   }, []);
+
+  
 
   const handleSoundToggle = () => {
     if (!audioRef.current) return;
@@ -205,6 +208,7 @@ function App() {
       nameTwo: "명진 & 제이미",
       dday: `제이미, 명진의 결혼식이 ${dDay}일 남았습니다.`,
       date: "2025년 11월 8일 토요일, 오후 3시",
+      mealTime: "오후 4시",
       place: "남산골한옥마을 관훈동 민씨가옥",
       address: "서울 중구 퇴계로 34길 28",
       tel: "02-6358-5543",
@@ -212,11 +216,11 @@ function App() {
       call: "전화하기",
       photoInfo: "사진을 클릭하시면 전체 화면 보기가 가능합니다",
       banquet: "연회 & 식사 안내",
-      banquetDesc: "솔라고 호텔 2층 연회장  \n오후 4시",
+      banquetDesc: "솔라고 호텔 2층 연회장",
       banquetDesc2: "(민씨가옥에서 5분 거리).",
       banquetDesc3:
         "부족함 없이 즐기실 수 있도록 한식을 비롯해 중식, 양식, 일식 등 다양한 뷔페 메뉴가 준비되어 있습니다.",
-      banquetAddr: "서울 중구 필동2가 84-1 (남산골한옥마을 내)",
+      banquetAddr: "서울 중구 충무로2길 9",
       guestbook: "방명록",
       addNote: "스티키노트 추가 →",
       writeNote: "방명록 작성하기",
@@ -248,9 +252,10 @@ As we vow to honour, support, and care for one another as we always have, it wou
       tel: "+82-2-6358-5543",
       map: "View Map",
       call: "Call",
+      mealTime: "4 PM",
       photoInfo: "Click the photo to view it in full screen.",
       banquet: "Banquet & Meal Info",
-      banquetDesc: "Sollago Hotel, 2nd Floor Hall\n 4PM",
+      banquetDesc: "Sollago Hotel, 2nd Floor Hall",
       banquetDesc2: "a 5-minute walk away from the Hanok Village.",
       banquetDesc3:
         "A variety of buffet menus including Korean, Chinese, Western, and Japanese cuisine will be served.`,",
@@ -568,11 +573,11 @@ As we vow to honour, support, and care for one another as we always have, it wou
           src={process.env.PUBLIC_URL + "/overlay/flower.png"}
           alt="landing-main"
           style={{
-            width: "60px",
-            height: "60px",
+            width: "50px",
+            height: "50px",
             objectFit: "cover",
             display: "block",
-            margin: "10px auto",
+            margin: "20px auto",
             padding: 0,
           }}
         />
@@ -591,20 +596,9 @@ As we vow to honour, support, and care for one another as we always have, it wou
         <div className="section-title-ko" data-aos="fade-up" style={{ fontSize: "15px" }}>
           {text[lang].invitationTitle}
         </div>
-        <img data-aos="fade-up"
-          src={process.env.PUBLIC_URL + "/main_photos/210A1898.jpg"}
-          alt="landing-main"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            display: "block",
-            margin: 0,
-            padding: 0,
-            border: "none",
-            borderRadius: "10px",
-          }}
-        />
+        <div style={{ marginTop: "20px", marginBottom: "20px" }}>
+          <ImageTransition />
+</div>
         <pre data-aos="fade-up" style={{ padding: "10px 20px" }}>{text[lang].invitationMsg}</pre>
         <b data-aos="fade-up">{text[lang].nameTwo}</b>
       </section>
@@ -625,12 +619,12 @@ As we vow to honour, support, and care for one another as we always have, it wou
           src={process.env.PUBLIC_URL + "/overlay/flower.png"}
           alt="landing-main"
           style={{
-            width: "60px",
-            height: "60px",
+            width: "50px",
+            height: "50px",
             objectFit: "cover",
             display: "block",
             margin: "10px auto",
-            marginTop: 30,
+            marginTop: 20,
             padding: 0,
           }}
         />
@@ -775,12 +769,12 @@ As we vow to honour, support, and care for one another as we always have, it wou
           src={process.env.PUBLIC_URL + "/overlay/flower.png"}
           alt="landing-main"
           style={{
-            width: "60px",
-            height: "60px",
+            width: "50px",
+            height: "50px",
             objectFit: "cover",
             display: "block",
             margin: "10px auto",
-            marginTop: 30,
+            marginTop: 20,
             padding: 0,
           }}
         />
@@ -947,12 +941,12 @@ As we vow to honour, support, and care for one another as we always have, it wou
           src={process.env.PUBLIC_URL + "/overlay/flower.png"}
           alt="landing-main"
           style={{
-            width: "60px",
-            height: "60px",
+            width: "50px",
+            height: "50px",
             objectFit: "cover",
             display: "block",
             marginTop: 30,
-            margin: "10px auto",
+            margin: "20px auto",
             padding: 0,
           }}
         />
@@ -1176,8 +1170,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
           />
         </div>
       )}
-
-          <h4 className="direction_head" data-aos="fade-up"><FaSubway size={16} color="#797979" style={{ marginRight: "6px", verticalAlign: "-2px" }} />{directionText[lang].subwayTitle}</h4>
+<div style={{padding:"10px"}}>
+<h4 className="direction_head" data-aos="fade-up"><FaSubway size={16} color="#797979" style={{ marginRight: "6px", verticalAlign: "-2px" }} />{directionText[lang].subwayTitle}</h4>
           <pre className="direction_body" data-aos="fade-up">{directionText[lang].subway}</pre>
 
           <div
@@ -1217,6 +1211,9 @@ As we vow to honour, support, and care for one another as we always have, it wou
           </p>
         </div>
 
+</div>
+          
+
       <div
         style={{
           display: "flex",
@@ -1246,32 +1243,57 @@ As we vow to honour, support, and care for one another as we always have, it wou
           src={process.env.PUBLIC_URL + "/overlay/flower.png"}
           alt="landing-main"
           style={{
-            width: "60px",
-            height: "60px",
+            width: "50px",
+            height: "50px",
             objectFit: "cover",
             display: "block",
             margin: "10px auto",
-            marginTop: 30,
+            marginTop: 20,
             padding: 0,
           }}
         />
-        <h3 style={{ marginBottom: "40px" }}>{text[lang].banquet}</h3>
-        <p style={{ fontWeight: "600", margin: "0px", fontSize: "20px" }}>
+        <h3 style={{ marginBottom: "10px" }}>{text[lang].banquet}</h3>
+        <img
+            src="/main_photos/table_flower.png"
+            alt="Enlarged Map"
+            style={{
+              width: "100%",
+              height: "250px",
+              objectFit: "fill",
+              border: "2px solid white",
+              borderRadius: "8px",
+            }}
+          />
+
+<div style={{margin:"30px auto " }}>
+<p style={{ fontWeight: "600", marginBottom:0, fontSize: "20px" }}>
           {text[lang].banquetDesc}
         </p>
-        <pre style={{ fontSize: "16px" }}>{text[lang].banquetDesc2}</pre>
-        <pre>{text[lang].banquetDesc3}</pre>
+        <p style={{fontSize:"15px", color:"#555"}}>{text[lang].mealTime}</p>
 
-        <p
-          style={{
-            fontSize: "15px",
-            whiteSpace: "pre-line",
-            marginTop: "10px",
-            marginBottom: "0px",
-          }}
-        >
-          {text[lang].banquetAddr}
-        </p>
+</div>
+      
+
+<div >
+    <span style={{fontSize: "14px", marginBottom: 0}} data-aos="fade-up">{text[lang].banquetAddr}</span>
+    <button data-aos="fade-up"
+      style={{
+        marginLeft: "8px",
+        fontSize: "0.9em",
+        padding: "2px 2px",
+        borderRadius: "4px",
+        border: "1px solid #ccc",
+        cursor: "pointer",
+      }}
+      onClick={() => {
+        navigator.clipboard.writeText(text[lang].banquetAddr);
+        alert("주소가 복사되었습니다!");
+      }}
+    >
+    <FiCopy style={{ marginRight: 4 }} />
+    </button>
+  </div>
+
         <img
           src={process.env.PUBLIC_URL + "/map_hotel.png"}
           alt="banquet-map"
@@ -1447,14 +1469,14 @@ As we vow to honour, support, and care for one another as we always have, it wou
       {/* 마음 전하실 곳 */}
       <section
         className="gift"
-        style={{ padding: "60px 20px 80px 20px", textAlign: "center" }}
+        style={{ padding: "60px 20px", textAlign: "center" }}
       >
         <img
           src={process.env.PUBLIC_URL + "/overlay/flower.png"}
           alt="landing-main"
           style={{
-            width: "60px",
-            height: "60px",
+            width: "50px",
+            height: "50px",
             objectFit: "cover",
             display: "block",
             margin: "10px auto",
@@ -1462,8 +1484,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
             padding: 0,
           }}
         />
-        <h3>{lang === "ko" ? "마음 전하실 곳" : "GIFT"}</h3>
-        <p>
+        <h3>  {lang === "ko" ? "마음 전하실 곳" : "GIFT"}</h3>
+        <p className="body_text_deco">
           {lang === "ko"
             ? "참석이 어려우신 분들을 위해 계좌번호를 기재하였습니다.\n너그러운 마음으로 양해 부탁드립니다."
             : "For those unable to attend, we have provided a bank account below. Thank you for your understanding."}
@@ -1523,12 +1545,12 @@ As we vow to honour, support, and care for one another as we always have, it wou
           src={process.env.PUBLIC_URL + "/overlay/flower.png"}
           alt="landing-main"
           style={{
-            width: "60px",
-            height: "60px",
+            width: "50px",
+            height: "50px",
             objectFit: "cover",
             display: "block",
             margin: "10px auto",
-            marginTop: 10,
+            
             padding: 0,
           }}
         />
@@ -1600,12 +1622,12 @@ As we vow to honour, support, and care for one another as we always have, it wou
           src={process.env.PUBLIC_URL + "/overlay/flower.png"}
           alt="landing-main"
           style={{
-            width: "60px",
-            height: "60px",
+            width: "50px",
+            height: "50px",
             objectFit: "cover",
             display: "block",
             margin: "10px auto",
-            marginTop: 10,
+            marginTop: 20,
             padding: 0,
           }}
         />
