@@ -770,7 +770,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       </section>
 
       {/* GALLERY 섹션 */}
-      <section className="gallery-section" style={{ padding: "40px 20px" }}>
+      <section className="gallery-section" data-aos="fade-up" style={{ padding: "40px 20px" }}>
         <img
           src={process.env.PUBLIC_URL + "/overlay/flower.png"}
           alt="landing-main"
@@ -965,12 +965,12 @@ As we vow to honour, support, and care for one another as we always have, it wou
             marginBottom: 16,
 
             color: "#e69ac1",
-          }}
+          }} data-aos="fade-up"
         >
           LOCATION
         </div>
         <img
-          src="/main_photos/mins_house.png"
+          src="/main_photos/mins_house.png" data-aos="fade-up"
           alt="Mins' house"
           style={{
             width: "100%",
@@ -980,19 +980,19 @@ As we vow to honour, support, and care for one another as we always have, it wou
           }}
         />
 
-        <div style={{ marginTop: "30px"  }}>
-        <div style={{ textAlign: "center", lineHeight: "1.6" }}>
-  <p style={{ fontWeight: "600", marginBottom: "4px", fontSize: "20px" }}>
+        <div style={{ marginTop: "30px"  }} data-aos="fade-up">
+        <div style={{ textAlign: "center", lineHeight: "1.6" }} data-aos="fade-up">
+  <p style={{ fontWeight: "600", marginBottom: "4px", fontSize: "20px" }} data-aos="fade-up">
     {text[lang].place}
   </p>
 
-          <div style={{color:"#888888"}}>{text[lang].date}</div>
+          <div style={{color:"#888888"}}data-aos="fade-up">{text[lang].date}</div>
           <br></br>
           <br></br>
 
           <div >
-    <span style={{fontSize: "14px", marginBottom: 0}}>{directionText[lang].address}</span>
-    <button
+    <span style={{fontSize: "14px", marginBottom: 0}} data-aos="fade-up">{directionText[lang].address}</span>
+    <button data-aos="fade-up"
       style={{
         marginLeft: "8px",
         fontSize: "0.9em",
@@ -1016,7 +1016,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
   target="_blank"
   rel="noopener noreferrer"
 >
-  <img
+  <img data-aos="fade-up"
     src="/main_photos/vilage_map.png"
     alt="Mins' map"
     style={{
@@ -1028,7 +1028,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
   />
 </a>
 
-        <div
+        <div data-aos="fade-up"
           style={{
             display: "flex",
             justifyContent: "space-around",
@@ -1131,7 +1131,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
         >
 
  {/* 화면에 보이는 이미지 */}
- <img
+ <img data-aos="fade-up"
         src="/main_photos/map_min.png" // public 폴더 안에 위치해야 함
         alt="Google Map"
         onClick={() => setShowLargeMap(true)}
@@ -1177,8 +1177,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
         </div>
       )}
 
-          <h4 className="direction_head"><FaSubway size={16} color="#797979" style={{ marginRight: "6px", verticalAlign: "-2px" }} />{directionText[lang].subwayTitle}</h4>
-          <pre className="direction_body">{directionText[lang].subway}</pre>
+          <h4 className="direction_head" data-aos="fade-up"><FaSubway size={16} color="#797979" style={{ marginRight: "6px", verticalAlign: "-2px" }} />{directionText[lang].subwayTitle}</h4>
+          <pre className="direction_body" data-aos="fade-up">{directionText[lang].subway}</pre>
 
           <div
             style={{
@@ -1186,11 +1186,11 @@ As we vow to honour, support, and care for one another as we always have, it wou
               height: "1px",
               backgroundColor: "#c1c1c1",
               margin: "12px auto",
-            }}
+            }} data-aos="fade-up"
           ></div>
 
-          <h4 className="direction_head"><FaBus size={16} color="#797979" style={{ marginRight: "6px", verticalAlign: "-2px" }} />{directionText[lang].busTitle}</h4>
-          <pre className="direction_body">
+          <h4 className="direction_head" data-aos="fade-up"><FaBus size={16} color="#797979" style={{ marginRight: "6px", verticalAlign: "-2px" }} />{directionText[lang].busTitle}</h4>
+          <pre className="direction_body" data-aos="fade-up">
             {directionText[lang].bus}
           </pre>
 
@@ -1200,19 +1200,19 @@ As we vow to honour, support, and care for one another as we always have, it wou
               height: "1px",
               backgroundColor: "#c1c1c1",
               margin: "12px auto",
-            }}
+            }} data-aos="fade-up"
           ></div>
 
-          <h4 className="direction_head"><FaParking
+          <h4 className="direction_head" data-aos="fade-up"><FaParking
     size={16}
     color="#797979"
-    style={{ marginRight: "6px", verticalAlign: "-2px" }}
+    style={{ marginRight: "6px", verticalAlign: "-2px" }} data-aos="fade-up"
   />{directionText[lang].parkingTitle}</h4>
-          <pre className="direction_body">
+          <pre className="direction_body" data-aos="fade-up">
             {directionText[lang].parking}
           </pre>
 
-          <p style={{ marginTop: "12px", fontWeight: 500 }}>
+          <p style={{ marginTop: "12px", fontWeight: 500 }} data-aos="fade-up">
             {directionText[lang].note}
           </p>
         </div>
@@ -1234,7 +1234,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       </div>
 
       {/* 연회 & 식사 안내 */}
-      <section
+      <section data-aos="fade-up"
         className="section-box"
         style={{
           padding: "40px 20px",
