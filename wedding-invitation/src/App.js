@@ -21,6 +21,8 @@ import { useSwipeable } from "react-swipeable";
 import FallingPetals from "./components/FallingPetals";
 import { FiCopy } from "react-icons/fi"; // Feather icon
 import { FaSubway, FaBus, FaParking  } from 'react-icons/fa';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 
 function App() {
@@ -69,6 +71,13 @@ function App() {
       window.removeEventListener("touchstart", tryPlay);
       window.removeEventListener("keydown", tryPlay);
     };
+  }, []);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 800, // 애니메이션 지속시간 (ms)
+      once: true,     // 한 번만 실행
+    });
   }, []);
 
   const handleSoundToggle = () => {
@@ -390,7 +399,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       className="invitation-container"
       style={{
         maxWidth: "500px", // ✅ 최대 너비 제한
-      }}
+      }} 
     >
       {/* 최상단 언어 전환 버튼 영역 */}
       <div
@@ -568,7 +577,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
           }}
         />
         <div
-          className="section-title-en"
+          className="section-title-en" data-aos="fade-up"
           style={{
             textAlign: "center",
             fontFamily: "Playfair Display,serif",
@@ -579,10 +588,10 @@ As we vow to honour, support, and care for one another as we always have, it wou
         >
           INVITATION
         </div>
-        <div className="section-title-ko" style={{ fontSize: "15px" }}>
+        <div className="section-title-ko" data-aos="fade-up" style={{ fontSize: "15px" }}>
           {text[lang].invitationTitle}
         </div>
-        <img
+        <img data-aos="fade-up"
           src={process.env.PUBLIC_URL + "/main_photos/210A1898.jpg"}
           alt="landing-main"
           style={{
@@ -596,13 +605,13 @@ As we vow to honour, support, and care for one another as we always have, it wou
             borderRadius: "10px",
           }}
         />
-        <pre style={{ padding: "10px 20px" }}>{text[lang].invitationMsg}</pre>
-        <b>{text[lang].nameTwo}</b>
+        <pre data-aos="fade-up" style={{ padding: "10px 20px" }}>{text[lang].invitationMsg}</pre>
+        <b data-aos="fade-up">{text[lang].nameTwo}</b>
       </section>
 
       {/* D-day 카운트 */}
       <section
-        className="section-box"
+        className="section-box" data-aos="fade-up" 
         style={{
           padding: "60px 20px",
           backgroundColor: "#fafafa",
