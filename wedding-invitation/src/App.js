@@ -19,14 +19,14 @@ import Lightbox from 'react-image-lightbox';
 import 'react-calendar/dist/Calendar.css';
 import { useSwipeable } from "react-swipeable";
 import FallingPetals from "./components/FallingPetals";
-
+import { FiCopy } from "react-icons/fi"; // Feather icon
+import { FaSubway, FaBus, FaParking  } from 'react-icons/fa';
 
 
 function App() {
   const [lang, setLang] = useState("ko");
   const weddingDate = new Date("2025-11-08T15:00:00+09:00");
   const [now, setNow] = useState(new Date());
-
 
   const [guestbookList, setGuestbookList] = useState([
     // 예시글(샘플)도 이 배열에 포함
@@ -38,7 +38,7 @@ function App() {
   const [rsvpStatus, setRsvpStatus] = useState("Y");
   const [showModal, setShowModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
+  const [showLargeMap, setShowLargeMap] = useState(false);
   const [selectedAccountType, setSelectedAccountType] = useState(null);
   const brideAccounts = [
     { bank: "국민은행", number: "000-123-456789", holder: "이석훈" },
@@ -153,7 +153,6 @@ function App() {
   );
   const [photoIdx, setPhotoIdx] = useState(0);
 
-
   useEffect(() => {
     const handleScroll = () => {
       if (isOpen) {
@@ -204,11 +203,11 @@ function App() {
       call: "전화하기",
       photoInfo: "사진을 클릭하시면 전체 화면 보기가 가능합니다",
       banquet: "연회 & 식사 안내",
-      banquetDesc: "솔라고 호텔 2층 연회장, 오후 4시",
+      banquetDesc: "솔라고 호텔 2층 연회장  \n오후 4시",
       banquetDesc2: "(민씨가옥에서 5분 거리).",
       banquetDesc3:
         "부족함 없이 즐기실 수 있도록 한식을 비롯해 중식, 양식, 일식 등 다양한 뷔페 메뉴가 준비되어 있습니다.",
-      banquetAddr: "서울 특별시 중구 충무로 2길 9",
+      banquetAddr: "서울 중구 필동2가 84-1 (남산골한옥마을 내)",
       guestbook: "방명록",
       addNote: "스티키노트 추가 →",
       writeNote: "방명록 작성하기",
@@ -224,7 +223,6 @@ function App() {
       yes: "참석",
       no: "불참",
       submit: "참석의사 전달하기",
-      
     },
     en: {
       invitationTitle: "You are cordially invited.",
@@ -237,13 +235,13 @@ As we vow to honour, support, and care for one another as we always have, it wou
       nameTwo: "Taylor & Jamie",
       date: "Saturday, November 8, 2025, 3:00 PM",
       place: "Namsangol Hanok Village, Gwanhundong Min Family House",
-      address: "28, Toegye-ro 34-gil, Jung-gu, Seoul",
+      address: "Address: 84-1, Pildong 2-ga, Jung-gu, Seoul (inside Namsangol Hanok Village)",
       tel: "+82-2-6358-5543",
       map: "View Map",
       call: "Call",
       photoInfo: "Click the photo to view it in full screen.",
       banquet: "Banquet & Meal Info",
-      banquetDesc: "At the 2nd floor hall of Sollago Hotel, 4PM",
+      banquetDesc: "Sollago Hotel, 2nd Floor Hall\n 4PM",
       banquetDesc2: "a 5-minute walk away from the Hanok Village.",
       banquetDesc3:
         "A variety of buffet menus including Korean, Chinese, Western, and Japanese cuisine will be served.`,",
@@ -313,24 +311,21 @@ As we vow to honour, support, and care for one another as we always have, it wou
       subwayTitle: "지하철",
       subway: "3·4호선 충무로역 3번 또는 4번 출구 → 도보 약 5분",
       busTitle: "버스",
-      bus: `퇴계로3가 또는 한옥마을 정류장 하차
-  • 일반: 104, 105, 140, 421, 463, 507, 604, 7011
-  • 순환: 남산순환버스 02, 05, 90S 투어
-  • 공항: 6001, 6015, 6021`,
-      parkingTitle: "주차 안내",
-      parking: `• 남산골한옥마을 내 공영주차장 이용 가능 (※ 유료 / 공간 협소)
-  • 솔라고호텔(피로연장) 주차 시 2시간 무료 제공
-   → 도보 약 5~10분 소요되며, 자차 이용 시 더욱 권장드립니다.`,
+      bus: `퇴계로3가 또는 한옥마을 정류장 하차\n• 일반: 104, 105, 140, 421, 463, 507, 604, 7011\n• 순환: 남산순환버스 02, 05, 90S 투어\n• 공항: 6001, 6015, 6021`,
+      parkingTitle: "주차",
+      parking: `• 남산골한옥마을 내 공영주차장 이용 가능 (※ 유료 / 공간 협소)\n• 솔라고호텔(피로연장) 주차 시 2시간 무료 제공\n→ 도보 약 5~10분 소요되며, 자차 이용 시 더욱 권장드립니다.`,
       note: "※ 가급적 대중교통 또는 솔라고호텔 주차장 이용을 부탁드립니다.",
     },
-  
+
     en: {
       title: "Directions",
       name: "Namsangol Hanok Village – Min’s House (Minssi Gaok)",
-      address: "Address: 84-1, Pildong 2-ga, Jung-gu, Seoul (inside Namsangol Hanok Village)",
+      address:
+        "Address: 84-1, Pildong 2-ga, Jung-gu, Seoul (inside Namsangol Hanok Village)",
       phone: "Phone: +82-2-2263-0854",
-      subwayTitle: "🚇 Subway",
-      subway: "Line 3 or 4 → Get off at Chungmuro Station, Exit 3 or 4 → 5-minute walk",
+      subwayTitle: "Subway",
+      subway:
+        "Line 3 or 4 → Get off at Chungmuro Station, Exit 3 or 4 → 5-minute walk",
       busTitle: "Bus",
       bus: `Get off at Toegye-ro 3-ga or Hanok Village stop
   •⁠  ⁠Regular: 104, 105, 140, 421, 463, 507, 604, 7011
@@ -389,215 +384,204 @@ As we vow to honour, support, and care for one another as we always have, it wou
       place: "Namsangol Hanok Village, Min Clan’s House",
     },
   };
- 
 
-
-  return(
- 
-    <div className="invitation-container" style={{
-      maxWidth: "500px", // ✅ 최대 너비 제한
-
-    }}>
+  return (
+    <div
+      className="invitation-container"
+      style={{
+        maxWidth: "500px", // ✅ 최대 너비 제한
+      }}
+    >
       {/* 최상단 언어 전환 버튼 영역 */}
       <div
-  style={{
-    width: "95%",
-    height: 60,
-    background: "#fff",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "right",
-    padding: "10px 20px",
-  }}
->
-  {/* 사운드 아이콘 */}
-    
-      <button
-        className="sound-toggle-btn"
         style={{
-          position: "absolute",
-          left: 16,
-          top: 16,
-          background: "none",
-          border: "none",
-          cursor: "pointer",
-          zIndex: 10,
+          width: "95%",
+          height: 60,
+          background: "#fff",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "right",
+          padding: "10px 20px",
         }}
-        onClick={handleSoundToggle}
-        aria-label={isPlaying ? "Pause sound" : "Play sound"}
       >
-        {isPlaying ? (
-          <FaVolumeUp size={28} color="#f7a6b2" />
-        ) : (
-          <FaVolumeMute size={28} color="#f7a6b2" />
-        )}
-      </button>
-      <audio
-        ref={audioRef}
-        src={process.env.PUBLIC_URL + "/sound.mp3"}
-        loop
-        autoPlay
-      />
+        {/* 사운드 아이콘 */}
 
-  {/* 언어 변경 버튼 */}
-  <div
-    className="lang-switch"
-    style={{
-      display: "flex",
-      gap: 8,
-    }}
-  >
-    <button onClick={() => setLang("ko")}>한국어</button>
-    <button onClick={() => setLang("en")}>English</button>
-  </div>
-</div>
+        <button
+          className="sound-toggle-btn"
+          style={{
+            position: "absolute",
+            left: 16,
+            top: 16,
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            zIndex: 10,
+          }}
+          onClick={handleSoundToggle}
+          aria-label={isPlaying ? "Pause sound" : "Play sound"}
+        >
+          {isPlaying ? (
+            <FaVolumeUp size={28} color="#f7a6b2" />
+          ) : (
+            <FaVolumeMute size={28} color="#f7a6b2" />
+          )}
+        </button>
+        <audio
+          ref={audioRef}
+          src={process.env.PUBLIC_URL + "/sound.mp3"}
+          loop
+          autoPlay
+        />
 
-
-
+        {/* 언어 변경 버튼 */}
+        <div
+          className="lang-switch"
+          style={{
+            display: "flex",
+            gap: 8,
+          }}
+        >
+          <button onClick={() => setLang("ko")}>한국어</button>
+          <button onClick={() => setLang("en")}>English</button>
+        </div>
+      </div>
 
       {/* 랜딩페이지 섹션  시작*/}
-      <FallingPetals/>
+      <FallingPetals />
       <section
-  className="section-box landing-section"
-  style={{ padding: 0, margin: 0 }}
+        className="section-box landing-section"
+        style={{ padding: 0, marginTop: 30 }}
+      >
+        {/* 텍스트 정보 먼저 배치  맨 위*/}
+          <div
+  style={{
+      display: "flex",
+    justifyContent: "center",
+    alignItems: "flex-start", // ✅ 위 정렬
+    gap: 24,
+    marginBottom: 10
+    }}
 >
-  {/* 텍스트 정보 먼저 배치  맨 위*/}
-  <div className="landing-section-info" style={{ padding: "30px 0px 0px 0px" }}> 
+  {/* Groom Name */}
   <div
   style={{
     display: "flex",
-    justifyContent: "center",
+    flexDirection: "column",
     alignItems: "center",
-    gap: 16,
-    fontSize: lang === "en" ? 20 : 18,
-    fontWeight: 500,
-    color: "#222",
-    marginBottom: 10,
-    marginTop: 30,
-    fontFamily:
-      lang === "ko"
-        ? "Fira Sans, Noto Serif KR, serif"
-        : "Cormorant Garamond, Playfair Display, serif",
-    letterSpacing: "0.04em",
-    lineHeight: "1.4",
+    lineHeight: 1.3,
   }}
 >
-<span
-  className={lang === "en" ? "en-font-bold" : ""}
-  style={{ fontWeight: 400, display: "inline-block" }}
->
-{lang === "en" ? (
+  {lang === "en" ? (
     <>
-      {landingText[lang].groomName}
-      <br />
-      <span style={{ fontSize: "0.8em", opacity: 0.8 }}>
+      <span style={{ fontSize: "1.3em", fontWeight: 500 }}>{landingText[lang].groomName}</span>
+      <span style={{ fontSize: "0.8em", opacity: 0.6 }}>
         ({landingText[lang].kGroomName})
       </span>
     </>
   ) : (
-    <>
-      {landingText[lang].gGroomName}
-    </>
+    <span style={{ fontWeight: 500, fontSize: "1.3em" }}>{landingText[lang].gGroomName}</span>
   )}
-</span>
+</div>
+
+  {/* Heart */}
   <span
     style={{
-      fontSize: 18,
+      fontSize: 24,
       color: "#f7a6b2",
       fontWeight: 500,
-      margin: "0 6px",
+      alignSelf: "center",
     }}
   >
     ♡
   </span>
-  <span
-    className={lang === "en" ? "en-font-bold" : ""}
-    style={{ fontWeight: 400 }}
-  >
-    {landingText[lang].brideName}
-  </span>
-</div>
 
-<div
-  style={{
-    display: "flex",
-    justifyContent: "center",
-  }}
->
-  <div
-    style={{
-      width: "80%",
-      height: "1px",
-      backgroundColor: "#e0e0e0",
-      margin: "12px 0",
-    }}
-  ></div>
-</div>
-
-    <div
-      style={{
-        fontSize: lang === "en" ? 20 : 18,
-        color: "#888",
-        fontFamily:
-          lang === "en"
-            ? "Fira Sans, Arial, sans-serif"
-            : "Playfair Display, serif",
-        marginBottom: 8,
-        fontWeight: 500,
-        letterSpacing: "0.04em",
-        textAlign: "center",
-      }}
-    >
-      {lang === "en" ? (
-        <span className="en-fira">{landingText[lang].date}</span>
-      ) : (
-        landingText[lang].date
-      )}
-    </div>
+  {/* Bride Name */}
+  <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+    <span style={{ fontSize: "1.3em", fontWeight: 500 }}>{landingText[lang].brideName}</span>
   </div>
+</div>
 
-  {/* 사진 아래 배치 */}
-  <img
-    src={process.env.PUBLIC_URL + "/main_photos/main.png"}
-    alt="landing-main"
-    style={{
-      width: "100%",
-      height: "70vh",
-      objectFit: "cover",
-      display: "block",
-      margin: 0,
-      padding: 0,
-      border: "none",
-    }}
-  />
-</section>
+<hr
+          style={{
+            width: "80%",
+            margin: "0 auto 16px auto",
+            borderColor: "#eee",
+          }}
+        />
+
+          <div
+            style={{
+              fontSize: lang === "en" ? 16 : 18,
+              color: "#888",
+              fontFamily:
+                lang === "en"
+                  ? "Fira Sans, Arial, sans-serif"
+                  : "Playfair Display, serif",
+              margin: "16px auto 4px auto",
+              fontWeight: 500,
+              letterSpacing: "0.04em",
+              textAlign: "center",
+            }}
+          >
+            {lang === "en" ? (
+              <span className="en-fira">{landingText[lang].date}</span>
+            ) : (
+              landingText[lang].date
+            )}
+          </div>
+        
+
+        {/* 사진 아래 배치 */}
+        <img
+          src={process.env.PUBLIC_URL + "/main_photos/main.png"}
+          alt="landing-main"
+          style={{
+            width: "100%",
+            height: "70vh",
+            objectFit: "cover",
+            display: "block",
+            margin: 0,
+            padding: 0,
+            border: "none",
+          }}
+        />
+      </section>
 
       {/* 인삿말/ 시작 start */}
       <section
         className="section-box greeting"
         style={{
           padding: "60px 20px",
-          margin: "0"
+          margin: "0",
         }}
       >
-      
-        <img 
-         src={process.env.PUBLIC_URL + "/overlay/flower.png"}
-         alt="landing-main"
-         style={{
-           width: "60px",
-           height: "60px",
-           objectFit: "cover",
-           display: "block",
-           margin: "10px auto",
-           padding: 0}}
-           />
-        <div className="section-title-en" style={{            textAlign: "center",
+        <img
+          src={process.env.PUBLIC_URL + "/overlay/flower.png"}
+          alt="landing-main"
+          style={{
+            width: "60px",
+            height: "60px",
+            objectFit: "cover",
+            display: "block",
+            margin: "10px auto",
+            padding: 0,
+          }}
+        />
+        <div
+          className="section-title-en"
+          style={{
+            textAlign: "center",
             fontFamily: "Playfair Display,serif",
             fontSize: "1.5rem",
             letterSpacing: "0.3em",
-            marginBottom: 8,}}>INVITATION</div>
-        <div className="section-title-ko" style={{fontSize:"15px"}}>{text[lang].invitationTitle}</div>
+            marginBottom: 8,
+          }}
+        >
+          INVITATION
+        </div>
+        <div className="section-title-ko" style={{ fontSize: "15px" }}>
+          {text[lang].invitationTitle}
+        </div>
         <img
           src={process.env.PUBLIC_URL + "/main_photos/210A1898.jpg"}
           alt="landing-main"
@@ -623,31 +607,32 @@ As we vow to honour, support, and care for one another as we always have, it wou
           padding: "60px 20px",
           backgroundColor: "#fafafa",
           textAlign: "center",
-          margin:"0"
+          margin: "0",
         }}
       >
         {/* Title */}
 
-        <img 
-         src={process.env.PUBLIC_URL + "/overlay/flower.png"}
-         alt="landing-main"
-         style={{
-           width: "60px",
-           height: "60px",
-           objectFit: "cover",
-           display: "block",
-           margin: "10px auto",
-           marginTop: 30,
-           padding: 0}}
-           />
+        <img
+          src={process.env.PUBLIC_URL + "/overlay/flower.png"}
+          alt="landing-main"
+          style={{
+            width: "60px",
+            height: "60px",
+            objectFit: "cover",
+            display: "block",
+            margin: "10px auto",
+            marginTop: 30,
+            padding: 0,
+          }}
+        />
         <div
           style={{
             textAlign: "center",
-      fontFamily: "Playfair Display,serif",
-      fontSize: "1.5rem",
-      letterSpacing: "0.3em",
-      marginBottom: 30,
-      color: "#b87c9b"
+            fontFamily: "Playfair Display,serif",
+            fontSize: "1.5rem",
+            letterSpacing: "0.3em",
+            marginBottom: 30,
+            color: "#b87c9b",
           }}
         >
           WEDDING DAY
@@ -718,56 +703,53 @@ As we vow to honour, support, and care for one another as we always have, it wou
 
         {/* Countdown cards */}
         <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: 16,
-            flexWrap: "wrap",
-            marginBottom: 10,
-          }}
-        >
-          {[
-            { label: ddayLabels[lang].days, value: days },
-            {
-              label: ddayLabels[lang].hour,
-              value: String(hours).padStart(2, "0"),
-            },
-            {
-              label: ddayLabels[lang].min,
-              value: String(mins).padStart(2, "0"),
-            },
-            {
-              label: ddayLabels[lang].sec,
-              value: String(secs).padStart(2, "0"),
-            },
-          ].map((item, i) => (
-            <div
-              key={i}
-              style={{
-                width: 70,
-                padding: "12px 0",
-                background: "#fff",
-                borderRadius: 12,
-                boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
-                textAlign: "center",
-              }}
-            >
-              <div style={{ fontSize: "1.5rem", color: "#333" }}>
-                {item.value}
-              </div>
-              <div
-                style={{
-                  fontSize: "0.75rem",
-                  color: "#aaa",
-                  letterSpacing: "0.05em",
-                }}
-              >
-                {item.label.toUpperCase()}
-              </div>
-            </div>
-          ))}
-        </div>
-
+  style={{
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: 6,
+    marginBottom: 10,
+    width: "100%",
+    maxWidth: 320, // ✅ 작게 제한
+    marginInline: "auto", // 가운데 정렬
+  }}
+>
+  {[
+    { label: ddayLabels[lang].days, value: days },
+    { label: ddayLabels[lang].hour, value: String(hours).padStart(2, "0") },
+    { label: ddayLabels[lang].min, value: String(mins).padStart(2, "0") },
+    { label: ddayLabels[lang].sec, value: String(secs).padStart(2, "0") },
+  ].map((item, i) => (
+    <div
+      key={i}
+      style={{
+        width: "22%",         // ✅ 퍼센트 기반
+        minWidth: 60,
+        padding: "10px 0",
+        background: "#fff",
+        borderRadius: 12,
+        boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
+        textAlign: "center",
+      }}
+    >
+      <div style={{
+        fontSize: "clamp(1rem, 4vw, 1.4rem)", // ✅ 자동 줄어드는 글씨
+        color: "#333",
+      }}>
+        {item.value}
+      </div>
+      <div
+        style={{
+          fontSize: "clamp(0.6rem, 2.5vw, 0.75rem)",
+          color: "#aaa",
+          letterSpacing: "0.05em",
+        }}
+      >
+        {item.label.toUpperCase()}
+      </div>
+    </div>
+  ))}
+</div>
         {/* Countdown footer text */}
         <div style={{ marginTop: 10, fontSize: "0.9rem", color: "#666" }}>
           {ddayLabels[lang].countdown}
@@ -778,163 +760,155 @@ As we vow to honour, support, and care for one another as we always have, it wou
         </div>
       </section>
 
-
-
-
-      
       {/* GALLERY 섹션 */}
-      <section
-  className="gallery-section"
-  style={{ padding: "40px 20px" }}
->
-<img 
-         src={process.env.PUBLIC_URL + "/overlay/flower.png"}
-         alt="landing-main"
-         style={{
-           width: "60px",
-           height: "60px",
-           objectFit: "cover",
-           display: "block",
-           margin: "10px auto",
-           marginTop: 30,
-           padding: 0}}
-           />
-  <div
-    style={{
-      textAlign: "center",
-      fontFamily: "Playfair Display,serif",
-      fontSize: "1.5rem",
-      letterSpacing: "0.3em",
-      marginBottom: 30,
-      color: "#b87c9b"
-      
-    }}
-  >
-    GALLERY
-  </div>
-  <div
-  style={{
-    fontSize: 14,
-    textAlign: "center",
-    color: "#888",
-    fontFamily:
-      lang === "en"
-        ? "Fira Sans, Arial, sans-serif"
-        : "Playfair Display, serif",
-    marginBottom: 12,
-    fontWeight: 500,
-    letterSpacing: "0.04em",
-  }}
->
-<span className={lang === "en" ? "en-fira" : undefined}>
-  {text[lang]?.photoInfo}
-</span>
-</div>
+      <section className="gallery-section" style={{ padding: "40px 20px" }}>
+        <img
+          src={process.env.PUBLIC_URL + "/overlay/flower.png"}
+          alt="landing-main"
+          style={{
+            width: "60px",
+            height: "60px",
+            objectFit: "cover",
+            display: "block",
+            margin: "10px auto",
+            marginTop: 30,
+            padding: 0,
+          }}
+        />
+        <div
+          style={{
+            textAlign: "center",
+            fontFamily: "Playfair Display,serif",
+            fontSize: "1.5rem",
+            letterSpacing: "0.3em",
+            marginBottom: 30,
+            color: "#b87c9b",
+          }}
+        >
+          GALLERY
+        </div>
+        <div
+          style={{
+            fontSize: 14,
+            textAlign: "center",
+            color: "#888",
+            fontFamily:
+              lang === "en"
+                ? "Fira Sans, Arial, sans-serif"
+                : "Playfair Display, serif",
+            marginBottom: 12,
+            fontWeight: 500,
+            letterSpacing: "0.04em",
+          }}
+        >
+          <span className={lang === "en" ? "en-fira" : undefined}>
+            {text[lang]?.photoInfo}
+          </span>
+        </div>
 
-  {/* 🟩 3x4 이미지 그리드 */}
-  <div
-    style={{
-      display: "grid",
-      gridTemplateColumns: "repeat(3, 1fr)",
-      gap: "8px",
-      maxWidth: "900px",
-      margin: "0 auto",
-    }}
-  >
-    {samplePhotos.slice(0, 12).map((url, idx) => (
-      <img
-        key={idx}
-        src={url}
-        alt={`Wedding ${idx + 1}`}
-        onClick={() => {
-          setPhotoIdx(idx);
-          setIsOpen(true);
-        }}
-        style={{
-          width: "100%",
-          aspectRatio: "1",
-          objectFit: "cover",
-          objectPosition: "top",
-          cursor: "pointer",
-        }}
-      />
-    ))}
-  </div>
+        {/* 🟩 3x4 이미지 그리드 */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "8px",
+            maxWidth: "900px",
+            margin: "0 auto",
+          }}
+        >
+          {samplePhotos.slice(0, 12).map((url, idx) => (
+            <img
+              key={idx}
+              src={url}
+              alt={`Wedding ${idx + 1}`}
+              onClick={() => {
+                setPhotoIdx(idx);
+                setIsOpen(true);
+              }}
+              style={{
+                width: "100%",
+                aspectRatio: "1",
+                objectFit: "cover",
+                objectPosition: "top",
+                cursor: "pointer",
+              }}
+            />
+          ))}
+        </div>
 
-  {/* 🖼️ 선택된 큰 이미지 (그리드 밑) */}
-  <div
-  {...swipeHandlers} // ✅ 스와이프 감지 연결
-  style={{
-    marginTop: "20px",
-    textAlign: "center",
-  }}
->
-  <img
-    src={samplePhotos[photoIdx]}
-    alt="Selected wedding"
-    onClick={() => setIsOpen(true)} // 기존 클릭으로 열기 유지
-    style={{
-      width: "100%",
-      maxWidth: "700px",
-      height: "70vh",
-      objectFit: "cover",
-      objectPosition: "top",
+        {/* 🖼️ 선택된 큰 이미지 (그리드 밑) */}
+        <div
+          {...swipeHandlers} // ✅ 스와이프 감지 연결
+          style={{
+            marginTop: "20px",
+            textAlign: "center",
+          }}
+        >
+          <img
+            src={samplePhotos[photoIdx]}
+            alt="Selected wedding"
+            onClick={() => setIsOpen(true)} // 기존 클릭으로 열기 유지
+            style={{
+              width: "100%",
+              maxWidth: "700px",
+              height: "70vh",
+              objectFit: "cover",
+              objectPosition: "top",
 
-      boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
-      cursor: "pointer",
-    }}
-  />
-  <div style={{ marginTop: 12, color: "#888" }}>
-    {photoIdx + 1} / {samplePhotos.length}
-  </div>
+              boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
+              cursor: "pointer",
+            }}
+          />
+          <div style={{ marginTop: 12, color: "#888" }}>
+            {photoIdx + 1} / {samplePhotos.length}
+          </div>
+        </div>
 
-</div>
+        {/* 📸 Lightbox */}
+        {isOpen && (
+          <>
+            <Lightbox
+              mainSrc={samplePhotos[photoIdx]}
+              nextSrc={samplePhotos[(photoIdx + 1) % samplePhotos.length]}
+              prevSrc={
+                samplePhotos[
+                  (photoIdx + samplePhotos.length - 1) % samplePhotos.length
+                ]
+              }
+              onCloseRequest={() => setIsOpen(false)}
+              onMovePrevRequest={() =>
+                setPhotoIdx(
+                  (photoIdx + samplePhotos.length - 1) % samplePhotos.length
+                )
+              }
+              onMoveNextRequest={() =>
+                setPhotoIdx((photoIdx + 1) % samplePhotos.length)
+              }
+              imageTitle={`${photoIdx + 1} / ${samplePhotos.length}`}
+              reactModalStyle={{ overlay: { zIndex: 9999 } }}
+            />
 
-  {/* 📸 Lightbox */}
-  {isOpen && (
-    <>
-      <Lightbox
-        mainSrc={samplePhotos[photoIdx]}
-        nextSrc={samplePhotos[(photoIdx + 1) % samplePhotos.length]}
-        prevSrc={
-          samplePhotos[
-            (photoIdx + samplePhotos.length - 1) % samplePhotos.length
-          ]
-        }
-        onCloseRequest={() => setIsOpen(false)}
-        onMovePrevRequest={() =>
-          setPhotoIdx(
-            (photoIdx + samplePhotos.length - 1) % samplePhotos.length
-          )
-        }
-        onMoveNextRequest={() =>
-          setPhotoIdx((photoIdx + 1) % samplePhotos.length)
-        }
-        imageTitle={`${photoIdx + 1} / ${samplePhotos.length}`}
-        reactModalStyle={{ overlay: { zIndex: 9999 } }}
-      />
-
-      {/* ❌ Optional close button */}
-      <button
-        onClick={() => setIsOpen(false)}
-        style={{
-          position: "fixed",
-          top: "20px",
-          right: "20px",
-          zIndex: 10000,
-          background: "white",
-          border: "none",
-          fontSize: "1.5rem",
-          borderRadius: "50%",
-          padding: "5px 10px",
-          cursor: "pointer",
-        }}
-      >
-        ✕
-      </button>
-    </>
-  )}
-</section>
+            {/* ❌ Optional close button */}
+            <button
+              onClick={() => setIsOpen(false)}
+              style={{
+                position: "fixed",
+                top: "20px",
+                right: "20px",
+                zIndex: 10000,
+                background: "white",
+                border: "none",
+                fontSize: "1.5rem",
+                borderRadius: "50%",
+                padding: "5px 10px",
+                cursor: "pointer",
+              }}
+            >
+              ✕
+            </button>
+          </>
+        )}
+      </section>
       {/* 날짜/장소/시간/오시는 길 */}
       <section
         className="section-box"
@@ -945,228 +919,310 @@ As we vow to honour, support, and care for one another as we always have, it wou
         }}
       >
         <div
-  style={{
-    display: "flex",
-    justifyContent: "center",
-  }}
->
-  <div
-    style={{
-      width: "80%",
-      height: "1px",
-      backgroundColor: "#e0e0e0",
-      margin: "12px 0",
-    }}
-  ></div>
-</div>
+          style={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <div
+            style={{
+              width: "80%",
+              height: "1px",
+              backgroundColor: "#e0e0e0",
+              margin: "12px 0",
+            }}
+          ></div>
+        </div>
 
-<img 
-         src={process.env.PUBLIC_URL + "/overlay/flower.png"}
-         alt="landing-main"
-         style={{
-           width: "60px",
-           height: "60px",
-           objectFit: "cover",
-           display: "block",
-           marginTop: 30,
-           margin: "10px auto",
-           padding: 0}}
-           />
-      <div
-      style={{
+        <img
+          src={process.env.PUBLIC_URL + "/overlay/flower.png"}
+          alt="landing-main"
+          style={{
+            width: "60px",
+            height: "60px",
+            objectFit: "cover",
+            display: "block",
+            marginTop: 30,
+            margin: "10px auto",
+            padding: 0,
+          }}
+        />
+        <div
+          style={{
             textAlign: "center",
             fontFamily: "Playfair Display,serif",
             fontSize: "1.5rem",
             letterSpacing: "0.3em",
             marginBottom: 16,
-            
-           color: "#e69ac1"
-          }}>LOCATION</div>
-        <div
-        style={{marginBottom:"40px", marginTop:"30px"}}
-        >
-          <p style={{ fontWeight: "600", marginBottom:"4px", fontSize:"20px" }}>{text[lang].place} </p>
-          {text[lang].date}</div>
-       
-        <p
-          style={{
-            fontSize: "15px",
-            whiteSpace: "pre-line",
-            marginTop: "10px",
-            marginBottom: "0px",
+
+            color: "#e69ac1",
           }}
         >
-          {`${text[lang].address}`}
-        </p>
+          LOCATION
+        </div>
         <img
-      src="map_min.png"
-      alt="Google Map"
+          src="/main_photos/mins_house.png"
+          alt="Mins' house"
+          style={{
+            width: "100%",
+            background: "#f1f1f1",
+            objectFit: "cover",
+            marginBottom: "6px",
+          }}
+        />
+
+        <div style={{ marginTop: "30px"  }}>
+        <div style={{ textAlign: "center", lineHeight: "1.6" }}>
+  <p style={{ fontWeight: "600", marginBottom: "4px", fontSize: "20px" }}>
+    {text[lang].place}
+  </p>
+
+          <div style={{color:"#888888"}}>{text[lang].date}</div>
+          <br></br>
+          <br></br>
+
+          <div >
+    <span style={{fontSize: "14px", marginBottom: 0}}>{directionText[lang].address}</span>
+    <button
       style={{
-        width: "100%",
-        background: "#f1f1f1",
-        objectFit: "cover",
-        marginBottom: "6px",
+        marginLeft: "8px",
+        fontSize: "0.9em",
+        padding: "2px 2px",
+        borderRadius: "4px",
+        border: "1px solid #ccc",
+        cursor: "pointer",
       }}
-    />
+      onClick={() => {
+        navigator.clipboard.writeText(directionText[lang].address);
+        alert("주소가 복사되었습니다!");
+      }}
+    >
+    <FiCopy style={{ marginRight: 4 }} />
+    </button>
+  </div>
+  </div>
+        </div>
+        <a
+  href="https://map.kakao.com/?map_type=TYPE_MAP&q=%EA%B4%80%ED%9B%88%EB%8F%99+%EB%AF%BC%EC%94%A8+%EA%B0%80%EC%98%A5&hId=8246127&mode=place&urlLevel=3&urlX=499490&urlY=1127716"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <img
+    src="/main_photos/vilage_map.png"
+    alt="Mins' map"
+    style={{
+      width: "100%",
+      background: "#f1f1f1",
+      objectFit: "cover",
+      marginBottom: "6px",
+    }}
+  />
+</a>
 
         <div
-  style={{
-    display: "flex",
-    justifyContent: "space-around",
-    alignItems: "center",
-    marginTop: "8px",
-    flexWrap: "wrap",
-  }}
->
-  {/* Google Maps */}
-  <a
-    href="https://maps.app.goo.gl/LmmCiUggPAGuqnTC9"
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      textDecoration: "none",
-      color: "#000",
-    }}
-  >
-    <img
-      src="https://yt3.googleusercontent.com/ytc/AIdro_mZGy0ZLktn9NL_4__5MbK49kpYHU8YPkUgvvdpPxt3O6Q=s900-c-k-c0x00ffffff-no-rj"
-      alt="Google Map"
-      style={{
-        width: 45,
-        height: 45,
-        borderRadius: "50%",
-        background: "#f1f1f1",
-        objectFit: "cover",
-        marginBottom: "6px",
-        border: "solid 1px #eae9e9"
-      }}
-    />
-    <span style={{ fontSize: 14 }}>구글지도</span>
-  </a>
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            alignItems: "center",
+            marginTop: "8px",
+            flexWrap: "wrap",
+          }}
+        >
+          {/* Google Maps */}
+          <a
+            href="https://maps.app.goo.gl/LmmCiUggPAGuqnTC9"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textDecoration: "none",
+              color: "#000",
+            }}
+          >
+            <img
+              src="https://yt3.googleusercontent.com/ytc/AIdro_mZGy0ZLktn9NL_4__5MbK49kpYHU8YPkUgvvdpPxt3O6Q=s900-c-k-c0x00ffffff-no-rj"
+              alt="Google Map"
+              style={{
+                width: 45,
+                height: 45,
+                borderRadius: "50%",
+                background: "#f1f1f1",
+                objectFit: "cover",
+                marginBottom: "6px",
+                border: "solid 1px #eae9e9",
+              }}
+            />
+            <span style={{ fontSize: 14 }}>구글지도</span>
+          </a>
 
-  {/* Naver Map */}
-  <a
-    href="https://naver.me/5gFg3Fm"
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      textDecoration: "none",
-      color: "#000",
-    }}
-  >
-    <img
-      src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/15/79/af/1579afe7-27a1-7c65-4445-55a99fc76031/AppIcon-0-0-1x_U007epad-0-1-0-sRGB-85-220.png/434x0w.webp"
-      alt="Naver Map"
-      style={{
-        width: 45,
-        height: 45,
-        borderRadius: "50%",
-        background: "#f1f1f1",
-        objectFit: "cover",
-        marginBottom: "6px",
-        border: "solid 1px #eae9e9"
-      }}
-    />
-    <span style={{ fontSize: 14 }}>네이버지도</span>
-  </a>
+          {/* Naver Map */}
+          <a
+            href="https://naver.me/5gFg3Fm"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textDecoration: "none",
+              color: "#000",
+            }}
+          >
+            <img
+              src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/15/79/af/1579afe7-27a1-7c65-4445-55a99fc76031/AppIcon-0-0-1x_U007epad-0-1-0-sRGB-85-220.png/434x0w.webp"
+              alt="Naver Map"
+              style={{
+                width: 45,
+                height: 45,
+                borderRadius: "50%",
+                background: "#f1f1f1",
+                objectFit: "cover",
+                marginBottom: "6px",
+                border: "solid 1px #eae9e9",
+              }}
+            />
+            <span style={{ fontSize: 14 }}>네이버지도</span>
+          </a>
 
-  {/* Kakao Map */}
-  <a
-    href="https://kko.kakao.com/C1VTVtFsFV"
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      textDecoration: "none",
-      color: "#000",
-      
-    }}
-  >
-    <img
-      src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ba/45/6c/ba456ce5-e8cb-daf1-4afc-8ef96f2aeb9f/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/434x0w.webp"
-      alt="Kakao Map"
-      style={{
-        width: 45,
-        height: 45,
-        borderRadius: "50%",
-        background: "#f1f1f1",
-        objectFit: "cover",
-        marginBottom: "6px",
-      }}
-    />
-    <span style={{ fontSize: 14 }}>카카오맵</span>
-  </a>
-</div>
-
-<div className="direction-section" style={{ marginTop: "40px", lineHeight: 1.6 }}>
-  <h2>{directionText[lang].title}</h2>
-  <p>{directionText[lang].name}</p>
-  <p>{directionText[lang].address}</p>
-  <p>{directionText[lang].phone}</p>
-
-  <div
-  style={{
-    width: "90%",
-    height: "1px",
-    backgroundColor: "#c1c1c1",
-    margin: "12px auto",
-  }}
-></div>
-
-  <h4>{directionText[lang].subwayTitle}</h4>
-  <p>{directionText[lang].subway}</p>
-
-  <div
-  style={{
-    width: "90%",
-    height: "1px",
-    backgroundColor: "#c1c1c1",
-    margin: "12px auto",
-  }}
-></div>
-
-  <h4>{directionText[lang].busTitle}</h4>
-  <pre style={{ whiteSpace: "pre-wrap" }}>{directionText[lang].bus}</pre>
-
-<div
-  style={{
-    width: "90%",
-    height: "1px",
-    backgroundColor: "#c1c1c1",
-    margin: "12px auto",
-  }}
-></div>
-
-  <h4>{directionText[lang].parkingTitle}</h4>
-  <pre style={{ whiteSpace: "pre-wrap" }}>{directionText[lang].parking}</pre>
-
-  <p style={{ marginTop: "12px", fontWeight: 500 }}>{directionText[lang].note}</p>
-</div> 
+          {/* Kakao Map */}
+          <a
+            href="https://kko.kakao.com/C1VTVtFsFV"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textDecoration: "none",
+              color: "#000",
+            }}
+          >
+            <img
+              src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ba/45/6c/ba456ce5-e8cb-daf1-4afc-8ef96f2aeb9f/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/434x0w.webp"
+              alt="Kakao Map"
+              style={{
+                width: 45,
+                height: 45,
+                borderRadius: "50%",
+                background: "#f1f1f1",
+                objectFit: "cover",
+                marginBottom: "6px",
+              }}
+            />
+            <span style={{ fontSize: 14 }}>카카오맵</span>
+          </a>
+        </div>
       </section>
 
       <div
-  style={{
-    display: "flex",
-    justifyContent: "center",
-  }}
->
-<div
-  style={{
-    width: "90%",
-    height: "1px",
-    backgroundColor: "#c1c1c1",
-    margin: "12px auto",
-  }}
-></div>
-</div>
+          className="direction-section"
+          style={{ padding: "20px", lineHeight: 1.6, background:"#f6f6f6"}}
+        >
+
+ {/* 화면에 보이는 이미지 */}
+ <img
+        src="/main_photos/map_min.png" // public 폴더 안에 위치해야 함
+        alt="Google Map"
+        onClick={() => setShowLargeMap(true)}
+        style={{
+          width: "100%",
+          background: "#f1f1f1",
+          objectFit: "cover",
+          marginBottom: "6px",
+          border: "1px solid #cfcfcf",
+          cursor: "zoom-in",
+        }}
+      />
+
+      {/* 클릭 시 전체화면으로 확대 */}
+      {showLargeMap && (
+        <div
+          onClick={() => setShowLargeMap(false)}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            backgroundColor: "rgba(0,0,0,0.8)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999,
+            cursor: "zoom-out",
+          }}
+        >
+          <img
+            src="/main_photos/map_min.png"
+            alt="Enlarged Map"
+            style={{
+              maxWidth: "90vw",
+              maxHeight: "90vh",
+              objectFit: "contain",
+              border: "2px solid white",
+              borderRadius: "8px",
+            }}
+          />
+        </div>
+      )}
+
+          <h4 className="direction_head"><FaSubway size={16} color="#797979" style={{ marginRight: "6px", verticalAlign: "-2px" }} />{directionText[lang].subwayTitle}</h4>
+          <pre className="direction_body">{directionText[lang].subway}</pre>
+
+          <div
+            style={{
+              width: "90%",
+              height: "1px",
+              backgroundColor: "#c1c1c1",
+              margin: "12px auto",
+            }}
+          ></div>
+
+          <h4 className="direction_head"><FaBus size={16} color="#797979" style={{ marginRight: "6px", verticalAlign: "-2px" }} />{directionText[lang].busTitle}</h4>
+          <pre className="direction_body">
+            {directionText[lang].bus}
+          </pre>
+
+          <div
+            style={{
+              width: "90%",
+              height: "1px",
+              backgroundColor: "#c1c1c1",
+              margin: "12px auto",
+            }}
+          ></div>
+
+          <h4 className="direction_head"><FaParking
+    size={16}
+    color="#797979"
+    style={{ marginRight: "6px", verticalAlign: "-2px" }}
+  />{directionText[lang].parkingTitle}</h4>
+          <pre className="direction_body">
+            {directionText[lang].parking}
+          </pre>
+
+          <p style={{ marginTop: "12px", fontWeight: 500 }}>
+            {directionText[lang].note}
+          </p>
+        </div>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <div
+          style={{
+            width: "90%",
+            height: "1px",
+            backgroundColor: "#c1c1c1",
+            margin: "12px auto",
+          }}
+        ></div>
+      </div>
 
       {/* 연회 & 식사 안내 */}
       <section
@@ -1177,21 +1233,21 @@ As we vow to honour, support, and care for one another as we always have, it wou
           marginRight: 0,
         }}
       >
-
-<img 
-         src={process.env.PUBLIC_URL + "/overlay/flower.png"}
-         alt="landing-main"
-         style={{
-           width: "60px",
-           height: "60px",
-           objectFit: "cover",
-           display: "block",
-           margin: "10px auto",
-           marginTop: 30,
-           padding: 0}}
-           />
-        <h3 style={{marginBottom: "40px"}}>{text[lang].banquet}</h3>
-        <p style={{ fontWeight: "600", margin: "0px", fontSize:"20px" }}>
+        <img
+          src={process.env.PUBLIC_URL + "/overlay/flower.png"}
+          alt="landing-main"
+          style={{
+            width: "60px",
+            height: "60px",
+            objectFit: "cover",
+            display: "block",
+            margin: "10px auto",
+            marginTop: 30,
+            padding: 0,
+          }}
+        />
+        <h3 style={{ marginBottom: "40px" }}>{text[lang].banquet}</h3>
+        <p style={{ fontWeight: "600", margin: "0px", fontSize: "20px" }}>
           {text[lang].banquetDesc}
         </p>
         <pre style={{ fontSize: "16px" }}>{text[lang].banquetDesc2}</pre>
@@ -1225,101 +1281,100 @@ As we vow to honour, support, and care for one another as we always have, it wou
           }
         />
         <div
-  style={{
-    display: "flex",
-    justifyContent: "space-around",
-    alignItems: "center",
-    marginTop: "8px",
-    flexWrap: "wrap",
-  }}
->
-  {/* Google Maps */}
-  <a
-    href="https://maps.app.goo.gl/4vCWhGsigcLQFCne6"
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      textDecoration: "none",
-      color: "#000",
-    }}
-  >
-    <img
-      src="https://yt3.googleusercontent.com/ytc/AIdro_mZGy0ZLktn9NL_4__5MbK49kpYHU8YPkUgvvdpPxt3O6Q=s900-c-k-c0x00ffffff-no-rj"
-      alt="Google Map"
-      style={{
-        width: 45,
-        height: 45,
-        borderRadius: "50%",
-        background: "#f1f1f1",
-        objectFit: "cover",
-        marginBottom: "6px",
-        border: "solid 1px #eae9e9"
-      }}
-    />
-    <span style={{ fontSize: 14 }}>구글지도</span>
-  </a>
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            alignItems: "center",
+            marginTop: "8px",
+            flexWrap: "wrap",
+          }}
+        >
+          {/* Google Maps */}
+          <a
+            href="https://maps.app.goo.gl/4vCWhGsigcLQFCne6"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textDecoration: "none",
+              color: "#000",
+            }}
+          >
+            <img
+              src="https://yt3.googleusercontent.com/ytc/AIdro_mZGy0ZLktn9NL_4__5MbK49kpYHU8YPkUgvvdpPxt3O6Q=s900-c-k-c0x00ffffff-no-rj"
+              alt="Google Map"
+              style={{
+                width: 45,
+                height: 45,
+                borderRadius: "50%",
+                background: "#f1f1f1",
+                objectFit: "cover",
+                marginBottom: "6px",
+                border: "solid 1px #eae9e9",
+              }}
+            />
+            <span style={{ fontSize: 14 }}>구글지도</span>
+          </a>
 
-  {/* Naver Map */}
-  <a
-    href="https://naver.me/x0UPjjrq"
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      textDecoration: "none",
-      color: "#000",
-    }}
-  >
-    <img
-      src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/15/79/af/1579afe7-27a1-7c65-4445-55a99fc76031/AppIcon-0-0-1x_U007epad-0-1-0-sRGB-85-220.png/434x0w.webp"
-      alt="Naver Map"
-      style={{
-        width: 45,
-        height: 45,
-        borderRadius: "50%",
-        background: "#f1f1f1",
-        objectFit: "cover",
-        marginBottom: "6px",
-        border: "solid 1px #eae9e9"
-      }}
-    />
-    <span style={{ fontSize: 14 }}>네이버지도</span>
-  </a>
+          {/* Naver Map */}
+          <a
+            href="https://naver.me/x0UPjjrq"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textDecoration: "none",
+              color: "#000",
+            }}
+          >
+            <img
+              src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/15/79/af/1579afe7-27a1-7c65-4445-55a99fc76031/AppIcon-0-0-1x_U007epad-0-1-0-sRGB-85-220.png/434x0w.webp"
+              alt="Naver Map"
+              style={{
+                width: 45,
+                height: 45,
+                borderRadius: "50%",
+                background: "#f1f1f1",
+                objectFit: "cover",
+                marginBottom: "6px",
+                border: "solid 1px #eae9e9",
+              }}
+            />
+            <span style={{ fontSize: 14 }}>네이버지도</span>
+          </a>
 
-  {/* Kakao Map */}
-  <a
-    href="https://kko.kakao.com/YsHebygNAP"
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      textDecoration: "none",
-      color: "#000",
-      
-    }}
-  >
-    <img
-      src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ba/45/6c/ba456ce5-e8cb-daf1-4afc-8ef96f2aeb9f/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/434x0w.webp"
-      alt="Kakao Map"
-      style={{
-        width: 45,
-        height: 45,
-        borderRadius: "50%",
-        background: "#f1f1f1",
-        objectFit: "cover",
-        marginBottom: "6px",
-      }}
-    />
-    <span style={{ fontSize: 14 }}>카카오맵</span>
-  </a>
-</div>
+          {/* Kakao Map */}
+          <a
+            href="https://kko.kakao.com/YsHebygNAP"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textDecoration: "none",
+              color: "#000",
+            }}
+          >
+            <img
+              src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ba/45/6c/ba456ce5-e8cb-daf1-4afc-8ef96f2aeb9f/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/434x0w.webp"
+              alt="Kakao Map"
+              style={{
+                width: 45,
+                height: 45,
+                borderRadius: "50%",
+                background: "#f1f1f1",
+                objectFit: "cover",
+                marginBottom: "6px",
+              }}
+            />
+            <span style={{ fontSize: 14 }}>카카오맵</span>
+          </a>
+        </div>
       </section>
 
       {/* 지도 모달 */}
@@ -1385,19 +1440,19 @@ As we vow to honour, support, and care for one another as we always have, it wou
         className="gift"
         style={{ padding: "60px 20px 80px 20px", textAlign: "center" }}
       >
-
-<img 
-         src={process.env.PUBLIC_URL + "/overlay/flower.png"}
-         alt="landing-main"
-         style={{
-           width: "60px",
-           height: "60px",
-           objectFit: "cover",
-           display: "block",
-           margin: "10px auto",
-           marginTop: 10,
-           padding: 0}}
-           />
+        <img
+          src={process.env.PUBLIC_URL + "/overlay/flower.png"}
+          alt="landing-main"
+          style={{
+            width: "60px",
+            height: "60px",
+            objectFit: "cover",
+            display: "block",
+            margin: "10px auto",
+            marginTop: 10,
+            padding: 0,
+          }}
+        />
         <h3>{lang === "ko" ? "마음 전하실 곳" : "GIFT"}</h3>
         <p>
           {lang === "ko"
@@ -1423,9 +1478,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
               background: "white",
             }}
           >
-            {lang === "ko" ? "신부 측 계좌번호" : "Bride's Account Info"}
+            {lang === "ko" ? "신랑 신부 측 계좌번호" : "Account Info"}
           </button>
-
         </div>
 
         {showModal && (
@@ -1433,7 +1487,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
             title={
               showModal === "bride"
                 ? lang === "ko"
-                  ? "신부 측 계좌번호"
+                  ? "신랑 신부 측 계좌번호"
                   : "Bride's Account Info"
                 : lang === "ko"
                 ? "신랑 측 계좌번호"
@@ -1456,19 +1510,19 @@ As we vow to honour, support, and care for one another as we always have, it wou
           marginRight: 0,
         }}
       >
-
-<img 
-         src={process.env.PUBLIC_URL + "/overlay/flower.png"}
-         alt="landing-main"
-         style={{
-           width: "60px",
-           height: "60px",
-           objectFit: "cover",
-           display: "block",
-           margin: "10px auto",
-           marginTop: 10,
-           padding: 0}}
-           />
+        <img
+          src={process.env.PUBLIC_URL + "/overlay/flower.png"}
+          alt="landing-main"
+          style={{
+            width: "60px",
+            height: "60px",
+            objectFit: "cover",
+            display: "block",
+            margin: "10px auto",
+            marginTop: 10,
+            padding: 0,
+          }}
+        />
         <h3>{text[lang].rsvp}</h3>
         <p>{text[lang].rsvpDesc}</p>
 
@@ -1533,19 +1587,19 @@ As we vow to honour, support, and care for one another as we always have, it wou
           marginRight: 0,
         }}
       >
-
-<img 
-         src={process.env.PUBLIC_URL + "/overlay/flower.png"}
-         alt="landing-main"
-         style={{
-           width: "60px",
-           height: "60px",
-           objectFit: "cover",
-           display: "block",
-           margin: "10px auto",
-           marginTop: 10,
-           padding: 0}}
-           />
+        <img
+          src={process.env.PUBLIC_URL + "/overlay/flower.png"}
+          alt="landing-main"
+          style={{
+            width: "60px",
+            height: "60px",
+            objectFit: "cover",
+            display: "block",
+            margin: "10px auto",
+            marginTop: 10,
+            padding: 0,
+          }}
+        />
         <div className="guestbook-title">
           <div
             className="guestbook-en"
@@ -1613,53 +1667,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
           </button>
         </div>
       </section>
-    </div>  )}
-  
+    </div>
+  );
+}
 export default App;
-
-
-
-// App.js (최적화된 구조)
-// import React, { useState } from "react";
-// import GallerySection from "./components/GallerySection";
-// import InvitationSection from "./components/InvitationSection";
-// import LocationSection from "./components/LocationSection";
-// import BanquetSection from "./components/BanquetSection";
-// import RSVPSection from "./components/RSVPSection";
-// import GuestbookSection from "./components/GuestbookSection";
-// import SoundPlayer from "./components/SoundPlayer";
-// import FallingPetals from "./components/FallingPetals";
-// import CalendarSection from "./components/CalendarSection";
-// import { samplePhotos, weddingDate, text, guestbookText, landingText, ddxayLabels } from "./constants";
-
-// function App() {
-//   const [lang, setLang] = useState("ko");
-
-//   return (
-//     <div className="invitation-container">
-//       <div className="lang-switch">
-//         <button onClick={() => setLang("ko")}>한국어</button>
-//         <button onClick={() => setLang("en")}>English</button>
-//       </div>
-
-//       <FallingPetals />
-//       <SoundPlayer lang={lang} />
-
-//       <InvitationSection lang={lang} text={text} landingText={landingText} />
-
-//       <CalendarSection lang={lang} weddingDate={weddingDate} ddayLabels={ddayLabels} />
-
-//       <GallerySection lang={lang} photos={samplePhotos} text={text} />
-
-//       <LocationSection lang={lang} text={text} />
-
-//       <BanquetSection lang={lang} text={text} />
-
-//       <RSVPSection lang={lang} text={text} />
-
-//       <GuestbookSection lang={lang} guestbookText={guestbookText} />
-//     </div>
-//   );
-// }
-
-// export default App;
