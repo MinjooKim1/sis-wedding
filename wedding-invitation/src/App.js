@@ -249,7 +249,7 @@ We will soon be celebrating our wedding, a day filled with love, commitment, and
 
 As we vow to honour, support, and care for one another as we always have, it would mean the world to us to have you there to witness and share in this special moment.`,
       dday: `148 days left until Jamie & Taylor's wedding.`,
-      nameTwo: "Taylor & Jamie",
+      nameTwo: "Jamie & Taylor",
       date: "Saturday, November 8, 2025, 3:00 PM",
       place: "Namsangol Hanok Village",
       address:
@@ -292,11 +292,11 @@ As we vow to honour, support, and care for one another as we always have, it wou
   const mainSectionText = {
     ko: {
       phrase: "언제나 한결같이, 평생 함께",
-      names: "김명진 & 제이미",
+      names: "제이미 & 김명진",
     },
     en: {
       phrase: "Always together, forever as one",
-      names: "Taylor & Jamie",
+      names: "Jamie & Taylor",
     },
   };
 
@@ -377,7 +377,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       hour: "시간",
       min: "분",
       sec: "초",
-      countdown: `명진, 제이미의 결혼식이 `,
+      countdown: `제이미, 명진의 결혼식이 `,
       left: "일 남았습니다.",
     },
     en: {
@@ -386,7 +386,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       hour: "HOUR",
       min: "MIN",
       sec: "SEC",
-      countdown: `Taylor & Jamie's wedding is in `,
+      countdown: `Jamie & Taylor's wedding is in `,
       left: "days left.",
     },
   };
@@ -464,65 +464,55 @@ As we vow to honour, support, and care for one another as we always have, it wou
       >
         {/* 텍스트 정보 먼저 배치  맨 위*/}
         <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "flex-start", // ✅ 위 정렬
-            gap: 24,
-            marginBottom: 10,
-            paddingBottom: 10,
-          }}
-        >
-          {/* Groom Name */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              lineHeight: 1.3,
-            }}
-          >
-            {lang === "en" ? (
-              <>
-                <span style={{ fontSize: "1.3em", fontWeight: 600 }}>
-                  {landingText[lang].groomName}
-                </span>
-                <span style={{ fontSize: "0.8em", opacity: 0.6 }}>
-                  ({landingText[lang].kGroomName})
-                </span>
-              </>
-            ) : (
-              <span style={{ fontWeight: 600, fontSize: "1.3em" }}>
-                {landingText[lang].gGroomName}
-              </span>
-            )}
-          </div>
+  style={{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "flex-start",
+    gap: 12,
+    marginBottom: 10,
+    paddingBottom: 10,
+    flexWrap: "wrap", // 줄바꿈 대응
+  }}
+>
+  {/* Bride Name */}
+  <span style={{ fontSize: "1.3em", fontWeight: 600 }}>
+    {landingText[lang].brideName}
+  </span>
 
-          {/* Heart */}
-          <span
-            style={{
-              fontSize: 24,
-              color: "#f7a6b2",
-              fontWeight: 500,
-              alignSelf: "center",
-            }}
-          >
-            ♡
-          </span>
+  {/* Heart */}
+  <span
+    style={{
+      fontSize: 24,
+      color: "#f7a6b2",
+      fontWeight: 500,
+    }}
+  >
+    ♡
+  </span>
 
-          {/* Bride Name */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <span style={{ fontSize: "1.3em", fontWeight: 600 }}>
-              {landingText[lang].brideName}
-            </span>
-          </div>
-        </div>
+  {/* Groom Name */}
+{lang === "en" ? (
+  <span
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      lineHeight: 1.2,
+    }}
+  >
+    <span style={{ fontSize: "1.3em", fontWeight: 600 }}>
+      {landingText[lang].groomName}
+    </span>
+    <span style={{ fontSize: "0.8em", opacity: 0.6 }}>
+      ({landingText[lang].kGroomName})
+    </span>
+  </span>
+) : (
+  <span style={{ fontWeight: 600, fontSize: "1.3em" }}>
+    {landingText[lang].gGroomName}
+  </span>
+)}
+</div>
 
         <hr
           style={{
@@ -539,9 +529,9 @@ As we vow to honour, support, and care for one another as we always have, it wou
             fontFamily:
               lang === "en"
                 ? "Fira Sans, Arial, sans-serif"
-                : "Playfair Display, serif",
+                : "Fira Sans', Arial, sans-serif",
             margin: "16px auto 4px auto",
-            fontWeight: 500,
+            fontWeight: 400,
             letterSpacing: "0.04em",
             textAlign: "center",
           }}
