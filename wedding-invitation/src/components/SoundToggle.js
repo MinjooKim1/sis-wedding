@@ -75,7 +75,7 @@ export default function SoundToggle({ lang = "ko" }) {
       <button
         className="sound-toggle-btn"
         style={{
-          position: "absolute",
+          position: "fixed",
           left: 16,
           top: 16,
           background: "none",

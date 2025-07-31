@@ -26,6 +26,7 @@ import 'aos/dist/aos.css';
 import ImageTransition from "./components/ImageTransition"; // 경로 주의!
 import BrideGroomInfo from "./components/BrideGroomInfo";
 import SoundToggle from "./components/SoundToggle";
+import GallerySection from "./components/PhotoGallery";
 
 
 function App() {
@@ -46,8 +47,7 @@ function App() {
   const [showLargeMap, setShowLargeMap] = useState(false);
   const [selectedAccountType, setSelectedAccountType] = useState(null);
   const brideAccounts = [
-    { bank: "국민은행", number: "000-123-456789", holder: "이석훈" },
-    { bank: "국민은행", number: "000-123-456789", holder: "이석훈" },
+    { bank: "신한은행", number: "110-385-015325", holder: "심경자" },
   ];
 
   useEffect(() => {
@@ -150,6 +150,13 @@ function App() {
     "WS_00321.png",
     "WS_01423.png",
     "WS_00049.png",
+    "WS_00927 ed.png",
+  "WS_00410.png",
+  "WS_00633.png",
+  "WS_01296.png",
+  "WS_01329.png",
+  "WS_01596.png"
+
   ];
   const samplePhotos = mainPhotoFiles.map(
     (f) => process.env.PUBLIC_URL + "/main_photos/" + f
@@ -532,7 +539,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       <section
         className="section-box greeting"
         style={{
-          padding: "60px 20px",
+          padding: "60px 0",
           margin: "0",
         }}
       >
@@ -735,7 +742,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       <BrideGroomInfo lang={lang} />
 
       {/* GALLERY 섹션 */}
-      <section className="gallery-section" data-aos="fade-up" style={{ padding: "40px 20px" }}>
+      {/* <section className="gallery-section" data-aos="fade-up" style={{ padding: "40px 20px" }}>
         <img
           src={process.env.PUBLIC_URL + "/overlay/flower.png"}
           alt="landing-main"
@@ -781,7 +788,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
         </div>
 
         {/* 🟩 3x4 이미지 그리드 */}
-        <div
+        {/* <div
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
@@ -811,7 +818,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
         </div>
 
         {/* 🖼️ 선택된 큰 이미지 (그리드 밑) */}
-        <div
+        {/* <div
           {...swipeHandlers} // ✅ 스와이프 감지 연결
           style={{
             marginTop: "20px",
@@ -839,7 +846,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
         </div>
 
         {/* 📸 Lightbox */}
-        {isOpen && (
+        {/* {isOpen && (
           <>
             <Lightbox
               mainSrc={samplePhotos[photoIdx]}
@@ -863,7 +870,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
             />
 
             {/* ❌ Optional close button */}
-            <button
+            {/* <button
               onClick={() => setIsOpen(false)}
               style={{
                 position: "fixed",
@@ -882,8 +889,17 @@ As we vow to honour, support, and care for one another as we always have, it wou
             </button>
           </>
         )}
-      </section>
-      {/* 날짜/장소/시간/오시는 길 */}
+      </section> */}
+
+<GallerySection
+  samplePhotos={samplePhotos}
+  lang={lang}
+  text={text}
+  swipeHandlers={swipeHandlers}
+/>
+
+
+      {/* //  날짜/장소/시간/오시는 길 */}
       <section
         className="section-box"
         style={{
@@ -892,7 +908,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
           marginRight: 0,
         }}
       >
-        <div
+        {/* <div
           style={{
             display: "flex",
             justifyContent: "center",
@@ -906,7 +922,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
               margin: "12px 0",
             }}
           ></div>
-        </div>
+        </div> */}
 
         <img
           src={process.env.PUBLIC_URL + "/overlay/flower.png"}
@@ -1033,7 +1049,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
 
           {/* Naver Map */}
           <a
-            href="https://naver.me/5gFg3Fm"
+            href="https://naver.me/5gFg3FmY"
             target="_blank"
             rel="noopener noreferrer"
             style={{
