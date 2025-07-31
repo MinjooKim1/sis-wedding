@@ -84,17 +84,6 @@ function App() {
   }, []);
 
   
-
-  const handleSoundToggle = () => {
-    if (!audioRef.current) return;
-    if (isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      audioRef.current.play();
-      setIsPlaying(true);
-    }
-  };
   useEffect(() => {
     const timer = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(timer);
@@ -249,7 +238,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       dday: `148 days left until Jamie & Taylor's wedding.`,
       nameTwo: "Taylor & Jamie",
       date: "Saturday, November 8, 2025, 3:00 PM",
-      place: "Namsangol Hanok Village, Gwanhundong Min Family House",
+      place: "Namsangol Hanok Village",
       address: "Address: 84-1, Pildong 2-ga, Jung-gu, Seoul (inside Namsangol Hanok Village)",
       tel: "+82-2-6358-5543",
       map: "View Map",
@@ -422,7 +411,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
         }}
       >
         {/* 사운드 아이콘 */}
-        <SoundToggle />
+        <SoundToggle lang={lang}  />
 
         {/* 언어 변경 버튼 */}
         <div
