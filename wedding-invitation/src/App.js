@@ -262,7 +262,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       banquetDesc: "Sollago Hotel, 2nd Floor Hall",
       banquetDesc2: "a 5-minute walk away from the Hanok Village.",
       banquetDesc3:
-        "A variety of buffet menus including Korean, Chinese, Western, and Japanese cuisine will be served.`,",
+        "A variety of buffet menus including Korean, Chinese, Western, and Japanese cuisine will be served.",
       banquetAddr: "9, Chungmuro 2-gil, Jung-gu, Seoul",
       guestbook: "Guestbook",
       addNote: "Add sticky note →",

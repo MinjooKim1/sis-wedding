@@ -34,8 +34,8 @@ const RSVPModal = ({
             onClick={() => setRsvpStatus("Y")}
             style={{
               ...styles.toggleButton,
-              backgroundColor: rsvpStatus === "Y" ? "#e8a7a7" : "#fff",
-              color: rsvpStatus === "Y" ? "#fff" : "#333",
+              backgroundColor: rsvpStatus === "Y" ? "#ffd6e8" : "#fff",
+              color: rsvpStatus === "Y" ? "#b87c9b" : "#333",
             }}
           >
             {text[lang].yes}
@@ -44,8 +44,8 @@ const RSVPModal = ({
             onClick={() => setRsvpStatus("N")}
             style={{
               ...styles.toggleButton,
-              backgroundColor: rsvpStatus === "N" ? "#e8a7a7" : "#fff",
-              color: rsvpStatus === "N" ? "#fff" : "#333",
+              backgroundColor: rsvpStatus === "N" ? "#ffd6e8" : "#fff",
+              color: rsvpStatus === "N" ? "#b87c9b" : "#333",
             }}
           >
             {text[lang].no}
@@ -100,6 +100,7 @@ const RSVPModal = ({
 
         <textarea
   value={specialNote}
+  className="rsvp-input"
   onChange={(e) => setSpecialNote(e.target.value)}
   placeholder={lang === "ko" ? "메모를 자유롭게 남겨주세요" : "Leave a special note"}
   style={{
@@ -150,13 +151,13 @@ const styles = {
     display: "flex", gap: "10px", marginBottom: "12px",
   },
   toggleButton: {
-    flex: 1, padding: "10px", borderRadius: "6px", border: "1px solid #e8a7a7", cursor: "pointer",
+    flex: 1, padding: "10px", borderRadius: "6px", border: "1px solid #ffd6e8 ", cursor: "pointer",
   },
   checkboxLabel: {
-    display: "block", marginBottom: "12px", fontSize: "14px",
+    display: "flex", marginBottom: "12px", fontSize: "14px",justifyContent: "flex-start",
   },
   submitBtn: {
-    width: "100%", backgroundColor: "#e8a7a7", color: "#fff",
+    width: "100%", backgroundColor: "#ffd6e8 ", color: "#b87c9b",
     padding: "12px", border: "none", borderRadius: "6px", cursor: "pointer",
     fontSize: "16px",
   },

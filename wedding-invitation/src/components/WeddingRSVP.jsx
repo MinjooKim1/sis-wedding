@@ -22,32 +22,34 @@ const WeddingRSVP = ({ text, lang }) => {
     }
   
     try {
-      await addDoc(collection(db, "rsvps"), {
-        name: rsvpName,
-        status: rsvpStatus,
-        side: rsvpSide,
-        withKids: rsvpWithKids,
-        kidsCount,
-        kidsAge,
-        note: specialNote, // 여기에 스페셜노트 포함
-        createdAt: Timestamp.now(),
-      });
-  
-      alert(lang === "ko" ? "참석 의사가 저장되었어요!" : "RSVP saved!");
-  
-      // 상태 초기화
-      setRsvpName("");
-      setRsvpStatus("Y");
-      setRsvpSide("");
-      setRsvpWithKids(false);
-      setKidsCount("");
-      setKidsAge("");
-      setSpecialNote(""); // 스페셜노트 초기화
-      setIsModalOpen(false);
-    } catch (error) {
-      console.error("RSVP 저장 오류", error);
-      alert(lang === "ko" ? "저장에 실패했어요." : "Failed to save RSVP.");
-    }
+  await addDoc(collection(db, "rsvps"), {
+    name: rsvpName,
+    status: rsvpStatus,
+    side: rsvpSide,
+    withKids: bringKid,
+    kidsCount: kidCount,
+    kidsAge: kidAge,
+    note: specialNote,
+    createdAt: Timestamp.now(),
+  });
+
+  // 상태 초기화
+  setRsvpName("");
+  setRsvpStatus("Y");
+  setRsvpSide("");
+  setBringKid(false);
+  setKidCount("");
+  setKidAge("");
+  setSpecialNote("");
+
+  setIsModalOpen(false); // ✅ 먼저 닫고
+  setTimeout(() => {
+    alert(lang === "ko" ? "참석 의사가 저장되었어요!" : "RSVP saved!");
+  }, 100); // ✅ 모달이 닫힌 후 알림
+} catch (error) {
+  console.error("RSVP 저장 오류", error);
+  alert(lang === "ko" ? "저장에 실패했어요." : "Failed to save RSVP.");
+}
   };
 
   return (
@@ -72,8 +74,8 @@ const WeddingRSVP = ({ text, lang }) => {
         onClick={() => setIsModalOpen(true)}
         style={{
           marginTop: "24px",
-          backgroundColor: "#e89cae",
-          color: "#fff",
+          backgroundColor: "#ffd6e8",
+          color: "#b87c9b",
           border: "none",
           padding: "12px 24px",
           borderRadius: "12px",
@@ -100,7 +102,7 @@ const WeddingRSVP = ({ text, lang }) => {
         specialNote={specialNote}              // ✅ 추가!
         setSpecialNote={setSpecialNote}        // ✅ 추가!
         handleSubmit={handleSubmit}
-        closeModal={() => {}}
+        closeModal={() => setIsModalOpen(false)}
         text={text}
         lang={lang}
       />
