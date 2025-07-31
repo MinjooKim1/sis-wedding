@@ -7,13 +7,13 @@ const BrideGroomInfo = ({ lang }) => {
     <section className="bridegroom-wrapper">
 
       <div className="person-section" data-aos="fade-up">
-        <div className="badge">신랑</div>
+        <div className="badge">{lang === "ko" ? "신랑" : "Groom"}</div>
         <div className="name">{lang === "ko" ? "제이미" : "Jamie"}</div>
         <div className="roman">{lang === "ko" ? "Jamie" : ""}</div>
         <div className="parents">
           {lang === "ko"
-            ? <>Gary <span style={{color: "##b2b2b2", margin: "5px 0"}}>  |  </span> Morak<br /><span style={{ color: "#919191" }}>아들</span></>
-            : <><span style={{ color: "#919191" }}>Son of</span> <br /> Gary<span className="flower"> | </span> Morak</>
+            ? <>Gary <span style={{color: "##b2b2b2", margin: "5px 0"}}>  |  </span> Morag<br /><span style={{ color: "#919191" }}>아들</span></>
+            : <><span style={{ color: "#919191" }}>Son of</span> <br /> Gary<span className="flower"> | </span> Morag</>
           }
         </div>
       </div>
@@ -21,7 +21,7 @@ const BrideGroomInfo = ({ lang }) => {
       <hr className="divider" />
 
       <div className="person-section" data-aos="fade-up">
-        <div className="badge">신부</div>
+        <div className="badge">{lang === "ko" ? "신부" : "Bride"}</div>
         <div className="name">{lang === "ko" ? "명진" : "Taylor"}</div>
         <div className="roman">{lang === "ko" ? "Myungjin" : "Myungjin"}</div>
         <div className="parents">

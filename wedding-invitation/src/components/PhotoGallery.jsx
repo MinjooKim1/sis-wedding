@@ -84,22 +84,28 @@ export default function GallerySection({ samplePhotos, text, lang, swipeHandlers
 
 {/* ➕ 더보기/접기 버튼 */}
 {samplePhotos.length > 12 && (
-  <div style={{ textAlign: "center", marginTop: "16px" }}>
-    <button
-      onClick={() => setShowAll((prev) => !prev)}
-      style={{
-        padding: "8px 16px",
-        backgroundColor: "#f7a6b2",
-        color: "#fff",
-        border: "none",
-        borderRadius: "20px",
-        cursor: "pointer",
-        fontSize: "14px",
-      }}
-    >
-      {showAll ? (lang === "ko" ? "접기" : "Show Less") : (lang === "ko" ? "더보기" : "Show More")}
-    </button>
-  </div>
+<div style={{ textAlign: "center", marginTop: "16px" }}>
+  <button
+    onClick={() => setShowAll((prev) => !prev)}
+    style={{
+      padding: "8px 16px",
+      backgroundColor: "#f7a6b2",
+      color: "#fff",
+      border: "none",
+      borderRadius: "20px",
+      cursor: "pointer",
+      fontSize: "14px",
+    }}
+  >
+    {showAll
+      ? lang === "ko"
+        ? "접기 ▲"
+        : "Show Less ▲"
+      : lang === "ko"
+      ? "더보기 ▼"
+      : "Show More ▼"}
+  </button>
+</div>
 )}
 
       {/* 🌸 선택된 큰 이미지 */}

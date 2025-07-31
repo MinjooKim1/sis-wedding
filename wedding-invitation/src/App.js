@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
+import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 import GuestbookForm from "./GuestbookForm";
 import { db } from "./firebase"; // make sure this path matches your project
 import {
@@ -27,6 +27,7 @@ import ImageTransition from "./components/ImageTransition"; // 경로 주의!
 import BrideGroomInfo from "./components/BrideGroomInfo";
 import SoundToggle from "./components/SoundToggle";
 import GallerySection from "./components/PhotoGallery";
+import WeddingRSVP from "./components/WeddingRSVP"; 
 
 
 function App() {
@@ -40,17 +41,15 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(true);
   const audioRef = React.useRef(null);
   const [mapModal, setMapModal] = useState({ open: false, src: "" });
-  const [rsvpName, setRsvpName] = useState("");
-  const [rsvpStatus, setRsvpStatus] = useState("Y");
   const [showModal, setShowModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [showLargeMap, setShowLargeMap] = useState(false);
-  const [selectedAccountType, setSelectedAccountType] = useState(null);
   const brideAccounts = [
     { bank: "신한은행", number: "110-385-015325", holder: "심경자" },
-    { bank: "E-Transfer", number: "taylorkim211@gmail.com", holder: "Taylor Myungjin Kim" },
+    { bank: "E-Transfer", number: "taylorkim211@gmail.com", holder: "Taylor Kim" },
   ];
 
+  
   useEffect(() => {
     if (audioRef.current) {
       const playPromise = audioRef.current.play();
@@ -194,6 +193,8 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const commentsPerPage = 3;
 
+  
+
   // Calculate indexes
   const indexOfLast = currentPage * commentsPerPage;
   const indexOfFirst = indexOfLast - commentsPerPage;
@@ -228,13 +229,17 @@ function App() {
       giftDesc:
         "참석이 어려우신 분들을 위해 계좌번호를 기재하였습니다. 너그러운 마음으로 양해 부탁드립니다.",
       account: "김명진 우리은행 1002432266279",
-      rsvp: "참석 의사 전달",
-      rsvpDesc: "신랑, 신부에게 참석의사를 미리 전달할 수 있어요",
-      name: "이름",
-      availability: "참석 여부",
-      yes: "참석",
-      no: "불참",
-      submit: "참석의사 전달하기",
+      rsvpTitle: "참석 의사 체크하기",
+    rsvpDesc: "한 분 한 분을 소중히 모실 수 있도록 참석 의사를 전해주시면 감사하겠습니다.",
+    groom: "신랑",
+    bride: "신부",
+    yes: "참석할게요",
+    no: "참석이 어려워요",
+    name: "참석자 본인 성함",
+    includeKid: "아이도 함께 참석해요",
+    kidCount: "아이 인원",
+    kidAge: "아이 나이",
+    submit: "참석 의사 체크하기",
     },
     en: {
       invitationTitle: "You are cordially invited.",
@@ -267,13 +272,17 @@ As we vow to honour, support, and care for one another as we always have, it wou
       giftDesc:
         "For those unable to attend, we have provided a bank account below. Thank you for your understanding.",
       account: "Taylor (Myungjin) Woori Bank 1002432266279",
-      rsvp: "RSVP",
-      rsvpDesc: "Let the bride and groom know your attendance in advance",
-      name: "Name",
-      availability: "Attendance",
-      yes: "Yes",
-      no: "No",
-      submit: "Submit RSVP",
+      rsvpTitle: "Check RSVP",
+    rsvpDesc: "Please let us know your RSVP so we can warmly prepare for your presence.",
+    groom: "Groom",
+    bride: "Bride",
+    yes: "I'll attend",
+    no: "Sorry, can't make it",
+    name: "Your name",
+    includeKid: "I'm bringing a child",
+    kidCount: "Number of kids",
+    kidAge: "Child's age",
+    submit: "Submit RSVP",
     },
   };
 
@@ -350,11 +359,11 @@ As we vow to honour, support, and care for one another as we always have, it wou
         parking: `• Public parking is available inside Namsangol Hanok Village  
         (Paid parking / Limited spaces)
         
-        • Free 2-hour parking is available at Solago Hotel (Reception venue)  
+        • Free 2-hour parking is available at Sollago Hotel (Reception venue)  
         → Approximately 5–10 minutes on foot from the ceremony venue  
-        → We recommend using Solago Hotel parking if driving.`,
+        → We recommend using Sollago Hotel parking if driving.`,
         
-        note: "※ For your convenience, we kindly suggest using public transportation or parking at Solago Hotel.",
+        note: "※ For your convenience, we kindly suggest using public transportation or parking at Sollago Hotel.",
     },
   };
 
@@ -623,13 +632,13 @@ As we vow to honour, support, and care for one another as we always have, it wou
 
         {/* Date info */}
         <div style={{ fontSize: "1.1rem", color: "#555", marginBottom: "4px" }}>
-          {calYear}년 {calMonth + 1}월 {weddingDate.getDate()}일{" "}
-          {ddayLabels[lang].weekday}
-        </div>
+  {weddingDate.getUTCFullYear()}년 {weddingDate.getUTCMonth() + 1}월 {weddingDate.getUTCDate()}일{" "}
+  {ddayLabels[lang].weekday}
+</div>
         <div
           style={{ fontSize: "0.95rem", color: "#999", marginBottom: "20px" }}
         >
-          Saturday, November 7, 2025 | PM 3:00
+          Saturday, November 8, 2025 | 3:00 PM
         </div>
 
         {/* Optional: Divider line */}
@@ -725,7 +734,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
         style={{
           fontSize: "clamp(0.6rem, 2.5vw, 0.75rem)",
           color: "#aaa",
-          letterSpacing: "0.05em",
+          letterSpacing: "0.08em",
         }}
       >
         {item.label.toUpperCase()}
@@ -735,12 +744,14 @@ As we vow to honour, support, and care for one another as we always have, it wou
 </div>
         {/* Countdown footer text */}
         <div style={{ marginTop: 10, fontSize: "0.9rem", color: "#666" }}>
-          {ddayLabels[lang].countdown}
-          <span style={{ color: "#f7a6b2", fontWeight: 600, margin: "0 4px" }}>
-            {dDay}
-          </span>
-          {lang === "ko" ? ddayLabels[lang].left : ` ${ddayLabels[lang].left}`}
-        </div>
+  {ddayLabels[lang].countdown}
+  <span style={{ color: "#f7a6b2", fontWeight: 600, margin: "0 4px" }}>
+    {dDay}
+  </span>
+  {lang === "ko"
+  ? ddayLabels[lang].left
+  : <span style={{ textTransform: "none" }}>{ddayLabels[lang].days.toLowerCase()}</span>}
+</div>
       </section>
 
       {/* 부모님 아들 딸 */}
@@ -1560,7 +1571,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
 
       {/* 참석 의사 전달 */}
 
-      <section
+      {/* <section
         className="rsvp"
         style={{
           padding: "60px 20px 80px 20px",
@@ -1634,7 +1645,9 @@ As we vow to honour, support, and care for one another as we always have, it wou
             {text[lang].submit}
           </button>
         </form>
-      </section>
+      </section> */}
+
+<WeddingRSVP text={text} lang={lang} />
 
       {/* 방명록 */}
       <section
