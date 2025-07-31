@@ -48,6 +48,7 @@ function App() {
   const [selectedAccountType, setSelectedAccountType] = useState(null);
   const brideAccounts = [
     { bank: "신한은행", number: "110-385-015325", holder: "심경자" },
+    { bank: "E-Transfer", number: "taylorkim211@gmail.com", holder: "Taylor Myungjin Kim" },
   ];
 
   useEffect(() => {
