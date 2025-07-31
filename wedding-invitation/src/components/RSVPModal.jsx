@@ -26,7 +26,7 @@ const RSVPModal = ({
       <div style={styles.modal}>
         <button style={styles.closeBtn} onClick={closeModal}>✕</button>
         <h3 style={styles.title}>{text[lang].rsvpTitle}</h3>
-        <p style={styles.description}>{text[lang].rsvpDesc} <strong>{text[lang].rsvpDesc2}</strong></p>
+        <p style={styles.description}>{text[lang].rsvpDesc} <strong>{text[lang].rsvpDesc2}</strong>{text[lang].rsvpDesc3}</p>
 
 
         {/* 참석 여부 */}

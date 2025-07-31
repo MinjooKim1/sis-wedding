@@ -158,6 +158,24 @@ function App() {
     "WS_01296.png",
     "WS_01329.png",
     "WS_01596.png",
+    "210A1761.png",
+"210A1855.png",
+"210A1936.png",
+"210A1975.png",
+"210A1991.png",
+"210A2033.png",
+"210A2041.png",
+"210A2043.png",
+"210A2114.png",
+"WS_00122.png",
+"WS_00555.png",
+"WS_00997.png",
+"WS_01494.png",
+"WS_01496.png",
+"WS_01549.png",
+"WS_01676.png",
+"WS_01746.png",
+"WS_02017.png",
   ];
   const samplePhotos = mainPhotoFiles.map(
     (f) => process.env.PUBLIC_URL + "/main_photos/" + f
@@ -228,7 +246,7 @@ function App() {
       giftDesc:
         "참석이 어려우신 분들을 위해 계좌번호를 기재하였습니다. 너그러운 마음으로 양해 부탁드립니다.",
       account: "김명진 우리은행 1002432266279",
-      rsvpTitle: "참석 의사 체크하기",
+      rsvpTitle: "참석 의사",
       rsvpDesc:
         "한 분 한 분을 소중히 모실 수 있도록 참석 의사를 전해주시면 감사하겠습니다.",
       rsvpDesc2: "(2025년 10월 25일 까지)",
@@ -276,8 +294,9 @@ As we vow to honour, support, and care for one another as we always have, it wou
       account: "Taylor (Myungjin) Woori Bank 1002432266279",
       rsvpTitle: "Check RSVP",
       rsvpDesc:
-        "Please let us know your RSVP so we can warmly prepare for your presence",
-      rsvpDesc2: "By Oct 25th 2025.",
+        "Please let us know your RSVP by October 25, 2025,",
+      rsvpDesc2: "by October 25, 2025",
+      rsvpDesc3: "so we can warmly prepare for your presence.",
       groom: "Groom",
       bride: "Bride",
       yes: "I'll attend",
@@ -286,7 +305,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       includeKid: " I will be bringing a child/children",
       kidCount: "Number of kids",
       kidAge: "Child's age",
-      submit: "Submit RSVP",
+      submit: "RSVP",
     },
   };
 
@@ -551,8 +570,9 @@ As we vow to honour, support, and care for one another as we always have, it wou
           alt="landing-main"
           style={{
             width: "100%",
-            height: "70vh",
+            height: "80vh",
             objectFit: "cover",
+            objectPosition: "top", // ✅ 위쪽 기준으로 보여지게 함
             display: "block",
             margin: 0,
             padding: 0,
@@ -973,7 +993,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
                 border: "solid 1px #eae9e9",
               }}
             />
-            <span style={{ fontSize: 14 }}>네이버지도</span>
+            <span style={{ fontSize: 14 }}>{lang === "ko" ? "네이버지도" : "Naver Map"}</span>
           </a>
 
           {/* Kakao Map */}
