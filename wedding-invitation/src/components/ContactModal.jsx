@@ -5,22 +5,23 @@ const contacts = [
   {
     name: { ko: "제이미", en: "Jamie" },
     role: { ko: "신랑", en: "Groom" },
-    phone: "01012345678",
+    email: "jamiehughes37@hotmail.com",
   },
   {
-    name: { ko: "김명진", en: "Myungjin Kim" },
+    name: { ko: "김명진", en: "Taylor" },
     role: { ko: "신부", en: "Bride" },
-    phone: "01012345678",
+    phone: "010-8073-4025",
+    email: "taylorkim211@gmail.com",
   },
   {
-    name: { ko: "김재득", en: "Jaedeuk Kim" },
-    role: { ko: "아버지", en: "Father" },
-    phone: "01023456789",
+    name: { ko: "김재득" },
+    role: { ko: "아버지" },
+    phone: "01027252400",
   },
   {
-    name: { ko: "심경자", en: "KyungJa Sim" },
-    role: { ko: "어머니", en: "Mother" },
-    phone: "01034567890",
+    name: { ko: "심경자" },
+    role: { ko: "어머니" },
+    phone: "01028062011",
   },
 ];
 
@@ -37,23 +38,44 @@ const ContactModal = ({ isOpen, closeModal, lang }) => {
         {/* 연락처 리스트 */}
         {contacts
   .filter((person) =>
-    lang === "ko" || !["Jaedeuk Kim", "KyungJa Sim"].includes(person.name.en)
+    lang === "ko" || ["Jamie", "Taylor"].includes(person.name.en)
   )
   .map((person, i) => (
     <div key={i} style={styles.row}>
       <div style={styles.nameAndRole}>
         <span>{person.name[lang]}</span>
-        {person.role?.[lang] && lang === "ko" && (
-          <span style={styles.role}>{person.role.ko}</span>
+        {person.role?.[lang] && (
+          <span style={styles.role}>{person.role[lang]}</span>
         )}
       </div>
       <div style={styles.buttonGroup}>
-        <a href={`sms:${person.phone}`} style={styles.smsBtn}>
-          {lang === "ko" ? "문자 보내기" : "Send Message"}
-        </a>
-        <a href={`tel:${person.phone}`} style={styles.callBtn}>
-          {lang === "ko" ? "전화하기" : "Call"}
-        </a>
+        {/* 한국어 버전: 문자 먼저 */}
+        {lang === "ko" && person.phone && (
+          <>
+            {(person.name.ko === "김명진" ||
+              person.name.ko === "김재득" ||
+              person.name.ko === "심경자") && (
+              <a href={`sms:${person.phone}`} style={styles.smsBtn}>
+                문자 보내기
+              </a>
+            )}
+          </>
+        )}
+
+        {/* 이메일 버튼 (제이미, 김명진) */}
+        {person.email && (
+          <a href={`mailto:${person.email}`} style={styles.mailBtn}>
+            {lang === "ko" ? "이메일" : "Email"}
+          </a>
+        )}
+
+        {/* 부모님만 전화 */}
+        {lang === "ko" &&
+          (person.name.ko === "김재득" || person.name.ko === "심경자") && (
+            <a href={`tel:${person.phone}`} style={styles.callBtn}>
+              전화하기
+            </a>
+          )}
       </div>
     </div>
   ))}
@@ -128,6 +150,16 @@ const styles = {
     padding: "10px",
     borderRadius: "10px",
     textDecoration: "none",
+  },
+  mailBtn:{
+    flex: 1,
+    backgroundColor: "#fff4f9",
+    color: "rgb(68 68 68)",
+    textAlign: "center",
+    padding: "10px",
+    borderRadius: "10px",
+    textDecoration: "none",
+    border: "solid 1px #ead0dd"
   },
   callBtn: {
     flex: 1,

@@ -13,21 +13,21 @@ import {
 } from "firebase/firestore";
 import AccountModal from "./AccountModal";
 import "react-calendar/dist/Calendar.css"; // 기본 스타일
-import 'react-image-lightbox/style.css';
-import Lightbox from 'react-image-lightbox';
-import 'react-calendar/dist/Calendar.css';
+import "react-image-lightbox/style.css";
+import Lightbox from "react-image-lightbox";
+import "react-calendar/dist/Calendar.css";
 import { useSwipeable } from "react-swipeable";
 import FallingPetals from "./components/FallingPetals";
 import { FiCopy } from "react-icons/fi"; // Feather icon
-import { FaSubway, FaBus, FaParking  } from 'react-icons/fa';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import { FaSubway, FaBus, FaParking } from "react-icons/fa";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import ImageTransition from "./components/ImageTransition"; // 경로 주의!
 import BrideGroomInfo from "./components/BrideGroomInfo";
 import ContactModal from "./components/ContactModal";
 import SoundToggle from "./components/SoundToggle";
 import GallerySection from "./components/PhotoGallery";
-import WeddingRSVP from "./components/WeddingRSVP"; 
+import WeddingRSVP from "./components/WeddingRSVP";
 
 function App() {
   const [lang, setLang] = useState("ko");
@@ -46,10 +46,13 @@ function App() {
   const [showLargeMap, setShowLargeMap] = useState(false);
   const brideAccounts = [
     { bank: "신한은행", number: "110-385-015325", holder: "심경자" },
-    { bank: "E-Transfer", number: "taylorkim211@gmail.com", holder: "Taylor Kim" },
+    {
+      bank: "E-Transfer",
+      number: "taylorkim211@gmail.com",
+      holder: "Taylor Kim",
+    },
   ];
 
-  
   useEffect(() => {
     if (audioRef.current) {
       const playPromise = audioRef.current.play();
@@ -79,11 +82,10 @@ function App() {
   useEffect(() => {
     AOS.init({
       duration: 800, // 애니메이션 지속시간 (ms)
-      once: true,     // 한 번만 실행
+      once: true, // 한 번만 실행
     });
   }, []);
 
-  
   useEffect(() => {
     const timer = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(timer);
@@ -151,12 +153,11 @@ function App() {
     "WS_01423.png",
     "WS_00049.png",
     "WS_00927 ed.png",
-  "WS_00410.png",
-  "WS_00633.png",
-  "WS_01296.png",
-  "WS_01329.png",
-  "WS_01596.png"
-
+    "WS_00410.png",
+    "WS_00633.png",
+    "WS_01296.png",
+    "WS_01329.png",
+    "WS_01596.png",
   ];
   const samplePhotos = mainPhotoFiles.map(
     (f) => process.env.PUBLIC_URL + "/main_photos/" + f
@@ -193,8 +194,6 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const commentsPerPage = 3;
 
-  
-
   // Calculate indexes
   const indexOfLast = currentPage * commentsPerPage;
   const indexOfFirst = indexOfLast - commentsPerPage;
@@ -230,16 +229,17 @@ function App() {
         "참석이 어려우신 분들을 위해 계좌번호를 기재하였습니다. 너그러운 마음으로 양해 부탁드립니다.",
       account: "김명진 우리은행 1002432266279",
       rsvpTitle: "참석 의사 체크하기",
-    rsvpDesc: "한 분 한 분을 소중히 모실 수 있도록 참석 의사를 전해주시면 감사하겠습니다.",
-    groom: "신랑",
-    bride: "신부",
-    yes: "참석할게요",
-    no: "참석이 어려워요",
-    name: "참석자 본인 성함",
-    includeKid: "아이도 함께 참석해요",
-    kidCount: "아이 인원",
-    kidAge: "아이 나이",
-    submit: "참석 의사 체크하기",
+      rsvpDesc:
+        "한 분 한 분을 소중히 모실 수 있도록 참석 의사를 전해주시면 감사하겠습니다.",
+      groom: "신랑",
+      bride: "신부",
+      yes: "참석할게요",
+      no: "참석이 어려워요",
+      name: "참석자 본인 성함",
+      includeKid: "아이도 함께 참석해요",
+      kidCount: "아이 인원",
+      kidAge: "아이 나이",
+      submit: "참석 의사 체크하기",
     },
     en: {
       invitationTitle: "You are cordially invited.",
@@ -252,7 +252,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
       nameTwo: "Taylor & Jamie",
       date: "Saturday, November 8, 2025, 3:00 PM",
       place: "Namsangol Hanok Village",
-      address: "Address: 84-1, Pildong 2-ga, Jung-gu, Seoul (inside Namsangol Hanok Village)",
+      address:
+        "Address: 84-1, Pildong 2-ga, Jung-gu, Seoul (inside Namsangol Hanok Village)",
       tel: "+82-2-6358-5543",
       map: "View Map",
       call: "Call",
@@ -273,16 +274,17 @@ As we vow to honour, support, and care for one another as we always have, it wou
         "For those unable to attend, we have provided a bank account below. Thank you for your understanding.",
       account: "Taylor (Myungjin) Woori Bank 1002432266279",
       rsvpTitle: "Check RSVP",
-    rsvpDesc: "Please let us know your RSVP so we can warmly prepare for your presence.",
-    groom: "Groom",
-    bride: "Bride",
-    yes: "I'll attend",
-    no: "Sorry, can't make it",
-    name: "Your name",
-    includeKid: "I'm bringing a child or children",
-    kidCount: "Number of kids",
-    kidAge: "Child's age",
-    submit: "Submit RSVP",
+      rsvpDesc:
+        "Please let us know your RSVP so we can warmly prepare for your presence.",
+      groom: "Groom",
+      bride: "Bride",
+      yes: "I'll attend",
+      no: "Sorry, can't make it",
+      name: "Your name",
+      includeKid: " I will be bringing a child/children",
+      kidCount: "Number of kids",
+      kidAge: "Child's age",
+      submit: "Submit RSVP",
     },
   };
 
@@ -348,22 +350,22 @@ As we vow to honour, support, and care for one another as we always have, it wou
       subwayTitle: "Subway",
       subway:
         "Line 3 or 4 → Get off at Chungmuro Station, Exit 3 or 4 → 5-minute walk",
-        busTitle: "Bus",
-        bus: `Get off at Toegye-ro 3-ga or Hanok Village stop
+      busTitle: "Bus",
+      bus: `Get off at Toegye-ro 3-ga or Hanok Village stop
         
         • Regular: 104, 105, 140, 421, 463, 507, 604, 7011
         • Circulation: Namsan Loop Bus 02, 05, 90S Tour
         • Airport: 6001, 6015, 6021`,
-        
-        parkingTitle: "Parking Information",
-        parking: `• Public parking is available inside Namsangol Hanok Village  
+
+      parkingTitle: "Parking Information",
+      parking: `• Public parking is available inside Namsangol Hanok Village  
         (Paid parking / Limited spaces)
         
         • Free 2-hour parking is available at Sollago Hotel (Reception venue)  
         → Approximately 5–10 minutes on foot from the ceremony venue  
         → We recommend using Sollago Hotel parking if driving.`,
-        
-        note: "※ For your convenience, we kindly suggest using public transportation or parking at Sollago Hotel.",
+
+      note: "※ For your convenience, we kindly suggest using public transportation or parking at Sollago Hotel.",
     },
   };
 
@@ -416,8 +418,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
       className="invitation-container"
       style={{
         maxWidth: "500px", // ✅ 최대 너비 제한
-        position: "relative"
-      }} 
+        position: "relative",
+      }}
     >
       {/* 최상단 언어 전환 버튼 영역 */}
       <div
@@ -432,15 +434,15 @@ As we vow to honour, support, and care for one another as we always have, it wou
         }}
       >
         {/* 사운드 아이콘 */}
-        <SoundToggle lang={lang}  />
+        <SoundToggle lang={lang} />
 
         {/* Contact modal */}
 
         <ContactModal
-        isOpen={isModalOpen}
-        closeModal={() => setIsModalOpen(false)}
-        lang={lang}
-      />
+          isOpen={isModalOpen}
+          closeModal={() => setIsModalOpen(false)}
+          lang={lang}
+        />
         {/* 언어 변경 버튼 */}
         <div
           className="lang-switch"
@@ -461,56 +463,68 @@ As we vow to honour, support, and care for one another as we always have, it wou
         // style={{ padding: 30 }}
       >
         {/* 텍스트 정보 먼저 배치  맨 위*/}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "flex-start", // ✅ 위 정렬
+            gap: 24,
+            marginBottom: 10,
+            paddingBottom: 10,
+          }}
+        >
+          {/* Groom Name */}
           <div
-  style={{
-      display: "flex",
-    justifyContent: "center",
-    alignItems: "flex-start", // ✅ 위 정렬
-    gap: 24,
-    marginBottom: 10,
-    paddingBottom: 10
-    }}
->
-  {/* Groom Name */}
-  <div
-  style={{
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    lineHeight: 1.3,
-  }}
->
-  {lang === "en" ? (
-    <>
-      <span style={{ fontSize: "1.3em", fontWeight: 600 }}>{landingText[lang].groomName}</span>
-      <span style={{ fontSize: "0.8em", opacity: 0.6 }}>
-        ({landingText[lang].kGroomName})
-      </span>
-    </>
-  ) : (
-    <span style={{ fontWeight: 600, fontSize: "1.3em" }}>{landingText[lang].gGroomName}</span>
-  )}
-</div>
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              lineHeight: 1.3,
+            }}
+          >
+            {lang === "en" ? (
+              <>
+                <span style={{ fontSize: "1.3em", fontWeight: 600 }}>
+                  {landingText[lang].groomName}
+                </span>
+                <span style={{ fontSize: "0.8em", opacity: 0.6 }}>
+                  ({landingText[lang].kGroomName})
+                </span>
+              </>
+            ) : (
+              <span style={{ fontWeight: 600, fontSize: "1.3em" }}>
+                {landingText[lang].gGroomName}
+              </span>
+            )}
+          </div>
 
-  {/* Heart */}
-  <span
-    style={{
-      fontSize: 24,
-      color: "#f7a6b2",
-      fontWeight: 500,
-      alignSelf: "center",
-    }}
-  >
-    ♡
-  </span>
+          {/* Heart */}
+          <span
+            style={{
+              fontSize: 24,
+              color: "#f7a6b2",
+              fontWeight: 500,
+              alignSelf: "center",
+            }}
+          >
+            ♡
+          </span>
 
-  {/* Bride Name */}
-  <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-    <span style={{ fontSize: "1.3em", fontWeight: 600 }}>{landingText[lang].brideName}</span>
-  </div>
-</div>
+          {/* Bride Name */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <span style={{ fontSize: "1.3em", fontWeight: 600 }}>
+              {landingText[lang].brideName}
+            </span>
+          </div>
+        </div>
 
-<hr
+        <hr
           style={{
             width: "80%",
             margin: "0 auto 16px auto",
@@ -518,27 +532,26 @@ As we vow to honour, support, and care for one another as we always have, it wou
           }}
         />
 
-          <div
-            style={{
-              fontSize: lang === "en" ? 16 : 18,
-              color: "#888",
-              fontFamily:
-                lang === "en"
-                  ? "Fira Sans, Arial, sans-serif"
-                  : "Playfair Display, serif",
-              margin: "16px auto 4px auto",
-              fontWeight: 500,
-              letterSpacing: "0.04em",
-              textAlign: "center",
-            }}
-          >
-            {lang === "en" ? (
-              <span className="en-fira">{landingText[lang].date}</span>
-            ) : (
-              landingText[lang].date
-            )}
-          </div>
-        
+        <div
+          style={{
+            fontSize: lang === "en" ? 16 : 18,
+            color: "#888",
+            fontFamily:
+              lang === "en"
+                ? "Fira Sans, Arial, sans-serif"
+                : "Playfair Display, serif",
+            margin: "16px auto 4px auto",
+            fontWeight: 500,
+            letterSpacing: "0.04em",
+            textAlign: "center",
+          }}
+        >
+          {lang === "en" ? (
+            <span className="en-fira">{landingText[lang].date}</span>
+          ) : (
+            landingText[lang].date
+          )}
+        </div>
 
         {/* 사진 아래 배치 */}
         <img
@@ -552,7 +565,6 @@ As we vow to honour, support, and care for one another as we always have, it wou
             margin: 0,
             padding: 0,
             border: "none",
-            
           }}
         />
       </section>
@@ -578,7 +590,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
           }}
         />
         <div
-          className="section-title-en" data-aos="fade-up"
+          className="section-title-en"
+          data-aos="fade-up"
           style={{
             textAlign: "center",
             fontFamily: "Playfair Display,serif",
@@ -589,19 +602,26 @@ As we vow to honour, support, and care for one another as we always have, it wou
         >
           INVITATION
         </div>
-        <div className="section-title-ko" data-aos="fade-up" style={{ fontSize: "15px" }}>
+        <div
+          className="section-title-ko"
+          data-aos="fade-up"
+          style={{ fontSize: "15px" }}
+        >
           {text[lang].invitationTitle}
         </div>
         <div style={{ marginTop: "20px", marginBottom: "20px" }}>
           <ImageTransition />
-</div>
-        <pre data-aos="fade-up" style={{ padding: "10px 20px" }}>{text[lang].invitationMsg}</pre>
+        </div>
+        <pre data-aos="fade-up" style={{ padding: "10px 20px" }}>
+          {text[lang].invitationMsg}
+        </pre>
         <b data-aos="fade-up">{text[lang].nameTwo}</b>
       </section>
 
       {/* D-day 카운트 */}
       <section
-        className="section-box" data-aos="fade-up" 
+        className="section-box"
+        data-aos="fade-up"
         style={{
           padding: "60px 20px",
           backgroundColor: "#fafafa",
@@ -639,9 +659,9 @@ As we vow to honour, support, and care for one another as we always have, it wou
 
         {/* Date info */}
         <div style={{ fontSize: "1.1rem", color: "#555", marginBottom: "4px" }}>
-  {weddingDate.getUTCFullYear()}년 {weddingDate.getUTCMonth() + 1}월 {weddingDate.getUTCDate()}일{" "}
-  {ddayLabels[lang].weekday}
-</div>
+          {weddingDate.getUTCFullYear()}년 {weddingDate.getUTCMonth() + 1}월{" "}
+          {weddingDate.getUTCDate()}일 {ddayLabels[lang].weekday}
+        </div>
         <div
           style={{ fontSize: "0.95rem", color: "#999", marginBottom: "20px" }}
         >
@@ -666,22 +686,19 @@ As we vow to honour, support, and care for one another as we always have, it wou
             border: "none",
           }}
         >
-<img
-          src={process.env.PUBLIC_URL + "/main_photos/calendar.png"}
-          alt="landing-main"
-          style={{
-            width: "100%",
-            height: "auto",
-            objectFit: "contain",
-            display: "block",
-            margin: 0,
-            padding: 0,
-            border: "none",
-            
-          }}
-        />
-
-
+          <img
+            src={process.env.PUBLIC_URL + "/main_photos/calendar.png"}
+            alt="landing-main"
+            style={{
+              width: "100%",
+              height: "auto",
+              objectFit: "contain",
+              display: "block",
+              margin: 0,
+              padding: 0,
+              border: "none",
+            }}
+          />
         </div>
 
         {/* Optional: Divider line */}
@@ -695,79 +712,90 @@ As we vow to honour, support, and care for one another as we always have, it wou
 
         {/* Countdown cards */}
         <div
-  style={{
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    gap: 6,
-    marginBottom: 10,
-    width: "100%",
-    maxWidth: 320, // ✅ 작게 제한
-    marginInline: "auto", // 가운데 정렬
-  }}
->
-  {[
-    { label: ddayLabels[lang].days, value: days },
-    { label: ddayLabels[lang].hour, value: String(hours).padStart(2, "0") },
-    { label: ddayLabels[lang].min, value: String(mins).padStart(2, "0") },
-    { label: ddayLabels[lang].sec, value: String(secs).padStart(2, "0") },
-  ].map((item, i) => (
-    <div
-      key={i}
-      style={{
-        width: "22%",         // ✅ 퍼센트 기반
-        minWidth: 60,
-        padding: "10px 0",
-        background: "#fff",
-        borderRadius: 12,
-        boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
-        textAlign: "center",
-      }}
-    >
-      <div style={{
-        fontSize: "clamp(1rem, 4vw, 1.4rem)", // ✅ 자동 줄어드는 글씨
-        color: "#333",
-      }}>
-        {item.value}
-      </div>
-      <div
-        style={{
-          fontSize: "clamp(0.6rem, 2.5vw, 0.75rem)",
-          color: "#aaa",
-          letterSpacing: "0.08em",
-        }}
-      >
-        {item.label.toUpperCase()}
-      </div>
-    </div>
-  ))}
-</div>
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            gap: 6,
+            marginBottom: 10,
+            width: "100%",
+            maxWidth: 320, // ✅ 작게 제한
+            marginInline: "auto", // 가운데 정렬
+          }}
+        >
+          {[
+            { label: ddayLabels[lang].days, value: days },
+            {
+              label: ddayLabels[lang].hour,
+              value: String(hours).padStart(2, "0"),
+            },
+            {
+              label: ddayLabels[lang].min,
+              value: String(mins).padStart(2, "0"),
+            },
+            {
+              label: ddayLabels[lang].sec,
+              value: String(secs).padStart(2, "0"),
+            },
+          ].map((item, i) => (
+            <div
+              key={i}
+              style={{
+                width: "22%", // ✅ 퍼센트 기반
+                minWidth: 60,
+                padding: "10px 0",
+                background: "#fff",
+                borderRadius: 12,
+                boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
+                textAlign: "center",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: "clamp(1rem, 4vw, 1.4rem)", // ✅ 자동 줄어드는 글씨
+                  color: "#333",
+                }}
+              >
+                {item.value}
+              </div>
+              <div
+                style={{
+                  fontSize: "clamp(0.6rem, 2.5vw, 0.75rem)",
+                  color: "#aaa",
+                  letterSpacing: "0.08em",
+                }}
+              >
+                {item.label.toUpperCase()}
+              </div>
+            </div>
+          ))}
+        </div>
         {/* Countdown footer text */}
         <div style={{ marginTop: 10, fontSize: "0.9rem", color: "#666" }}>
-  {ddayLabels[lang].countdown}
-  <span style={{ color: "#f7a6b2", fontWeight: 600, margin: "0 4px" }}>
-    {dDay}
-  </span>
-  {lang === "ko"
-  ? ddayLabels[lang].left
-  : <span style={{ textTransform: "none" }}>{ddayLabels[lang].days.toLowerCase()}</span>}
-</div>
+          {ddayLabels[lang].countdown}
+          <span style={{ color: "#f7a6b2", fontWeight: 600, margin: "0 4px" }}>
+            {dDay}
+          </span>
+          {lang === "ko" ? (
+            ddayLabels[lang].left
+          ) : (
+            <span style={{ textTransform: "none" }}>
+              {ddayLabels[lang].days.toLowerCase()}
+            </span>
+          )}
+        </div>
       </section>
 
       {/* 부모님 아들 딸 */}
 
       <BrideGroomInfo setIsModalOpen={setIsModalOpen} lang={lang} />
 
-
- 
-
-<GallerySection
-  samplePhotos={samplePhotos}
-  lang={lang}
-  text={text}
-  swipeHandlers={swipeHandlers}
-/>
-
+      <GallerySection
+        samplePhotos={samplePhotos}
+        lang={lang}
+        text={text}
+        swipeHandlers={swipeHandlers}
+      />
 
       {/* //  날짜/장소/시간/오시는 길 */}
       <section
@@ -778,7 +806,6 @@ As we vow to honour, support, and care for one another as we always have, it wou
           marginRight: 0,
         }}
       >
-     
         <img
           src={process.env.PUBLIC_URL + "/overlay/flower.png"}
           alt="landing-main"
@@ -801,12 +828,14 @@ As we vow to honour, support, and care for one another as we always have, it wou
             marginBottom: 16,
 
             color: "#e69ac1",
-          }} data-aos="fade-up"
+          }}
+          data-aos="fade-up"
         >
           LOCATION
         </div>
         <img
-          src="/main_photos/mins_house.png" data-aos="fade-up"
+          src="/main_photos/mins_house.png"
+          data-aos="fade-up"
           alt="Mins' house"
           style={{
             width: "100%",
@@ -817,56 +846,76 @@ As we vow to honour, support, and care for one another as we always have, it wou
           }}
         />
 
-        <div style={{ marginTop: "30px"  }} data-aos="fade-up">
-        <div style={{ textAlign: "center", lineHeight: "1.6" }} data-aos="fade-up">
-  <p style={{ fontWeight: "600", marginBottom: "4px", fontSize: "20px" }} data-aos="fade-up">
-    {text[lang].place}
-  </p>
+        <div style={{ marginTop: "30px" }} data-aos="fade-up">
+          <div
+            style={{ textAlign: "center", lineHeight: "1.6" }}
+            data-aos="fade-up"
+          >
+            <p
+              style={{
+                fontWeight: "600",
+                marginBottom: "4px",
+                fontSize: "20px",
+              }}
+              data-aos="fade-up"
+            >
+              {text[lang].place}
+            </p>
 
-          <div style={{color:"#888888"}}data-aos="fade-up">{text[lang].date}</div>
-          <br></br>
-          <br></br>
+            <div style={{ color: "#888888" }} data-aos="fade-up">
+              {text[lang].date}
+            </div>
+            <br></br>
+            <br></br>
 
-          <div >
-    <span style={{fontSize: "14px", marginBottom: 0}} data-aos="fade-up">{directionText[lang].address}</span>
-    <button data-aos="fade-up"
-      style={{
-        marginLeft: "8px",
-        fontSize: "0.9em",
-        padding: "2px 2px",
-        borderRadius: "4px",
-        border: "1px solid #ccc",
-        cursor: "pointer",
-      }}
-      onClick={() => {
-        navigator.clipboard.writeText(directionText[lang].address);
-        alert("주소가 복사되었습니다!");
-      }}
-    >
-    <FiCopy style={{ marginRight: 4 }} />
-    </button>
-  </div>
-  </div>
+            <div>
+              <span
+                style={{ fontSize: "14px", marginBottom: 0 }}
+                data-aos="fade-up"
+              >
+                {directionText[lang].address}
+              </span>
+              <button
+                data-aos="fade-up"
+                style={{
+                  marginLeft: "8px",
+                  fontSize: "0.9em",
+                  padding: "2px 2px",
+                  borderRadius: "4px",
+                  border: "1px solid #ccc",
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  navigator.clipboard.writeText(directionText[lang].address);
+                  alert("주소가 복사되었습니다!");
+                }}
+              >
+                <FiCopy style={{ marginRight: 4 }} />
+              </button>
+            </div>
+          </div>
         </div>
         <a
-  href="https://map.kakao.com/?map_type=TYPE_MAP&q=%EA%B4%80%ED%9B%88%EB%8F%99+%EB%AF%BC%EC%94%A8+%EA%B0%80%EC%98%A5&hId=8246127&mode=place&urlLevel=3&urlX=499490&urlY=1127716"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  <img data-aos="fade-up"
-    src="/main_photos/vilage_map.png"
-    alt="Mins' map"
-    style={{
-      width: "100%",
-      background: "#f1f1f1",
-      objectFit: "cover",
-      marginBottom: "6px",
-      borderRadius: "6px",
-    }}
-  />
-</a>
+          href="https://map.kakao.com/?map_type=TYPE_MAP&q=%EA%B4%80%ED%9B%88%EB%8F%99+%EB%AF%BC%EC%94%A8+%EA%B0%80%EC%98%A5&hId=8246127&mode=place&urlLevel=3&urlX=499490&urlY=1127716"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            data-aos="fade-up"
+            src="/main_photos/vilage_map.png"
+            alt="Mins' map"
+            style={{
+              width: "100%",
+              background: "#f1f1f1",
+              objectFit: "cover",
+              marginBottom: "6px",
+              borderRadius: "6px",
+            }}
+          />
+        </a>
 
-        <div data-aos="fade-up"
+        <div
+          data-aos="fade-up"
           style={{
             display: "flex",
             justifyContent: "space-around",
@@ -901,7 +950,9 @@ As we vow to honour, support, and care for one another as we always have, it wou
                 border: "solid 1px #eae9e9",
               }}
             />
-            <span style={{ fontSize: 14 }}>{lang === "ko" ? "구글맵" : "Google Map"}</span>
+            <span style={{ fontSize: 14 }}>
+              {lang === "ko" ? "구글맵" : "Google Map"}
+            </span>
           </a>
 
           {/* Naver Map */}
@@ -958,155 +1009,167 @@ As we vow to honour, support, and care for one another as we always have, it wou
                 marginBottom: "6px",
               }}
             />
-            <span style={{ fontSize: 14 }}>{lang === "ko" ? "카카오맵" : "Kakao Map"}</span>
+            <span style={{ fontSize: 14 }}>
+              {lang === "ko" ? "카카오맵" : "Kakao Map"}
+            </span>
           </a>
         </div>
       </section>
 
       <div
-          className="direction-section"
-          style={{ padding: "20px", lineHeight: 1.6, background:"#f6f6f6"}}
-        >
-
- {/* 화면에 보이는 이미지 */}
- <img data-aos="fade-up"
-        src="/main_photos/map_min.png" // public 폴더 안에 위치해야 함
-        alt="Google Map"
-        onClick={() => setShowLargeMap(true)}
-        style={{
-          width: "100%",
-          background: "#f1f1f1",
-          objectFit: "cover",
-          marginBottom: "6px",
-          border: "1px solid #cfcfcf",
-          cursor: "zoom-in",
-          borderRadius: "6px",
-        }}
-      />
-
-      {/* 클릭 시 전체화면으로 확대 */}
-      {showLargeMap && (
-        <div
-          onClick={() => setShowLargeMap(false)}
+        className="direction-section"
+        style={{ padding: "20px", lineHeight: 1.6, background: "#f6f6f6" }}
+      >
+        {/* 화면에 보이는 이미지 */}
+        <img
+          data-aos="fade-up"
+          src="/main_photos/map_min.png" // public 폴더 안에 위치해야 함
+          alt="Google Map"
+          onClick={() => setShowLargeMap(true)}
           style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            backgroundColor: "rgba(0,0,0,0.8)",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 9999,
-            cursor: "zoom-out",
+            width: "100%",
+            background: "#f1f1f1",
+            objectFit: "cover",
+            marginBottom: "6px",
+            border: "1px solid #cfcfcf",
+            cursor: "zoom-in",
+            borderRadius: "6px",
           }}
-        >
-          <img
-            src="/main_photos/map_min.png"
-            alt="Enlarged Map"
+        />
+
+        {/* 클릭 시 전체화면으로 확대 */}
+        {showLargeMap && (
+          <div
+            onClick={() => setShowLargeMap(false)}
             style={{
-              maxWidth: "90vw",
-              maxHeight: "90vh",
-              objectFit: "contain",
-              border: "2px solid white",
-              borderRadius: "8px",
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100vw",
+              height: "100vh",
+              backgroundColor: "rgba(0,0,0,0.8)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              zIndex: 9999,
+              cursor: "zoom-out",
             }}
-          />
+          >
+            <img
+              src="/main_photos/map_min.png"
+              alt="Enlarged Map"
+              style={{
+                maxWidth: "90vw",
+                maxHeight: "90vh",
+                objectFit: "contain",
+                border: "2px solid white",
+                borderRadius: "8px",
+              }}
+            />
+          </div>
+        )}
+        <div style={{ padding: "10px" }}>
+          {/* Subway */}
+          <h4 className="direction_head" data-aos="fade-up">
+            <FaSubway
+              size={16}
+              color="#797979"
+              style={{ marginRight: "6px", verticalAlign: "-2px" }}
+            />
+            {directionText[lang].subwayTitle}
+          </h4>
+          <div
+            className="direction_body"
+            data-aos="fade-up"
+            style={{
+              whiteSpace: "pre-line",
+              fontFamily: "inherit",
+              fontSize: "15px",
+            }}
+          >
+            {directionText[lang].subway}
+          </div>
+
+          {/* Divider */}
+          <div
+            style={{
+              width: "90%",
+              height: "1px",
+              backgroundColor: "#c1c1c1",
+              margin: "12px auto",
+            }}
+            data-aos="fade-up"
+          ></div>
+
+          {/* Bus */}
+          <h4 className="direction_head" data-aos="fade-up">
+            <FaBus
+              size={16}
+              color="#797979"
+              style={{ marginRight: "6px", verticalAlign: "-2px" }}
+            />
+            {directionText[lang].busTitle}
+          </h4>
+          <div
+            className="direction_body"
+            data-aos="fade-up"
+            style={{
+              whiteSpace: "pre-line",
+              fontFamily: "inherit",
+              fontSize: "15px",
+            }}
+          >
+            {directionText[lang].bus}
+          </div>
+
+          {/* Divider */}
+          <div
+            style={{
+              width: "90%",
+              height: "1px",
+              backgroundColor: "#c1c1c1",
+              margin: "12px auto",
+            }}
+            data-aos="fade-up"
+          ></div>
+
+          {/* Parking */}
+          <h4 className="direction_head" data-aos="fade-up">
+            <FaParking
+              size={16}
+              color="#797979"
+              style={{ marginRight: "6px", verticalAlign: "-2px" }}
+            />
+            {directionText[lang].parkingTitle}
+          </h4>
+          <div
+            className="direction_body"
+            data-aos="fade-up"
+            style={{
+              whiteSpace: "pre-line",
+              fontFamily: "inherit",
+              fontSize: "15px",
+            }}
+          >
+            {directionText[lang].parking}
+          </div>
+
+          {/* Note */}
+          <p style={{ marginTop: "12px", fontWeight: 500 }} data-aos="fade-up">
+            {directionText[lang].note}
+          </p>
         </div>
-      )}
-<div style={{ padding: "10px" }}>
-  {/* Subway */}
-  <h4 className="direction_head" data-aos="fade-up">
-    <FaSubway
-      size={16}
-      color="#797979"
-      style={{ marginRight: "6px", verticalAlign: "-2px" }}
-    />
-    {directionText[lang].subwayTitle}
-  </h4>
-  <div
-    className="direction_body"
-    data-aos="fade-up"
-    style={{ whiteSpace: "pre-line", fontFamily: "inherit", fontSize: "15px" }}
-  >
-    {directionText[lang].subway}
-  </div>
-
-  {/* Divider */}
-  <div
-    style={{
-      width: "90%",
-      height: "1px",
-      backgroundColor: "#c1c1c1",
-      margin: "12px auto",
-    }}
-    data-aos="fade-up"
-  ></div>
-
-  {/* Bus */}
-  <h4 className="direction_head" data-aos="fade-up">
-    <FaBus
-      size={16}
-      color="#797979"
-      style={{ marginRight: "6px", verticalAlign: "-2px" }}
-    />
-    {directionText[lang].busTitle}
-  </h4>
-  <div
-    className="direction_body"
-    data-aos="fade-up"
-    style={{ whiteSpace: "pre-line", fontFamily: "inherit", fontSize: "15px" }}
-  >
-    {directionText[lang].bus}
-  </div>
-
-  {/* Divider */}
-  <div
-    style={{
-      width: "90%",
-      height: "1px",
-      backgroundColor: "#c1c1c1",
-      margin: "12px auto",
-    }}
-    data-aos="fade-up"
-  ></div>
-
-  {/* Parking */}
-  <h4 className="direction_head" data-aos="fade-up">
-    <FaParking
-      size={16}
-      color="#797979"
-      style={{ marginRight: "6px", verticalAlign: "-2px" }}
-    />
-    {directionText[lang].parkingTitle}
-  </h4>
-  <div
-    className="direction_body"
-    data-aos="fade-up"
-    style={{ whiteSpace: "pre-line", fontFamily: "inherit", fontSize: "15px" }}
-  >
-    {directionText[lang].parking}
-  </div>
-
-  {/* Note */}
-  <p style={{ marginTop: "12px", fontWeight: 500 }} data-aos="fade-up">
-    {directionText[lang].note}
-  </p>
-</div>
-</div>
-          
+      </div>
 
       <div
         style={{
           display: "flex",
           justifyContent: "center",
         }}
-      >
-      </div>
+      ></div>
 
       {/* 연회 & 식사 안내 */}
-      <section 
+      <section
         className="section-box"
         style={{
           padding: "40px 20px",
@@ -1114,7 +1177,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
           marginRight: 0,
         }}
       >
-        <img data-aos="fade-up"
+        <img
+          data-aos="fade-up"
           src={process.env.PUBLIC_URL + "/overlay/flower.png"}
           alt="landing-main"
           style={{
@@ -1127,48 +1191,66 @@ As we vow to honour, support, and care for one another as we always have, it wou
             padding: 0,
           }}
         />
-        <h3 data-aos="fade-up" style={{ marginBottom: "10px" }}>{text[lang].banquet}</h3>
-        <img data-aos="fade-up"
-            src="/main_photos/table_flower.png"
-            alt="Enlarged Map"
+        <h3 data-aos="fade-up" style={{ marginBottom: "10px" }}>
+          {text[lang].banquet}
+        </h3>
+        <img
+          data-aos="fade-up"
+          src="/main_photos/table_flower.png"
+          alt="Enlarged Map"
+          style={{
+            width: "100%",
+            height: "300px",
+            objectFit: "cover",
+            border: "2px solid white",
+            borderRadius: "6px",
+          }}
+        />
+
+        <div data-aos="fade-up" style={{ margin: "50px auto " }}>
+          <p
+            data-aos="fade-up"
+            style={{ fontWeight: "600", marginBottom: 0, fontSize: "20px" }}
+          >
+            {text[lang].banquetDesc}
+          </p>
+          <p data-aos="fade-up" style={{ fontSize: "15px", color: "#555" }}>
+            {text[lang].mealTime}
+          </p>
+
+          <div
+            data-aos="fade-up"
+            style={{ fontSize: "16px", color: "#5e5e5e", margin: "30px 10px" }}
+          >
+            {text[lang].banquetDesc3}
+          </div>
+        </div>
+
+        <div data-aos="fade-up">
+          <span
+            style={{ fontSize: "14px", marginBottom: 0 }}
+            data-aos="fade-up"
+          >
+            {text[lang].banquetAddr}
+          </span>
+          <button
+            data-aos="fade-up"
             style={{
-              width: "100%",
-              height: "300px",
-              objectFit: "cover",
-              border: "2px solid white",
-              borderRadius: "6px",
+              marginLeft: "8px",
+              fontSize: "0.9em",
+              padding: "2px 2px",
+              borderRadius: "4px",
+              border: "1px solid #ccc",
+              cursor: "pointer",
             }}
-          />
-
-<div data-aos="fade-up" style={{margin:"50px auto " }}>
-<p data-aos="fade-up" style={{ fontWeight: "600", marginBottom:0, fontSize: "20px" }}>
-          {text[lang].banquetDesc}
-        </p>
-        <p data-aos="fade-up" style={{fontSize:"15px", color:"#555"}}>{text[lang].mealTime}</p>
-
-        <div data-aos="fade-up" style={{fontSize:"16px", color:"#5e5e5e", margin:"30px 10px"}}>{text[lang].banquetDesc3}</div>
-</div>
-      
-
-<div  data-aos="fade-up">
-    <span style={{fontSize: "14px", marginBottom: 0}} data-aos="fade-up">{text[lang].banquetAddr}</span>
-    <button data-aos="fade-up"
-      style={{
-        marginLeft: "8px",
-        fontSize: "0.9em",
-        padding: "2px 2px",
-        borderRadius: "4px",
-        border: "1px solid #ccc",
-        cursor: "pointer",
-      }}
-      onClick={() => {
-        navigator.clipboard.writeText(text[lang].banquetAddr);
-        alert("주소가 복사되었습니다!");
-      }}
-    >
-    <FiCopy style={{ marginRight: 4 }} />
-    </button>
-  </div>
+            onClick={() => {
+              navigator.clipboard.writeText(text[lang].banquetAddr);
+              alert("주소가 복사되었습니다!");
+            }}
+          >
+            <FiCopy style={{ marginRight: 4 }} />
+          </button>
+        </div>
 
         <img
           src={process.env.PUBLIC_URL + "/map_hotel.png"}
@@ -1222,7 +1304,9 @@ As we vow to honour, support, and care for one another as we always have, it wou
                 border: "solid 1px #eae9e9",
               }}
             />
-            <span style={{ fontSize: 14 }}>{lang === "ko" ? "구글맵" : "Google Map"}</span>
+            <span style={{ fontSize: 14 }}>
+              {lang === "ko" ? "구글맵" : "Google Map"}
+            </span>
           </a>
 
           {/* Naver Map */}
@@ -1251,7 +1335,9 @@ As we vow to honour, support, and care for one another as we always have, it wou
                 border: "solid 1px #eae9e9",
               }}
             />
-            <span style={{ fontSize: 14 }}>{lang === "ko" ? "네이버지도" : "Naver Map"}</span>
+            <span style={{ fontSize: 14 }}>
+              {lang === "ko" ? "네이버지도" : "Naver Map"}
+            </span>
           </a>
 
           {/* Kakao Map */}
@@ -1279,7 +1365,9 @@ As we vow to honour, support, and care for one another as we always have, it wou
                 marginBottom: "6px",
               }}
             />
-            <span style={{ fontSize: 14 }}>{lang === "ko" ? "카카오맵" : "Kakao Map"}</span>
+            <span style={{ fontSize: 14 }}>
+              {lang === "ko" ? "카카오맵" : "Kakao Map"}
+            </span>
           </a>
         </div>
       </section>
@@ -1347,7 +1435,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
         className="gift"
         style={{ padding: "60px 20px", textAlign: "center" }}
       >
-        <img data-aos="fade-up"
+        <img
+          data-aos="fade-up"
           src={process.env.PUBLIC_URL + "/overlay/flower.png"}
           alt="landing-main"
           style={{
@@ -1360,14 +1449,15 @@ As we vow to honour, support, and care for one another as we always have, it wou
             padding: 0,
           }}
         />
-        <h3 data-aos="fade-up">  {lang === "ko" ? "마음 전하실 곳" : "GIFT"}</h3>
-        <p  className="body_text_deco" data-aos="fade-up">
+        <h3 data-aos="fade-up"> {lang === "ko" ? "마음 전하실 곳" : "GIFT"}</h3>
+        <p className="body_text_deco" data-aos="fade-up">
           {lang === "ko"
             ? "참석이 어려우신 분들을 위해 계좌번호를 기재하였습니다.\n너그러운 마음으로 양해 부탁드립니다."
             : "For those unable to attend, we have provided a bank account below. Thank you for your understanding."}
         </p>
 
-        <div data-aos="fade-up"
+        <div
+          data-aos="fade-up"
           style={{
             marginTop: 16,
             display: "flex",
@@ -1376,7 +1466,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
             flexWrap: "wrap",
           }}
         >
-          <button data-aos="fade-up"
+          <button
+            data-aos="fade-up"
             onClick={() => setShowModal("bride")}
             style={{
               background: "#ffd6e8",
@@ -1384,7 +1475,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
               border: "none",
               padding: "14px 30px",
               borderRadius: "8px",
-              width: "250px"
+              width: "250px",
             }}
           >
             {lang === "ko" ? "계좌번호" : "Account Info"}
@@ -1411,7 +1502,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
 
       {/* 참석의사 */}
 
-<WeddingRSVP text={text} lang={lang} />
+      <WeddingRSVP text={text} lang={lang} />
 
       {/* 방명록 */}
       <section
@@ -1422,7 +1513,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
           marginRight: 0,
         }}
       >
-        <img data-aos="fade-up"
+        <img
+          data-aos="fade-up"
           src={process.env.PUBLIC_URL + "/overlay/flower.png"}
           alt="landing-main"
           style={{
@@ -1436,7 +1528,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
           }}
         />
         <div className="guestbook-title" data-aos="fade-up">
-          <div data-aos="fade-up"
+          <div
+            data-aos="fade-up"
             className="guestbook-en"
             style={{
               fontSize: "1.3rem",
