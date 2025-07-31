@@ -231,6 +231,7 @@ function App() {
       rsvpTitle: "참석 의사 체크하기",
       rsvpDesc:
         "한 분 한 분을 소중히 모실 수 있도록 참석 의사를 전해주시면 감사하겠습니다.",
+      rsvpDesc2: "(2025년 10월 25일 까지)",
       groom: "신랑",
       bride: "신부",
       yes: "참석할게요",
@@ -275,7 +276,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
       account: "Taylor (Myungjin) Woori Bank 1002432266279",
       rsvpTitle: "Check RSVP",
       rsvpDesc:
-        "Please let us know your RSVP so we can warmly prepare for your presence.",
+        "Please let us know your RSVP so we can warmly prepare for your presence",
+      rsvpDesc2: "By Oct 25th 2025.",
       groom: "Groom",
       bride: "Bride",
       yes: "I'll attend",
@@ -1466,6 +1468,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
               padding: "14px 30px",
               borderRadius: "8px",
               width: "250px",
+              fontSize: "16px"
             }}
           >
             {lang === "ko" ? "계좌번호" : "Account Info"}
@@ -1478,7 +1481,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
               showModal === "bride"
                 ? lang === "ko"
                   ? "계좌번호"
-                  : "Bride's Account Info"
+                  : "Account Info"
                 : lang === "ko"
                 ? "신랑 측 계좌번호"
                 : "Groom's Account Info"

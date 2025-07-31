@@ -29,14 +29,14 @@ const GuestbookForm = ({ lang, guestbookText, onNewMessage }) => {
     type="text"
     value={name}
     onChange={(e) => setName(e.target.value)}
-    placeholder="이름"
+    placeholder={lang === "ko" ? "이름" : "Your Name"}
     className="guestbook-input"
     required
   />
   <textarea
     value={msg}
     onChange={(e) => setMsg(e.target.value)}
-    placeholder="축하메시지"
+    placeholder={lang === "ko" ? "축하메세지" : "Message"}
     className="guestbook-textarea"
     required
   />

@@ -26,7 +26,7 @@ const RSVPModal = ({
       <div style={styles.modal}>
         <button style={styles.closeBtn} onClick={closeModal}>✕</button>
         <h3 style={styles.title}>{text[lang].rsvpTitle}</h3>
-        <p style={styles.description}>{text[lang].rsvpDesc}</p>
+        <p style={styles.description}>{text[lang].rsvpDesc} <strong>{text[lang].rsvpDesc2}</strong></p>
 
 
         {/* 참석 여부 */}
@@ -37,6 +37,7 @@ const RSVPModal = ({
               ...styles.toggleButton,
               backgroundColor: rsvpStatus === "Y" ? "#ffd6e8" : "#fff",
               color: rsvpStatus === "Y" ? "#b87c9b" : "#333",
+              fontFamily: "Arial, sans-serif;"
             }}
           >
             {text[lang].yes}
@@ -63,15 +64,20 @@ const RSVPModal = ({
 />
 
         {/* 아이 동반 체크 */}
-        <label style={styles.checkboxLabel}>
-          <input
-            type="checkbox"
-            checked={bringKid}
-            onChange={(e) => setBringKid(e.target.checked)}
-          />
-          {text[lang].includeKid}
-        </label>
-
+        <label
+  style={{
+    ...styles.checkboxLabel,
+    textAlign: "left", // ✅ 왼쪽 정렬
+    display: "block",  // 🔸 필요 시 줄 정렬 보장
+  }}
+>
+  <input
+    type="checkbox"
+    checked={bringKid}
+    onChange={(e) => setBringKid(e.target.checked)}
+  />
+  {text[lang].includeKid}
+</label>
         {/* 아이 수와 나이 드롭다운 */}
         {bringKid && (
           <>
