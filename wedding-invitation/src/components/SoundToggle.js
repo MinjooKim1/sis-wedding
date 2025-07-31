@@ -4,16 +4,16 @@ import { FaPlay } from "react-icons/fa";
 
 export default function SoundToggle({ lang = "ko" }) {
   const [isPlaying, setIsPlaying] = useState(true);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const [showToast, setShowToast] = useState(true);
   const audioRef = useRef(null);
 
-  // ⏱️ 토스트 자동 사라짐 & 오디오 자동 재생 시도
+  // 오토플레이 시도
   useEffect(() => {
     const timer = setTimeout(() => setShowToast(false), 3000);
 
     if (audioRef.current) {
-      // 오토플레이 시도 (muted)
-      audioRef.current.play().catch((e) => {
+      audioRef.current.play().catch(() => {
         console.warn("Autoplay blocked until user interaction.");
       });
     }
@@ -21,18 +21,26 @@ export default function SoundToggle({ lang = "ko" }) {
     return () => clearTimeout(timer);
   }, []);
 
-  // 🔊 토글 시 음소거 해제/적용
   const handleSoundToggle = () => {
-    if (audioRef.current) {
-      const shouldPlay = !isPlaying;
-      audioRef.current.muted = !shouldPlay;
-      if (shouldPlay) {
-        audioRef.current.play();
-      } else {
-        audioRef.current.pause();
-      }
-      setIsPlaying(shouldPlay);
+    if (!audioRef.current) return;
+
+    if (!hasInteracted) {
+      // ✅ 첫 클릭: mute 해제 + 재생 강제 실행
+      audioRef.current.muted = false;
+      audioRef.current.play();
+      setHasInteracted(true);
+      return;
     }
+
+    // 그 이후: 일반적인 토글
+    const shouldPlay = !isPlaying;
+    audioRef.current.muted = !shouldPlay;
+    if (shouldPlay) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+    }
+    setIsPlaying(shouldPlay);
   };
 
   const toastMessage =
@@ -40,7 +48,6 @@ export default function SoundToggle({ lang = "ko" }) {
 
   return (
     <>
-      {/* 🔈 배경음악 */}
       <audio
         ref={audioRef}
         loop
@@ -49,29 +56,33 @@ export default function SoundToggle({ lang = "ko" }) {
         src={process.env.PUBLIC_URL + "/sound.mp3"}
       />
 
-      {/* 📢 토스트 알림 */}
       {showToast && (
         <div
-          style={{
-            position: "fixed",
-            top: 16,
-            left: "50%",
-            transform: "translateX(-50%)",
-            backgroundColor: "#333",
-            color: "#fff",
-            padding: "6px 16px",
-            borderRadius: "20px",
-            fontSize: "14px",
-            zIndex: 9999,
-            opacity: 0.95,
-            transition: "opacity 0.3s ease",
-          }}
-        >
-          {toastMessage}
-        </div>
+        style={{
+          position: "fixed",
+          top: 16,
+          left: "50%",
+          transform: "translateX(-50%)",
+          backgroundColor: "#333",
+          color: "#fff",
+          padding: "6px 16px",
+          borderRadius: "20px",
+          fontSize: "14px",
+          zIndex: 9999,
+          opacity: 0.95,
+          transition: "opacity 0.3s ease",
+      
+          // 💡 추가된 부분
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          maxWidth: "90vw", // 혹시 너무 길어지면 반응형 제한
+        }}
+      >
+        {toastMessage}
+      </div>
       )}
 
-      {/* 🎵 사운드 토글 버튼 */}
       <button
         className="sound-toggle-btn"
         style={{

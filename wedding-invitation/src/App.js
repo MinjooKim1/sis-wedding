@@ -339,18 +339,22 @@ As we vow to honour, support, and care for one another as we always have, it wou
       subwayTitle: "Subway",
       subway:
         "Line 3 or 4 → Get off at Chungmuro Station, Exit 3 or 4 → 5-minute walk",
-      busTitle: "Bus",
-      bus: `Get off at Toegye-ro 3-ga or Hanok Village stop
-  •⁠  ⁠Regular: 104, 105, 140, 421, 463, 507, 604, 7011
-  •⁠  ⁠Circulation: Namsan Loop Bus 02, 05, 90S Tour
-  •⁠  ⁠Airport: 6001, 6015, 6021`,
-      parkingTitle: "Parking Information",
-      parking: `•⁠  ⁠Public parking is available inside Namsangol Hanok Village
-   (Paid parking / Limited spaces)
-  •⁠  ⁠Free 2-hour parking is available at Solloago Hotel (Reception venue)
-   → Approximately 5–10 minutes on foot from the ceremony venue
-   → We recommend using Solago Hotel parking if driving.`,
-      note: "※ For your convenience, we kindly suggest using public transportation or parking at Solago Hotel.",
+        busTitle: "Bus",
+        bus: `Get off at Toegye-ro 3-ga or Hanok Village stop
+        
+        • Regular: 104, 105, 140, 421, 463, 507, 604, 7011
+        • Circulation: Namsan Loop Bus 02, 05, 90S Tour
+        • Airport: 6001, 6015, 6021`,
+        
+        parkingTitle: "Parking Information",
+        parking: `• Public parking is available inside Namsangol Hanok Village  
+        (Paid parking / Limited spaces)
+        
+        • Free 2-hour parking is available at Solago Hotel (Reception venue)  
+        → Approximately 5–10 minutes on foot from the ceremony venue  
+        → We recommend using Solago Hotel parking if driving.`,
+        
+        note: "※ For your convenience, we kindly suggest using public transportation or parking at Solago Hotel.",
     },
   };
 
@@ -1162,47 +1166,85 @@ As we vow to honour, support, and care for one another as we always have, it wou
           />
         </div>
       )}
-<div style={{padding:"10px"}}>
-<h4 className="direction_head" data-aos="fade-up"><FaSubway size={16} color="#797979" style={{ marginRight: "6px", verticalAlign: "-2px" }} />{directionText[lang].subwayTitle}</h4>
-          <pre className="direction_body" data-aos="fade-up">{directionText[lang].subway}</pre>
+<div style={{ padding: "10px" }}>
+  {/* Subway */}
+  <h4 className="direction_head" data-aos="fade-up">
+    <FaSubway
+      size={16}
+      color="#797979"
+      style={{ marginRight: "6px", verticalAlign: "-2px" }}
+    />
+    {directionText[lang].subwayTitle}
+  </h4>
+  <div
+    className="direction_body"
+    data-aos="fade-up"
+    style={{ whiteSpace: "pre-line", fontFamily: "inherit", fontSize: "15px" }}
+  >
+    {directionText[lang].subway}
+  </div>
 
-          <div
-            style={{
-              width: "90%",
-              height: "1px",
-              backgroundColor: "#c1c1c1",
-              margin: "12px auto",
-            }} data-aos="fade-up"
-          ></div>
+  {/* Divider */}
+  <div
+    style={{
+      width: "90%",
+      height: "1px",
+      backgroundColor: "#c1c1c1",
+      margin: "12px auto",
+    }}
+    data-aos="fade-up"
+  ></div>
 
-          <h4 className="direction_head" data-aos="fade-up"><FaBus size={16} color="#797979" style={{ marginRight: "6px", verticalAlign: "-2px" }} />{directionText[lang].busTitle}</h4>
-          <pre className="direction_body" data-aos="fade-up">
-            {directionText[lang].bus}
-          </pre>
+  {/* Bus */}
+  <h4 className="direction_head" data-aos="fade-up">
+    <FaBus
+      size={16}
+      color="#797979"
+      style={{ marginRight: "6px", verticalAlign: "-2px" }}
+    />
+    {directionText[lang].busTitle}
+  </h4>
+  <div
+    className="direction_body"
+    data-aos="fade-up"
+    style={{ whiteSpace: "pre-line", fontFamily: "inherit", fontSize: "15px" }}
+  >
+    {directionText[lang].bus}
+  </div>
 
-          <div
-            style={{
-              width: "90%",
-              height: "1px",
-              backgroundColor: "#c1c1c1",
-              margin: "12px auto",
-            }} data-aos="fade-up"
-          ></div>
+  {/* Divider */}
+  <div
+    style={{
+      width: "90%",
+      height: "1px",
+      backgroundColor: "#c1c1c1",
+      margin: "12px auto",
+    }}
+    data-aos="fade-up"
+  ></div>
 
-          <h4 className="direction_head" data-aos="fade-up"><FaParking
-    size={16}
-    color="#797979"
-    style={{ marginRight: "6px", verticalAlign: "-2px" }} data-aos="fade-up"
-  />{directionText[lang].parkingTitle}</h4>
-          <pre className="direction_body" data-aos="fade-up">
-            {directionText[lang].parking}
-          </pre>
+  {/* Parking */}
+  <h4 className="direction_head" data-aos="fade-up">
+    <FaParking
+      size={16}
+      color="#797979"
+      style={{ marginRight: "6px", verticalAlign: "-2px" }}
+    />
+    {directionText[lang].parkingTitle}
+  </h4>
+  <div
+    className="direction_body"
+    data-aos="fade-up"
+    style={{ whiteSpace: "pre-line", fontFamily: "inherit", fontSize: "15px" }}
+  >
+    {directionText[lang].parking}
+  </div>
 
-          <p style={{ marginTop: "12px", fontWeight: 500 }} data-aos="fade-up">
-            {directionText[lang].note}
-          </p>
-        </div>
-
+  {/* Note */}
+  <p style={{ marginTop: "12px", fontWeight: 500 }} data-aos="fade-up">
+    {directionText[lang].note}
+  </p>
+</div>
 </div>
           
 
