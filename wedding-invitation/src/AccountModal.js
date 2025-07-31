@@ -49,6 +49,7 @@ const styles = {
     borderRadius: "12px",
     width: "90%",
     maxWidth: "400px",
+    margin: "0 10px",
     boxShadow: "0 2px 10px rgba(0,0,0,0.2)",
   },
   modalHeader: {

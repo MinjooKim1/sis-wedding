@@ -20,6 +20,7 @@ const RSVPModal = ({
     lang,
     text,
   }) => {
+  if (!rsvpStatus) setRsvpStatus("Y");
   return (
     <div style={styles.overlay}>
       <div style={styles.modal}>
@@ -133,7 +134,7 @@ const styles = {
   },
   modal: {
     backgroundColor: "#fff", padding: "32px", borderRadius: "12px",
-    width: "90%", maxWidth: "400px", position: "relative",
+    width: "90%", maxWidth: "400px", position: "relative", margin: "0 10px"
   },
   closeBtn: {
     position: "absolute", top: "16px", right: "16px", border: "none",

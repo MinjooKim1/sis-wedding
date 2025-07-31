@@ -66,7 +66,7 @@ const WeddingRSVP = ({ text, lang }) => {
           margin: "10px auto",
         }}
       />
-      <h3 data-aos="fade-up">{text[lang].rsvp}</h3>
+      <h3 data-aos="fade-up">{text[lang].rsvpTitle}</h3>
       <p data-aos="fade-up">{text[lang].rsvpDesc}</p>
 
       <button
@@ -75,14 +75,15 @@ const WeddingRSVP = ({ text, lang }) => {
         style={{
           marginTop: "24px",
           backgroundColor: "#ffd6e8",
-          color: "#b87c9b",
+          color: "#914e6d",
           border: "none",
           padding: "12px 24px",
-          borderRadius: "12px",
+          borderRadius: "8px",
           cursor: "pointer",
+          width: "250px"
         }}
       >
-        참석 의사 체크하기
+        {text[lang].submit}
       </button>
 
       {isModalOpen && (

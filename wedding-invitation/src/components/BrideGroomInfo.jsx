@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./BrideGroomInfo.css";
 
-const BrideGroomInfo = ({ lang }) => {
-
+function BrideGroomInfo({ setIsModalOpen, lang }){
+  
   return (
     <section className="bridegroom-wrapper">
 
@@ -20,7 +20,7 @@ const BrideGroomInfo = ({ lang }) => {
 
       <hr className="divider" />
 
-      <div className="person-section" data-aos="fade-up">
+      <div className="person-section" data-aos="fade-up" style={{marginBottom: "10px"}}>
         <div className="badge">{lang === "ko" ? "신부" : "Bride"}</div>
         <div className="name">{lang === "ko" ? "명진" : "Taylor"}</div>
         <div className="roman">{lang === "ko" ? "Myungjin" : "Myungjin"}</div>
@@ -30,6 +30,23 @@ const BrideGroomInfo = ({ lang }) => {
             : <><span style={{ color: "#919191" }}>Daughter of</span> <br /> Jaedeuk <span className="flower">|</span> Kyungja</>
           }
         </div>
+        <div style={{ textAlign: "center" }}>
+        <button 
+        style={{
+          backgroundColor: "#ffd6e8",
+          color: "#914e6d",
+          border: "none",
+          marginTop: "20px",
+          borderRadius: "12px",
+          padding: "12px 24px",
+          fontSize: "16px",
+          cursor: "pointer",
+          width: "250px"
+        }}
+        onClick={() => setIsModalOpen(true)}>
+        {lang === "ko" ? "연락하기" : "Contact"}
+      </button>
+    </div>
       </div>
     </section>
   );

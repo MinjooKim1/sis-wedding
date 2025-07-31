@@ -12,7 +12,6 @@ import {
   orderBy,
 } from "firebase/firestore";
 import AccountModal from "./AccountModal";
-import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // 기본 스타일
 import 'react-image-lightbox/style.css';
 import Lightbox from 'react-image-lightbox';
@@ -25,10 +24,10 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import ImageTransition from "./components/ImageTransition"; // 경로 주의!
 import BrideGroomInfo from "./components/BrideGroomInfo";
+import ContactModal from "./components/ContactModal";
 import SoundToggle from "./components/SoundToggle";
 import GallerySection from "./components/PhotoGallery";
 import WeddingRSVP from "./components/WeddingRSVP"; 
-
 
 function App() {
   const [lang, setLang] = useState("ko");
@@ -43,6 +42,7 @@ function App() {
   const [mapModal, setMapModal] = useState({ open: false, src: "" });
   const [showModal, setShowModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [showLargeMap, setShowLargeMap] = useState(false);
   const brideAccounts = [
     { bank: "신한은행", number: "110-385-015325", holder: "심경자" },
@@ -279,7 +279,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
     yes: "I'll attend",
     no: "Sorry, can't make it",
     name: "Your name",
-    includeKid: "I'm bringing a child",
+    includeKid: "I'm bringing a child or children",
     kidCount: "Number of kids",
     kidAge: "Child's age",
     submit: "Submit RSVP",
@@ -434,6 +434,13 @@ As we vow to honour, support, and care for one another as we always have, it wou
         {/* 사운드 아이콘 */}
         <SoundToggle lang={lang}  />
 
+        {/* Contact modal */}
+
+        <ContactModal
+        isOpen={isModalOpen}
+        closeModal={() => setIsModalOpen(false)}
+        lang={lang}
+      />
         {/* 언어 변경 버튼 */}
         <div
           className="lang-switch"
@@ -659,29 +666,22 @@ As we vow to honour, support, and care for one another as we always have, it wou
             border: "none",
           }}
         >
-          <Calendar
-            value={weddingDate}
-            locale={lang === "ko" ? "ko-KR" : "en-US"}
-            calendarType="iso8601"
-            formatShortWeekday={(locale, date) =>
-              ["S", "M", "T", "W", "T", "F", "S"][date.getDay()]
-            }
-            formatDay={(locale, date) => date.getDate()} // ✅ 여기서 "7", "8"만 출력되게!
-            tileClassName={({ date, view }) => {
-              const classes = [];
-              if (
-                view === "month" &&
-                date.getDate() === weddingDate.getDate() &&
-                date.getMonth() === weddingDate.getMonth() &&
-                date.getFullYear() === weddingDate.getFullYear()
-              ) {
-                classes.push("highlight");
-              }
-              if (date.getDay() === 0) classes.push("sunday");
-              if (date.getDay() === 6) classes.push("saturday");
-              return classes;
-            }}
-          />
+<img
+          src={process.env.PUBLIC_URL + "/main_photos/calendar.png"}
+          alt="landing-main"
+          style={{
+            width: "100%",
+            height: "auto",
+            objectFit: "contain",
+            display: "block",
+            margin: 0,
+            padding: 0,
+            border: "none",
+            
+          }}
+        />
+
+
         </div>
 
         {/* Optional: Divider line */}
@@ -756,157 +756,10 @@ As we vow to honour, support, and care for one another as we always have, it wou
 
       {/* 부모님 아들 딸 */}
 
-      <BrideGroomInfo lang={lang} />
+      <BrideGroomInfo setIsModalOpen={setIsModalOpen} lang={lang} />
 
-      {/* GALLERY 섹션 */}
-      {/* <section className="gallery-section" data-aos="fade-up" style={{ padding: "40px 20px" }}>
-        <img
-          src={process.env.PUBLIC_URL + "/overlay/flower.png"}
-          alt="landing-main"
-          style={{
-            width: "50px",
-            height: "50px",
-            objectFit: "cover",
-            display: "block",
-            margin: "10px auto",
-            marginTop: 20,
-            padding: 0,
-          }}
-        />
-        <div
-          style={{
-            textAlign: "center",
-            fontFamily: "Playfair Display,serif",
-            fontSize: "1.5rem",
-            letterSpacing: "0.3em",
-            marginBottom: 30,
-            color: "#b87c9b",
-          }}
-        >
-          GALLERY
-        </div>
-        <div
-          style={{
-            fontSize: 14,
-            textAlign: "center",
-            color: "#888",
-            fontFamily:
-              lang === "en"
-                ? "Fira Sans, Arial, sans-serif"
-                : "Playfair Display, serif",
-            marginBottom: 12,
-            fontWeight: 500,
-            letterSpacing: "0.04em",
-          }}
-        >
-          <span className={lang === "en" ? "en-fira" : undefined}>
-            {text[lang]?.photoInfo}
-          </span>
-        </div>
 
-        {/* 🟩 3x4 이미지 그리드 */}
-        {/* <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "8px",
-            maxWidth: "900px",
-            margin: "0 auto",
-          }}
-        >
-          {samplePhotos.slice(0, 12).map((url, idx) => (
-            <img
-              key={idx}
-              src={url}
-              alt={`Wedding ${idx + 1}`}
-              onClick={() => {
-                setPhotoIdx(idx);
-                setIsOpen(true);
-              }}
-              style={{
-                width: "100%",
-                aspectRatio: "1",
-                objectFit: "cover",
-                objectPosition: "top",
-                cursor: "pointer",
-              }}
-            />
-          ))}
-        </div>
-
-        {/* 🖼️ 선택된 큰 이미지 (그리드 밑) */}
-        {/* <div
-          {...swipeHandlers} // ✅ 스와이프 감지 연결
-          style={{
-            marginTop: "20px",
-            textAlign: "center",
-          }}
-        >
-          <img
-            src={samplePhotos[photoIdx]}
-            alt="Selected wedding"
-            onClick={() => setIsOpen(true)} // 기존 클릭으로 열기 유지
-            style={{
-              width: "100%",
-              maxWidth: "700px",
-              height: "70vh",
-              objectFit: "cover",
-              objectPosition: "top",
-
-              boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
-              cursor: "pointer",
-            }}
-          />
-          <div style={{ marginTop: 12, color: "#888" }}>
-            {photoIdx + 1} / {samplePhotos.length}
-          </div>
-        </div>
-
-        {/* 📸 Lightbox */}
-        {/* {isOpen && (
-          <>
-            <Lightbox
-              mainSrc={samplePhotos[photoIdx]}
-              nextSrc={samplePhotos[(photoIdx + 1) % samplePhotos.length]}
-              prevSrc={
-                samplePhotos[
-                  (photoIdx + samplePhotos.length - 1) % samplePhotos.length
-                ]
-              }
-              onCloseRequest={() => setIsOpen(false)}
-              onMovePrevRequest={() =>
-                setPhotoIdx(
-                  (photoIdx + samplePhotos.length - 1) % samplePhotos.length
-                )
-              }
-              onMoveNextRequest={() =>
-                setPhotoIdx((photoIdx + 1) % samplePhotos.length)
-              }
-              imageTitle={`${photoIdx + 1} / ${samplePhotos.length}`}
-              reactModalStyle={{ overlay: { zIndex: 9999 } }}
-            />
-
-            {/* ❌ Optional close button */}
-            {/* <button
-              onClick={() => setIsOpen(false)}
-              style={{
-                position: "fixed",
-                top: "20px",
-                right: "20px",
-                zIndex: 10000,
-                background: "white",
-                border: "none",
-                fontSize: "1.5rem",
-                borderRadius: "50%",
-                padding: "5px 10px",
-                cursor: "pointer",
-              }}
-            >
-              ✕
-            </button>
-          </>
-        )}
-      </section> */}
+ 
 
 <GallerySection
   samplePhotos={samplePhotos}
@@ -925,22 +778,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
           marginRight: 0,
         }}
       >
-        {/* <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <div
-            style={{
-              width: "80%",
-              height: "1px",
-              backgroundColor: "#e0e0e0",
-              margin: "12px 0",
-            }}
-          ></div>
-        </div> */}
-
+     
         <img
           src={process.env.PUBLIC_URL + "/overlay/flower.png"}
           alt="landing-main"
@@ -1063,7 +901,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
                 border: "solid 1px #eae9e9",
               }}
             />
-            <span style={{ fontSize: 14 }}>구글지도</span>
+            <span style={{ fontSize: 14 }}>{lang === "ko" ? "구글맵" : "Google Map"}</span>
           </a>
 
           {/* Naver Map */}
@@ -1120,7 +958,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
                 marginBottom: "6px",
               }}
             />
-            <span style={{ fontSize: 14 }}>카카오맵</span>
+            <span style={{ fontSize: 14 }}>{lang === "ko" ? "카카오맵" : "Kakao Map"}</span>
           </a>
         </div>
       </section>
@@ -1295,8 +1133,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
             alt="Enlarged Map"
             style={{
               width: "100%",
-              height: "250px",
-              objectFit: "fill",
+              height: "300px",
+              objectFit: "cover",
               border: "2px solid white",
               borderRadius: "6px",
             }}
@@ -1384,7 +1222,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
                 border: "solid 1px #eae9e9",
               }}
             />
-            <span style={{ fontSize: 14 }}>구글지도</span>
+            <span style={{ fontSize: 14 }}>{lang === "ko" ? "구글맵" : "Google Map"}</span>
           </a>
 
           {/* Naver Map */}
@@ -1413,7 +1251,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
                 border: "solid 1px #eae9e9",
               }}
             />
-            <span style={{ fontSize: 14 }}>네이버지도</span>
+            <span style={{ fontSize: 14 }}>{lang === "ko" ? "네이버지도" : "Naver Map"}</span>
           </a>
 
           {/* Kakao Map */}
@@ -1441,7 +1279,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
                 marginBottom: "6px",
               }}
             />
-            <span style={{ fontSize: 14 }}>카카오맵</span>
+            <span style={{ fontSize: 14 }}>{lang === "ko" ? "카카오맵" : "Kakao Map"}</span>
           </a>
         </div>
       </section>
@@ -1541,10 +1379,12 @@ As we vow to honour, support, and care for one another as we always have, it wou
           <button data-aos="fade-up"
             onClick={() => setShowModal("bride")}
             style={{
-              border: "1px solid rgb(213 213 213)",
+              background: "#ffd6e8",
+              color: "#914e6d",
+              border: "none",
               padding: "14px 30px",
-              borderRadius: "30px",
-              background: "white",
+              borderRadius: "8px",
+              width: "250px"
             }}
           >
             {lang === "ko" ? "계좌번호" : "Account Info"}
@@ -1569,83 +1409,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
         )}
       </section>
 
-      {/* 참석 의사 전달 */}
-
-      {/* <section
-        className="rsvp"
-        style={{
-          padding: "60px 20px 80px 20px",
-          marginLeft: 0,
-          marginRight: 0,
-        }}
-      >
-        <img data-aos="fade-up"
-          src={process.env.PUBLIC_URL + "/overlay/flower.png"}
-          alt="landing-main"
-          style={{
-            width: "50px",
-            height: "50px",
-            objectFit: "cover",
-            display: "block",
-            margin: "10px auto",
-            
-            padding: 0,
-          }}
-        />
-        <h3 data-aos="fade-up">{text[lang].rsvp}</h3>
-        <p data-aos="fade-up">{text[lang].rsvpDesc}</p>
-
-        <form
-          onSubmit={async (e) => {
-            e.preventDefault();
-            if (!rsvpName) {
-              alert(
-                lang === "ko"
-                  ? "이름을 입력해주세요."
-                  : "Please enter your name."
-              );
-              return;
-            }
-
-            try {
-              await addDoc(collection(db, "rsvps"), {
-                name: rsvpName,
-                status: rsvpStatus,
-                createdAt: Timestamp.now(),
-              });
-              alert(
-                lang === "ko"
-                  ? "참석 의사가 저장되었어요!"
-                  : "RSVP saved successfully!"
-              );
-              setRsvpName("");
-              setRsvpStatus("Y");
-            } catch (error) {
-              console.error("RSVP 저장 오류", error);
-              alert(
-                lang === "ko" ? "저장에 실패했어요." : "Failed to save RSVP."
-              );
-            }
-          }}
-        >
-          <input
-            type="text"
-            value={rsvpName}
-            onChange={(e) => setRsvpName(e.target.value)}
-            placeholder={text[lang].name}
-          />
-          <select
-            value={rsvpStatus}
-            onChange={(e) => setRsvpStatus(e.target.value)}
-          >
-            <option value="Y">{text[lang].yes}</option>
-            <option value="N">{text[lang].no}</option>
-          </select>
-          <button type="submit" className="deliver-btn">
-            {text[lang].submit}
-          </button>
-        </form>
-      </section> */}
+      {/* 참석의사 */}
 
 <WeddingRSVP text={text} lang={lang} />
 
@@ -1653,7 +1417,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       <section
         className="guestbook"
         style={{
-          padding: "60px 20px 80px 20px",
+          padding: "60px 25px 80px 25px",
           marginLeft: 0,
           marginRight: 0,
         }}
