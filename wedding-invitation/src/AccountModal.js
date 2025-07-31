@@ -18,8 +18,8 @@ const AccountModal = ({ title, accounts, onClose, isKorean = true }) => {
         {accounts.map((acc, i) => (
           <div key={i} style={styles.row}>
             <div>
-              <div><strong>{acc.bank}</strong></div>
-              <div>{isKorean ? "예금주" : "Account Holder"}: {acc.holder}</div>
+              <div style={styles.textAline}><strong>{acc.bank}</strong></div>
+              <div style={styles.textAline}>{isKorean ? "예금주" : "Account Holder"}: {acc.holder}</div>
             </div>
             <div style={styles.copyBox}>
               <span style={styles.accountNum}>{acc.number}</span>
@@ -67,6 +67,10 @@ const styles = {
   accountNum: {
     fontWeight: "bold",
   },
+  textAline: {
+ display: "flex", justifyContent: "left", alignItems: "center"
+  },
+
   copyBtn: {
     marginLeft: "10px",
     padding: "5px 10px",

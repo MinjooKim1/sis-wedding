@@ -532,6 +532,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
             margin: 0,
             padding: 0,
             border: "none",
+            
           }}
         />
       </section>
@@ -959,6 +960,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
             background: "#f1f1f1",
             objectFit: "cover",
             marginBottom: "6px",
+            borderRadius: "6px",
           }}
         />
 
@@ -1006,6 +1008,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       background: "#f1f1f1",
       objectFit: "cover",
       marginBottom: "6px",
+      borderRadius: "6px",
     }}
   />
 </a>
@@ -1124,6 +1127,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
           marginBottom: "6px",
           border: "1px solid #cfcfcf",
           cursor: "zoom-in",
+          borderRadius: "6px",
         }}
       />
 
@@ -1241,7 +1245,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
               height: "250px",
               objectFit: "fill",
               border: "2px solid white",
-              borderRadius: "8px",
+              borderRadius: "6px",
             }}
           />
 
@@ -1490,7 +1494,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
               background: "white",
             }}
           >
-            {lang === "ko" ? "신랑 신부 측 계좌번호" : "Account Info"}
+            {lang === "ko" ? "계좌번호" : "Account Info"}
           </button>
         </div>
 
@@ -1499,7 +1503,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
             title={
               showModal === "bride"
                 ? lang === "ko"
-                  ? "신랑 신부 측 계좌번호"
+                  ? "계좌번호"
                   : "Bride's Account Info"
                 : lang === "ko"
                 ? "신랑 측 계좌번호"

@@ -21,7 +21,7 @@ const ImageTransition = () => {
         position: "relative",
         width: "100%",
         maxWidth: "600px",
-        height: "400px",
+        height: "350px",
         margin: "0 auto",
         overflow: "hidden",
       }}
