@@ -139,7 +139,7 @@ const styles = {
     justifyContent: "center", alignItems: "center",
   },
   modal: {
-    backgroundColor: "#fff", padding: "32px", borderRadius: "12px",
+    backgroundColor: "#fff", padding: "20px", borderRadius: "12px",
     width: "90%", maxWidth: "400px", position: "relative", margin: "0 10px"
   },
   closeBtn: {

@@ -140,13 +140,12 @@ function App() {
 
   // main_photos 폴더의 9장 이미지 사용
   const mainPhotoFiles = [
-    "WS_00927 ed.png",
+    "main3.png",
     "WS_01847.png",
     "WS_01621.png",
     "WS_00781.png",
     "WS_00597.png",
     "WS_00728.png", //6
-    "WS_00344.png",
     "WS_00713.png",
     "WS_01759.png", //9
     "WS_00321.png",
@@ -176,6 +175,7 @@ function App() {
 "WS_01676.png",
 "WS_01746.png",
 "WS_02017.png",
+"WS_00927 ed.png",
   ];
   const samplePhotos = mainPhotoFiles.map(
     (f) => process.env.PUBLIC_URL + "/main_photos/" + f
@@ -292,10 +292,10 @@ As we vow to honour, support, and care for one another as we always have, it wou
       giftDesc:
         "For those unable to attend, we have provided a bank account below. Thank you for your understanding.",
       account: "Taylor (Myungjin) Woori Bank 1002432266279",
-      rsvpTitle: "Check RSVP",
+      rsvpTitle: "RSVP",
       rsvpDesc:
-        "Please let us know your RSVP by October 25, 2025,",
-      rsvpDesc2: "by October 25, 2025",
+        "Please let us know your RSVP",
+      rsvpDesc2: "by October 25, 2025, ",
       rsvpDesc3: "so we can warmly prepare for your presence.",
       groom: "Groom",
       bride: "Bride",
@@ -305,7 +305,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       includeKid: " I will be bringing a child/children",
       kidCount: "Number of kids",
       kidAge: "Child's age",
-      submit: "RSVP",
+      submit: "Submit",
     },
   };
 
@@ -570,7 +570,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
           alt="landing-main"
           style={{
             width: "100%",
-            height: "80vh",
+            height: "75h",
             objectFit: "cover",
             objectPosition: "top", // ✅ 위쪽 기준으로 보여지게 함
             display: "block",
