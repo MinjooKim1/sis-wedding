@@ -10,16 +10,14 @@ export default function SoundToggle({ lang = "ko" }) {
 
   // 오토플레이 시도
   useEffect(() => {
+    // 토스트 다시 보여주기
+    setShowToast(true);
+  
+    // 기존 타이머 정리 후 새로운 타이머 설정
     const timer = setTimeout(() => setShowToast(false), 3000);
-
-    if (audioRef.current) {
-      audioRef.current.play().catch(() => {
-        console.warn("Autoplay blocked until user interaction.");
-      });
-    }
-
-    return () => clearTimeout(timer);
-  }, []);
+  
+    return () => clearTimeout(timer); // cleanup
+  }, [lang]);
 
   const handleSoundToggle = () => {
     if (!audioRef.current) return;
