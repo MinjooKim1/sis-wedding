@@ -28,6 +28,8 @@ import ContactModal from "./components/ContactModal";
 import SoundToggle from "./components/SoundToggle";
 import GallerySection from "./components/PhotoGallery";
 import WeddingRSVP from "./components/WeddingRSVP";
+import IntroOverlay from "./IntroOverlay";
+import Handwriting from "./components/Handwriting";
 
 function App() {
   const [lang, setLang] = useState("ko");
@@ -175,7 +177,6 @@ function App() {
 "WS_01676.png",
 "WS_01746.png",
 "WS_02017.png",
-"WS_00927 ed.png",
   ];
   const samplePhotos = mainPhotoFiles.map(
     (f) => process.env.PUBLIC_URL + "/main_photos/" + f
@@ -216,6 +217,40 @@ function App() {
   const indexOfLast = currentPage * commentsPerPage;
   const indexOfFirst = indexOfLast - commentsPerPage;
   const currentComments = guestbookList.slice(indexOfFirst, indexOfLast);
+
+  //  오버레이 스타트
+  const [showOverlay, setShowOverlay] = useState(true);
+  useEffect(() => {
+    if (showOverlay) {
+      document.body.style.overflow = 'hidden'; // 스크롤 막기
+    } else {
+      document.body.style.overflow = 'auto';   // 스크롤 다시 허용
+    }
+  
+    return () => {
+      document.body.style.overflow = 'auto'; // 컴포넌트 언마운트 시 초기화
+    };
+  }, [showOverlay]);
+
+  const styles = {
+    overlay: {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100vw",
+      height: "100vh",
+      backgroundColor: "rgba(0,0,0,0.8)",
+      zIndex: 9999,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+  };
+
+useEffect(() => {
+  const timer = setTimeout(() => setShowOverlay(false), 4000); // 4초 후 사라짐
+  return () => clearTimeout(timer);
+}, []);
 
   // 다국어 텍스트
   const text = {
@@ -294,7 +329,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       account: "Taylor (Myungjin) Woori Bank 1002432266279",
       rsvpTitle: "RSVP",
       rsvpDesc:
-        "Please let us know your RSVP",
+        "Please let us know your RSVP ",
       rsvpDesc2: "by October 25, 2025, ",
       rsvpDesc3: "so we can warmly prepare for your presence.",
       groom: "Groom",
@@ -435,6 +470,12 @@ As we vow to honour, support, and care for one another as we always have, it wou
   };
 
   return (
+
+// 오버레이 스타트 
+<>
+{/* Overlay */}
+{showOverlay && <Handwriting />}
+
     <div
       className="invitation-container"
       style={{
@@ -1609,6 +1650,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
         </div>
       </section>
     </div>
+    </>
   );
 }
 export default App;

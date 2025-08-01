@@ -68,8 +68,18 @@ const WeddingRSVP = ({ text, lang }) => {
       />
       <h3 data-aos="fade-up">{text[lang].rsvpTitle}</h3>
 
-      <p data-aos="fade-up">{text[lang].rsvpDesc} <strong>{text[lang].rsvpDesc2}</strong>{text[lang].rsvpDesc3}</p>
-      <button
+      <p data-aos="fade-up">
+  {text[lang].rsvpDesc}
+  {lang === "ko" ? (
+    <>
+      <br />
+      <strong>{text[lang].rsvpDesc2}</strong>
+    </>
+  ) : (
+    <strong>{text[lang].rsvpDesc2}</strong>
+  )}
+  {text[lang].rsvpDesc3}
+</p>      <button
         className="deliver-btn"
         onClick={() => setIsModalOpen(true)}
         style={{

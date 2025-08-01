@@ -75,8 +75,8 @@ const styles = {
   copyBtn: {
     marginLeft: "10px",
     padding: "5px 10px",
-    backgroundColor: "#4db6ac",
-    color: "#fff",
+    backgroundColor: "#ffd6e8",
+    color: "#914e6d",
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",

@@ -70,7 +70,7 @@ export default function SoundToggle({ lang = "ko" }) {
           fontSize: "14px",
           zIndex: 9999,
           opacity: 0.95,
-          transition: "opacity 0.3s ease",
+          transition: "opacity 1s ease",
       
           // 💡 추가된 부분
           whiteSpace: "nowrap",
