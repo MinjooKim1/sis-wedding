@@ -29,7 +29,7 @@ import SoundToggle from "./components/SoundToggle";
 import GallerySection from "./components/PhotoGallery";
 import WeddingRSVP from "./components/WeddingRSVP";
 import IntroOverlay from "./IntroOverlay";
-import Handwriting from "./components/Handwriting";
+import Handwriting from './components/Handwriting';
 
 function App() {
   const [lang, setLang] = useState("ko");
@@ -473,8 +473,9 @@ As we vow to honour, support, and care for one another as we always have, it wou
 
 // 오버레이 스타트 
 <>
-{/* Overlay */}
-{showOverlay && <Handwriting />}
+{/* Overlay
+{showOverlay && <Handwriting />} */}
+<Handwriting open={true} maxWidth={380} autoCloseMs={0} />
 
     <div
       className="invitation-container"
