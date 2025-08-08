@@ -475,7 +475,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
 <>
 {/* Overlay
 {showOverlay && <Handwriting />} */}
-<Handwriting open={true} maxWidth={380} autoCloseMs={0} />
+<Handwriting open={true} maxWidth={380} autoCloseMs={2100} />
 
     <div
       className="invitation-container"
