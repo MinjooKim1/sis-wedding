@@ -2,43 +2,60 @@ import { useState, useRef, useEffect } from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { FaPlay } from "react-icons/fa";
 
-export default function SoundToggle({ lang = "ko" }) {
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [hasInteracted, setHasInteracted] = useState(false);
+export default function SoundToggle({ lang = "ko", shouldPlayMusic = false }) {
+  const [isPlaying, setIsPlaying] = useState(false);
   const [showToast, setShowToast] = useState(true);
   const audioRef = useRef(null);
+  const [attempted, setAttempted] = useState(false);
 
-  // 오토플레이 시도
+  // Show toast message
   useEffect(() => {
-    // 토스트 다시 보여주기
     setShowToast(true);
-  
-    // 기존 타이머 정리 후 새로운 타이머 설정
     const timer = setTimeout(() => setShowToast(false), 3000);
-  
-    return () => clearTimeout(timer); // cleanup
+    return () => clearTimeout(timer);
   }, [lang]);
+
+  // Auto-play music after user clicks Enter (has user interaction)
+  useEffect(() => {
+    if (shouldPlayMusic && audioRef.current && !attempted) {
+      setAttempted(true);
+      console.log("🎵 Attempting to play music after user interaction...");
+      const audio = audioRef.current;
+      
+      audio.muted = false;
+      audio.volume = 0.7;
+      
+      const playPromise = audio.play();
+      
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            console.log("✅ Music started playing successfully!");
+            setIsPlaying(true);
+          })
+          .catch((error) => {
+            console.log("❌ Music play failed:", error.message);
+            setIsPlaying(false);
+          });
+      }
+    }
+  }, [shouldPlayMusic, attempted]);
 
   const handleSoundToggle = () => {
     if (!audioRef.current) return;
 
-    if (!hasInteracted) {
-      // ✅ 첫 클릭: mute 해제 + 재생 강제 실행
-      audioRef.current.muted = false;
-      audioRef.current.play();
-      setHasInteracted(true);
-      return;
-    }
+    const audio = audioRef.current;
 
-    // 그 이후: 일반적인 토글
-    const shouldPlay = !isPlaying;
-    audioRef.current.muted = !shouldPlay;
-    if (shouldPlay) {
-      audioRef.current.play();
+    if (isPlaying) {
+      audio.pause();
+      setIsPlaying(false);
     } else {
-      audioRef.current.pause();
+      audio.muted = false;
+      audio.volume = 0.7;
+      audio.play()
+        .then(() => setIsPlaying(true))
+        .catch((error) => console.log("Play error:", error));
     }
-    setIsPlaying(shouldPlay);
   };
 
   const toastMessage =
@@ -49,8 +66,7 @@ export default function SoundToggle({ lang = "ko" }) {
       <audio
         ref={audioRef}
         loop
-        muted
-        autoPlay
+        preload="auto"
         src={process.env.PUBLIC_URL + "/sound.mp3"}
       />
 
