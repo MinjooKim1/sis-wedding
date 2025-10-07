@@ -30,6 +30,7 @@ import GallerySection from "./components/PhotoGallery";
 import WeddingRSVP from "./components/WeddingRSVP";
 import IntroOverlay from "./IntroOverlay";
 import Handwriting from './components/Handwriting';
+import EntranceOverlay from './components/EntranceOverlay';
 
 function App() {
   const [lang, setLang] = useState("ko");
@@ -39,13 +40,15 @@ function App() {
   const [guestbookList, setGuestbookList] = useState([
     // 예시글(샘플)도 이 배열에 포함
   ]);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const audioRef = React.useRef(null);
   const [mapModal, setMapModal] = useState({ open: false, src: "" });
   const [showModal, setShowModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showLargeMap, setShowLargeMap] = useState(false);
+  const [shouldPlayMusic, setShouldPlayMusic] = useState(false);
+  const [hasEntered, setHasEntered] = useState(false);
+  const [showHandwriting, setShowHandwriting] = useState(false);
+  
   const brideAccounts = [
     { bank: "신한은행", number: "110-385-015325", holder: "심경자" },
     {
@@ -55,31 +58,23 @@ function App() {
     },
   ];
 
-  useEffect(() => {
-    if (audioRef.current) {
-      const playPromise = audioRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          setIsPlaying(false);
-        });
-      }
-    }
-    // 사용자 첫 상호작용 시 play() 재시도
-    const tryPlay = () => {
-      if (audioRef.current && !isPlaying) {
-        audioRef.current.play();
-        setIsPlaying(true);
-      }
-    };
-    window.addEventListener("click", tryPlay, { once: true });
-    window.addEventListener("touchstart", tryPlay, { once: true });
-    window.addEventListener("keydown", tryPlay, { once: true });
-    return () => {
-      window.removeEventListener("click", tryPlay);
-      window.removeEventListener("touchstart", tryPlay);
-      window.removeEventListener("keydown", tryPlay);
-    };
-  }, []);
+  // Handle entrance - start music and show handwriting
+  const handleEnter = () => {
+    console.log("👋 User clicked Enter button!");
+    setHasEntered(true);
+    setShowHandwriting(true);
+    
+    // Start music immediately (user interaction allows this!)
+    setTimeout(() => {
+      console.log("🎵 Starting music after user interaction...");
+      setShouldPlayMusic(true);
+    }, 100);
+    
+    // Hide handwriting after animation
+    setTimeout(() => {
+      setShowHandwriting(false);
+    }, 2200);
+  };
 
   useEffect(() => {
     AOS.init({
@@ -470,12 +465,12 @@ As we vow to honour, support, and care for one another as we always have, it wou
   };
 
   return (
-
-// 오버레이 스타트 
 <>
-{/* Overlay
-{showOverlay && <Handwriting />} */}
-<Handwriting open={true} maxWidth={380} autoCloseMs={2100} />
+{/* Entrance Overlay - shown first */}
+{!hasEntered && <EntranceOverlay onEnter={handleEnter} lang={lang} />}
+
+{/* Handwriting Animation - shown after entrance */}
+{showHandwriting && <Handwriting open={true} maxWidth={380} autoCloseMs={2100} />}
 
     <div
       className="invitation-container"
@@ -497,7 +492,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
         }}
       >
         {/* 사운드 아이콘 */}
-        <SoundToggle lang={lang} />
+        <SoundToggle lang={lang} shouldPlayMusic={shouldPlayMusic} />
 
         {/* Contact modal */}
 
