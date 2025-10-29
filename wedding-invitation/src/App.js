@@ -30,8 +30,8 @@ import GallerySection from "./components/PhotoGallery";
 import WeddingRSVP from "./components/WeddingRSVP";
 import IntroOverlay from "./IntroOverlay";
 import Handwriting from './components/Handwriting';
-import EntranceOverlay from './components/EntranceOverlay';
-import BottomMenuBar from './components/BottomMenuBar';
+import EntranceOverlay from './components/EntranceOverlay.jsx';
+import BottomMenuBar from './components/BottomMenuBar.jsx';
 
 function App() {
   const [lang, setLang] = useState("ko");
