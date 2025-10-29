@@ -31,6 +31,7 @@ import WeddingRSVP from "./components/WeddingRSVP";
 import IntroOverlay from "./IntroOverlay";
 import Handwriting from './components/Handwriting';
 import EntranceOverlay from './components/EntranceOverlay';
+import BottomMenuBar from './components/BottomMenuBar';
 
 function App() {
   const [lang, setLang] = useState("ko");
@@ -74,6 +75,27 @@ function App() {
     setTimeout(() => {
       setShowHandwriting(false);
     }, 2200);
+  };
+
+  // Handle bottom menu actions
+  const handleShowVenueMap = () => {
+    // Center the date block in the viewport
+    const target = document.getElementById('venue-date');
+    if (target) {
+      const rect = target.getBoundingClientRect();
+      const y = rect.top + window.pageYOffset - (window.innerHeight / 2) + (rect.height / 2);
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
+  const handleShowParking = () => {
+    // Center the parking text block in the viewport
+    const target = document.getElementById('parking-text');
+    if (target) {
+      const rect = target.getBoundingClientRect();
+      const y = rect.top + window.pageYOffset - (window.innerHeight / 2) + (rect.height / 2);
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
   };
 
   useEffect(() => {
@@ -387,8 +409,8 @@ As we vow to honour, support, and care for one another as we always have, it wou
       subway: "3·4호선 충무로역 3번 또는 4번 출구 → 도보 약 5분",
       busTitle: "버스",
       bus: `퇴계로3가 또는 한옥마을 정류장 하차\n• 일반: 104, 105, 140, 421, 463, 507, 604, 7011\n• 순환: 남산순환버스 02, 05, 90S 투어\n• 공항: 6001, 6015, 6021`,
-      parkingTitle: "주차",
-      parking: `• 남산골한옥마을 내 공영주차장 이용 가능 (※ 유료 / 공간 협소)\n• 솔라고호텔(피로연장) 주차 시 2시간 무료 제공\n→ 도보 약 5~10분 소요되며, 자차 이용 시 더욱 권장드립니다.`,
+      parkingTitle: "주차:",
+      parking: `• 남산골한옥마을 내 공영주차장 이용 가능 (※ 유료 / 공간 협소)\n• 솔라고호텔(피로연장) 지하 3~5층 주차장 이용 가능.\n    (2시간 30분 무료주차 가능합니다.)\n→ 도보 약 5~10분 소요되며, 자차 이용 시 더욱 권장드립니다.`,
       note: "※ 가급적 대중교통 또는 솔라고호텔 주차장 이용을 부탁드립니다.",
     },
 
@@ -408,13 +430,14 @@ As we vow to honour, support, and care for one another as we always have, it wou
         • Circulation: Namsan Loop Bus 02, 05, 90S Tour
         • Airport: 6001, 6015, 6021`,
 
-      parkingTitle: "Parking Information",
+      parkingTitle: "Parking:",
       parking: `• Public parking is available inside Namsangol Hanok Village  
         (Paid parking / Limited spaces)
         
-        • Free 2-hour parking is available at Sollago Hotel (Reception venue)  
+        • Hotel underground parking on floors 3-5 is available.
+        • 2 hours and 30 minutes of free parking is available.
         → Approximately 5–10 minutes on foot from the ceremony venue  
-        → We recommend using Sollago Hotel parking if driving.`,
+        → We recommend using hotel parking if driving.`,
 
       note: "※ For your convenience, we kindly suggest using public transportation or parking at Sollago Hotel.",
     },
@@ -477,6 +500,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       style={{
         maxWidth: "500px", // ✅ 최대 너비 제한
         position: "relative",
+        paddingBottom: "80px", // Space for bottom menu bar
       }}
     >
       {/* 최상단 언어 전환 버튼 영역 */}
@@ -848,6 +872,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
 
       {/* //  날짜/장소/시간/오시는 길 */}
       <section
+        id="venue-location"
         className="section-box"
         style={{
           padding: "32px 20px 28px 20px",
@@ -911,13 +936,13 @@ As we vow to honour, support, and care for one another as we always have, it wou
               {text[lang].place}
             </p>
 
-            <div style={{ color: "#888888" }} data-aos="fade-up">
+            <div id="venue-date" style={{ color: "#888888" }} data-aos="fade-up">
               {text[lang].date}
             </div>
             <br></br>
             <br></br>
 
-            <div>
+            <div id="venue-address">
               <span
                 style={{ fontSize: "14px", marginBottom: 0 }}
                 data-aos="fade-up"
@@ -1066,6 +1091,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
       </section>
 
       <div
+        id="parking-info"
         className="direction-section"
         style={{ padding: "20px", lineHeight: 1.6, background: "#f6f6f6" }}
       >
@@ -1128,6 +1154,7 @@ As we vow to honour, support, and care for one another as we always have, it wou
             {directionText[lang].subwayTitle}
           </h4>
           <div
+            id="parking-text"
             className="direction_body"
             data-aos="fade-up"
             style={{
@@ -1183,13 +1210,45 @@ As we vow to honour, support, and care for one another as we always have, it wou
           ></div>
 
           {/* Parking */}
-          <h4 className="direction_head" data-aos="fade-up">
-            <FaParking
-              size={16}
-              color="#797979"
-              style={{ marginRight: "6px", verticalAlign: "-2px" }}
-            />
-            {directionText[lang].parkingTitle}
+          <h4 className="direction_head" data-aos="fade-up" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <FaParking
+                size={16}
+                color="#797979"
+                style={{ marginRight: "6px", verticalAlign: "-2px" }}
+              />
+              {directionText[lang].parkingTitle}
+              <span style={{ marginLeft: "8px", fontSize: "14px", color: "#555", fontWeight: "normal" }}>
+                {lang === "ko" ? "솔라고 호텔" : "Sollago Hotel"}
+              </span>
+            </div>
+            <a
+              href="https://kko.kakao.com/YsHebygNAP"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "4px",
+                fontSize: "12px",
+                padding: "4px 10px",
+                backgroundColor: "#FEE500",
+                color: "#3C1E1E",
+                borderRadius: "6px",
+                textDecoration: "none",
+                fontWeight: "500",
+              }}
+            >
+              <img
+                src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ba/45/6c/ba456ce5-e8cb-daf1-4afc-8ef96f2aeb9f/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/434x0w.webp"
+                alt="Kakao Map"
+                style={{
+                  width: 16,
+                  height: 16,
+                }}
+              />
+              {lang === "ko" ? "카카오맵 바로가기" : "Kakao Map"}
+            </a>
           </h4>
           <div
             className="direction_body"
@@ -1200,7 +1259,27 @@ As we vow to honour, support, and care for one another as we always have, it wou
               fontSize: "15px",
             }}
           >
-            {directionText[lang].parking}
+            {lang === "ko" ? (
+              <>
+                {"• 남산골한옥마을 내 공영주차장 이용 가능 (※ 유료 / 공간 협소)\n"}
+                <span style={{ backgroundColor: "#FFFACD", padding: "2px 4px", borderRadius: "3px" }}>
+                  <strong>• 솔라고호텔(피로연장) 지하 3~5층 주차장 이용 가능.</strong>
+                  {"\n    (2시간 30분 무료주차 가능합니다.)"}
+                </span>
+                {"\n"}
+                {"→ 도보 약 5~10분 소요되며, 자차 이용 시 더욱 권장드립니다."}
+              </>
+            ) : (
+              <>
+                {"• Public parking is available inside Namsangol Hanok Village\n        (Paid parking / Limited spaces)\n        \n        "}
+                <span style={{ backgroundColor: "#FFFACD", padding: "2px 4px", borderRadius: "3px" }}>
+                  <strong>• Hotel underground parking on floors 3-5 is available.</strong>
+                  {"\n        • 2 hours and 30 minutes of free parking is available."}
+                </span>
+                {"\n        "}
+                {"→ Approximately 5–10 minutes on foot from the ceremony venue\n        → We recommend using hotel parking if driving."}
+              </>
+            )}
           </div>
 
           {/* Note */}
@@ -1646,6 +1725,15 @@ As we vow to honour, support, and care for one another as we always have, it wou
         </div>
       </section>
     </div>
+
+    {/* Bottom Menu Bar - only show after entrance */}
+    {hasEntered && (
+      <BottomMenuBar
+        lang={lang}
+        onShowVenueMap={handleShowVenueMap}
+        onShowParking={handleShowParking}
+      />
+    )}
     </>
   );
 }
